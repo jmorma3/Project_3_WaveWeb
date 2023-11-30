@@ -35,3 +35,13 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 - Admin (GOD): Full management and supervision.
 - Dev: Freelance developers selected through interviews and technical tests.
 - Client: Entrepreneurs and small businesses seeking digital services.
+
+## Some Mobile design...
+
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/a6b63ae7-c00a-4db4-8515-96bc14c733b2)
+
+## Some Web design...
+
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/b6735d47-f70c-441d-ab8b-292ba51d85b0)
+
+
