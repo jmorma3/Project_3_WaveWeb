@@ -63,6 +63,21 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ## Endpoints:
 
+### User Signup/Login
+
+#### Client Signup/Login
+
+| METHOD | ENDPOINT          | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                               | RETURNS               |
+|--------|-------------------|-------|------|--------------------------|-------------------------------------------|------------------------|
+| POST   | /auth/client/signup | -     | user | Client Signup           | first_name, last_name, email, password, phone, address, zipcode | { token: token }       |
+| POST   | /auth/client/login  | -     | user | Client Login            | email, password                           | { token: token }       |
+
+#### Developer Login
+
+| METHOD | ENDPOINT             | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                       | RETURNS               |
+|--------|----------------------|-------|-----------|--------------------------|-----------------------------------|------------------------|
+| POST   | /auth/developer/login| -     | developer | Developer Login          | email, password                   | { token: token }       |
+
 ### User Endpoints
 
 | METHOD | ENDPOINT         | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
@@ -116,21 +131,3 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | POST   | /invoice           | YES   | client, admin | Create one invoice   | TransactionID, ProjectID, ClientID, DeveloperID, issue_date, due_date | {invoice} |
 | PUT    | /invoice/:invoiceID| YES   | client, admin | Update one invoice       | TransactionID, ProjectID, ClientID, DeveloperID, issue_date, due_date | {message: "Invoice updated!"} |
 | DELETE | /invoice/:invoiceID| YES   | client, admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
-
-
-### User Signup/Login
-
-#### Client Signup/Login
-
-| METHOD | ENDPOINT          | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                               | RETURNS               |
-|--------|-------------------|-------|------|--------------------------|-------------------------------------------|------------------------|
-| POST   | /auth/client/signup | -     | user | Client Signup           | first_name, last_name, email, password, phone, address, zipcode | { token: token }       |
-| POST   | /auth/client/login  | -     | user | Client Login            | email, password                           | { token: token }       |
-
-#### Developer Login
-
-| METHOD | ENDPOINT             | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                       | RETURNS               |
-|--------|----------------------|-------|-----------|--------------------------|-----------------------------------|------------------------|
-| POST   | /auth/developer/login| -     | developer | Developer Login          | email, password                   | { token: token }       |
-
-
