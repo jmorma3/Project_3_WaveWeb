@@ -121,16 +121,6 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | DELETE | /agenda/:meetingId  | YES   | admin | Delete one agenda meeting | -                                               | {message: "Agenda meeting deleted!"} |
 | DELETE | /agenda/myAgenda/:meetingId  | YES   | admin, developer | Delete one own agenda meeting (developer only deletes own agenda meetings) | meeting_date_time, developerID, clientID, projectID | {message: "Agenda meeting deleted!"} |
 
-### Transaction Endpoints
-
-| METHOD | ENDPOINT             | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
-|--------|----------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /transaction         | YES   | admin    | Get all transactions     | Query params                                    | [{transaction}]        |
-| GET    | /transaction/:transID| YES   | admin    | Get one transaction      | -                                               | {transaction}          |
-| POST   | /transaction         | YES   | admin | Create one transaction | projectID, clientID, developerID, payment_date_time, amount, payment_method, payment_details | {transaction} |
-| PUT    | /transaction/:transID| YES   | admin | Update one transaction   | projectID, clientID, developerID, payment_date_time, amount, payment_method, payment_details | {message: "Transaction updated!"} |
-| DELETE | /transaction/:transID| YES   | admin | Delete one transaction   | -                                               | {message: "Transaction deleted!"} |
-
 ### Invoice Endpoints
 
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
@@ -139,6 +129,6 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | GET    | /invoice/:invoiceID| YES   | admin    | Get one invoice          | -                                               | {invoice}              |
 | GET    | /invoice/myInvoices| YES   | -    | Get own invoices (client and developer only get own invoices)         | -                                               | [{invoice}]            |
 | GET    | /invoice/myInvoices/:invoiceId| YES   | -    | Get one own invoice (client and developer only get own invoices)          | -                                               | {invoice}              |
-| POST   | /invoice           | YES   | admin | Create one invoice   | transactionID, projectID, clientID, developerID, invoice_date, amount, paymentStatus | {invoice} |
-| PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | transactionID, projectID, clientID, developerID, invoice_date, amount, paymentStatus | {message: "Invoice updated!"} |
+| POST   | /invoice           | YES   | admin | Create one invoice   | projectID, clientID, developerID, invoice_date, amount, payment_status, payment_date_time, payment_method | {invoice} |
+| PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | projectID, clientID, developerID, invoice_date, amount, payment_status, payment_date_time, payment_method | {message: "Invoice updated!"} |
 | DELETE | /invoice/:invoiceID| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
