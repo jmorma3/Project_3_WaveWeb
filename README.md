@@ -49,14 +49,16 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 ## Relationships between tables:
 
 **One-to-Many:**
-- A User can have multiple Projects, but a Project can belong to only one User.
-- A User can have multiple meetings in the Agenda, but an Agenda meeting can belong to only one User.
-- A User can have multiple Invoices, but an Invoice can only belong to one User.
-- A Project can have multiple meetings in the Agenda, but an Agenda meeting can belong to only one Project.
-- A Project can have multiple Invoices, but an Invoice can only belong to one Project.
+- One User can have multiple Projects, but a Project can belong to only one User.
+- One User can have multiple meetings in the Agenda, but an Agenda meeting can belong to only one User.
+- One User can have multiple Invoices, but an Invoice can only belong to one User.
+- One Project can have multiple meetings in the Agenda, but an Agenda meeting can belong to only one Project.
+- One Project can have multiple Invoices, but an Invoice can only belong to one Project.
+- One Project can have multiple Chat_Messages, but a Chat_Message can only belong to one Project.
+- One User can have multiple Chat_Messages, but a Chat_Message can only belong to one User. 
 
 **Many-to-Many:**
-- A User (Developer) can work on multiple Projects, and a Project can have multiple Developers.
+- One User (Developer) can work on multiple Projects, and a Project can have multiple Developers.
 
 ## Endpoints:
 
