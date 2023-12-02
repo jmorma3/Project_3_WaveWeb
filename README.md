@@ -44,7 +44,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ## Tables:
 
-![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/f860112d-1b3e-4d93-bf22-8b4cd9cd4f2a)
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/13e96f7f-7bfc-4ced-910e-906f7a82716d)
 
 ## Relationships between tables:
 
@@ -130,7 +130,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | PUT    | /invoice/:invoiceId| YES   | admin | Update one invoice       | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {message: "Invoice updated!"} |
 | DELETE | /invoice/:invoiceId| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
 
-### Chat_Messages Endpoints
+### Chat_Message Endpoints
 
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
