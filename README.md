@@ -96,28 +96,37 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /project           | YES   | -    | Get all projects         | Query params                                    | [{project}]            |
-| GET    | /project/:projectId| YES   | -    | Get one project          | -                                               | {project}              |
+| GET    | /project           | YES   | admin    | Get all projects         | Query params                                    | [{project}]            |
+| GET    | /project/:projectId| YES   | admin    | Get one project          | -                                               | {project}              |
+| GET    | /project/myProjects| YES   | -    | Get own projects        | -                                               | [{project}]             |
+| GET    | /project/myProjects/:projectId| YES   | -    | Get one own project       | -                                             | {project}             |
 | POST   | /project           | YES   | admin, client | Create one project | userID, project_name, project_type, price, progress_status, developerID, plusProtoype | {project} |
 | PUT    | /project/:projectId| YES   | admin, developer | Update one project      | userID, project_name, project_type, price, progress_status, developerID, plusProtoype | {message: "Project updated!"} |
+| PUT    | /project/myProjects/:projectId| YES   | admin, developer | Update one own project (developer only update own projects)     | userID, project_name, project_type, price, progress_status, developerID, plusProtoype | {message: "Project updated!"} |
 | DELETE | /project/:projectId| YES   | admin | Delete one project      | -                                               | {message: "Project deleted!"} |
+| DELETE | /project/myProjects/:projectId| YES   | admin, developer | Delete one own project (developer only deletes own projects)     | - | {message: "Project deleted!"} |
 
 ### Agenda Endpoints
 
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /agenda            | YES   | -    | Get all agenda entries   | Query params                                    | [{agenda}]             |
-| GET    | /agenda/:agendaId  | YES   | -    | Get one agenda entry     | -                                               | {agenda}               |
-| POST   | /agenda            | YES   | admin, developer | Create one agenda entry | meeting_date_time, developerID, clientID, projectID | {agenda}     |
-| PUT    | /agenda/:agendaId  | YES   | admin, developer | Update one agenda entry | meeting_date_time, developerID, clientID, projectID | {message: "Agenda entry updated!"} |
-| DELETE | /agenda/:agendaId  | YES   | admin, developer | Delete one agenda entry | -                                               | {message: "Agenda entry deleted!"} |
+| GET    | /agenda            | YES   | admin    | Get all agenda meeting   | Query params                                    | [{meeting}]             |
+| GET    | /agenda/:meetingId  | YES   | admin   | Get one agenda meeting     | -                                               | {meeting}               |
+| GET    | /agenda/myAgenda  | YES   | -    | Get own agenda meetings (client and developer only get own agenda meetings)     | -                                               | [{meeting}]              |
+| GET    | /agenda/myAgenda/:meetingId  | YES   | -    | Get own agenda meetings (client and developer only get own agenda meetings)     | -                                               | [{meeting}]              |
+| POST   | /agenda            | YES   | admin | Create one agenda meeting | meeting_date_time, developerID, clientID, projectID | {meeting}     |
+| POST   | /agenda/myAgenda        | YES   | admin, developer | Create one own agenda meeting | meeting_date_time, developerID, clientID, projectID | {meeting}     |
+| PUT    | /agenda/:meetingId  | YES   | admin | Update one agenda meeting | meeting_date_time, developerID, clientID, projectID | {message: "Agenda meeting updated!"} |
+| PUT    | /agenda/myAgenda/:meetingId  | YES   | admin, developer | Update one own agenda entry (developer only updates own agenda meetings) | meeting_date_time, developerID, clientID, projectID | {message: "Agenda meeting updated!"} |
+| DELETE | /agenda/:meetingId  | YES   | admin | Delete one agenda meeting | -                                               | {message: "Agenda meeting deleted!"} |
+| DELETE | /agenda/myAgenda/:meetingId  | YES   | admin, developer | Delete one own agenda meeting (developer only deletes own agenda meetings) | meeting_date_time, developerID, clientID, projectID | {message: "Agenda meeting deleted!"} |
 
 ### Transaction Endpoints
 
 | METHOD | ENDPOINT             | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|----------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /transaction         | YES   | -    | Get all transactions     | Query params                                    | [{transaction}]        |
-| GET    | /transaction/:transID| YES   | -    | Get one transaction      | -                                               | {transaction}          |
+| GET    | /transaction         | YES   | admin    | Get all transactions     | Query params                                    | [{transaction}]        |
+| GET    | /transaction/:transID| YES   | admin    | Get one transaction      | -                                               | {transaction}          |
 | POST   | /transaction         | YES   | admin | Create one transaction | projectID, clientID, developerID, payment_date_time, amount, payment_method, payment_details | {transaction} |
 | PUT    | /transaction/:transID| YES   | admin | Update one transaction   | projectID, clientID, developerID, payment_date_time, amount, payment_method, payment_details | {message: "Transaction updated!"} |
 | DELETE | /transaction/:transID| YES   | admin | Delete one transaction   | -                                               | {message: "Transaction deleted!"} |
@@ -126,8 +135,10 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /invoice           | YES   | -    | Get all invoices         | Query params                                    | [{invoice}]            |
-| GET    | /invoice/:invoiceID| YES   | -    | Get one invoice          | -                                               | {invoice}              |
+| GET    | /invoice           | YES   | admin    | Get all invoices         | Query params                                    | [{invoice}]            |
+| GET    | /invoice/:invoiceID| YES   | admin    | Get one invoice          | -                                               | {invoice}              |
+| GET    | /invoice/myInvoices| YES   | -    | Get own invoices (client and developer only get own invoices)         | -                                               | [{invoice}]            |
+| GET    | /invoice/myInvoices/:invoiceId| YES   | -    | Get one own invoice (client and developer only get own invoices)          | -                                               | {invoice}              |
 | POST   | /invoice           | YES   | admin | Create one invoice   | transactionID, projectID, clientID, developerID, invoice_date, amount, paymentStatus | {invoice} |
 | PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | transactionID, projectID, clientID, developerID, invoice_date, amount, paymentStatus | {message: "Invoice updated!"} |
 | DELETE | /invoice/:invoiceID| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
