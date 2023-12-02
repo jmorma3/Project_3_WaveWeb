@@ -44,7 +44,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ## Tables:
 
-![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/ff13980a-5e90-4a5f-8940-531cde2e35c8)
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/f860112d-1b3e-4d93-bf22-8b4cd9cd4f2a)
 
 ## Relationships between tables:
 
@@ -129,6 +129,6 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | GET    | /invoice/:invoiceID| YES   | admin    | Get one invoice          | -                                               | {invoice}              |
 | GET    | /invoice/myInvoices| YES   | -    | Get own invoices (client and developer only get own invoices)         | -                                               | [{invoice}]            |
 | GET    | /invoice/myInvoices/:invoiceId| YES   | -    | Get one own invoice (client and developer only get own invoices)          | -                                               | {invoice}              |
-| POST   | /invoice           | YES   | admin | Create one invoice   | projectID, clientID, developerID, invoice_date, amount, payment_status, payment_date_time, payment_method | {invoice} |
-| PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | projectID, clientID, developerID, invoice_date, amount, payment_status, payment_date_time, payment_method | {message: "Invoice updated!"} |
+| POST   | /invoice           | YES   | admin | Create one invoice   | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {invoice} |
+| PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {message: "Invoice updated!"} |
 | DELETE | /invoice/:invoiceID| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
