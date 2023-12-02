@@ -123,9 +123,23 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
 | GET    | /invoice           | YES   | admin    | Get all invoices         | Query params                                    | [{invoice}]            |
-| GET    | /invoice/:invoiceID| YES   | admin    | Get one invoice          | -                                               | {invoice}              |
+| GET    | /invoice/:invoiceId| YES   | admin    | Get one invoice          | -                                               | {invoice}              |
 | GET    | /invoice/myInvoices| YES   | -    | Get own invoices (client and developer only get own invoices)         | -                                               | [{invoice}]            |
 | GET    | /invoice/myInvoices/:invoiceId| YES   | -    | Get one own invoice (client and developer only get own invoices)          | -                                               | {invoice}              |
 | POST   | /invoice           | YES   | admin | Create one invoice   | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {invoice} |
-| PUT    | /invoice/:invoiceID| YES   | admin | Update one invoice       | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {message: "Invoice updated!"} |
-| DELETE | /invoice/:invoiceID| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
+| PUT    | /invoice/:invoiceId| YES   | admin | Update one invoice       | clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method | {message: "Invoice updated!"} |
+| DELETE | /invoice/:invoiceId| YES   | admin | Delete one invoice       | -                                               | {message: "Invoice deleted!"} |
+
+### Chat_Messages Endpoints
+
+| METHOD | ENDPOINT           | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
+|--------|--------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
+| GET    | /message           | YES   | admin    | Get all messages         | Query params                                    | [{message}]            |
+| GET    | /message/:messageId| YES   | admin    | Get one message          | -                                               | {message}              |
+| GET    | /message/myMessages| YES   | -    | Get own messages (client and developer only get own messages)         | -                                               | [{message}]            |
+| GET    | /message/myMessages/:messageId| YES   | -    | Get one own message (client and developer only get own messages)          | -                                               | {message}              |
+| POST   | /message           | YES   | - | Create one message   | message_text, message_date_time | {message} |
+| PUT    | /message/:messageId| YES   | admin | Update one message       | message_text, message_date_time | {message: "Message updated!"} |
+| PUT    | /message/myMessages/:messageId | YES   | - | Update own messages (client and developer only update own messages)  | message_text, message_date_time | {message: "Message updated!"} |
+| DELETE | /message/:messageId| YES   | admin | Delete one message       | -                                               | {message: "Message deleted!"} |
+| DELETE | /message/myMessages/:messageId | YES   | - | Delete own message (client and developer only delete own messages)  | - | {message: "Message deleted!"} |
