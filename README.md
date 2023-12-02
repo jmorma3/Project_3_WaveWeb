@@ -82,15 +82,15 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 | METHOD | ENDPOINT         | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS               |
 |--------|------------------|-------|------|--------------------------|-------------------------------------------------|------------------------|
-| GET    | /user/profile    | YES   | -    | Get own profile          | -                                               | {user}                |
 | GET    | /user            | YES   | admin| Get all users            | Query params                                    | [{user}]              |
 | GET    | /user/:userId    | YES   | admin| Get one user             | -                                               | {user}                |
+| GET    | /user/profile    | YES   | -    | Get own profile          | -                                               | {user}                |
 | POST   | /user            | YES   | admin| Create one user          | first_name, last_name, email, password, profile_type | {user}        |
-| PUT    | /user/profile    | YES   | -    | Update user profile (client and developer only update own profile)         | first_name, last_name, email, password, profile_type | {message: "Profile updated!"} |
-| PUT    | /user/password   | YES   | -    | Reset user password (client and developer only reset own password)         | newPassword, repeatPassword | {message: "Password updated!"} |
 | PUT    | /user/:userId    | YES   | admin| Update one user          | first_name, last_name, email, password, profile_type | {message: "User updated!"} |
+| PUT    | /user/profile    | YES   | -    | Update user profile (client and developer only update own profile)         | first_name, last_name, email, password, profile_type | {message: "Profile updated!"} |
+| PUT    | /user/profile/password   | YES   | -    | Reset user password (client and developer only reset own password)         | newPassword, repeatPassword | {message: "Password updated!"} |
+| DELETE | /user/:userId    | YES   | admin | Delete one user          | -                                               | {message: "User deleted!"} |
 | DELETE | /user/profile    | YES   | -    | Delete user profile (client and developer only delete own profile)         | -                                               | {message: "Profile deleted!"} |
-| DELETE | /user/:userId    | YES   | admin| Delete one user          | -                                               | {message: "User deleted!"} |
 
 ### Project Endpoints
 
