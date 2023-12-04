@@ -4,11 +4,11 @@ const {sequelize} = require("../../database")
 const Project = sequelize.define(
     "project", 
     {
-        projectName: {
+        project_name: {
             type: DataTypes.STRING, 
             allowNull: false
         }, 
-        projectType: {
+        project_type: {
             type: DataTypes.ENUM("Basic Web", "Dynamic Web", "E-Commerce Web"),
             allowNull: false
         }, 
@@ -16,11 +16,11 @@ const Project = sequelize.define(
             type: DataTypes.FLOAT, 
             allowNull: false
         }, 
-        progressStatus: {
+        progress_status: {
             type: DataTypes.ENUM("Finished", "Unfinished"), 
             allowNull: false
         }, 
-        plusPrototype: {
+        plus_prototype: {
             type: DataTypes.BOOLEAN, 
             allowNull: false
         }
