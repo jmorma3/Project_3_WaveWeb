@@ -11,7 +11,7 @@ const Agenda = sequelize.define(
                 isDateValid(value) {
                     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
                     if (!dateRegex.test(value)) {
-                        throw new Error('Incorrect date. Use the format YYYYY-MM-DD.');
+                        throw new Error('Incorrect date. Use the format YYYY-MM-DD.');
                     }
                 },
             },
@@ -31,7 +31,7 @@ const Agenda = sequelize.define(
             },
         },
     },
-    
+
     { timestamps: false }
 )
 
