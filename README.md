@@ -44,7 +44,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ## Tables:
 
-![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/13e96f7f-7bfc-4ced-910e-906f7a82716d)
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/b9326354-170b-4b65-9a6b-7d9c3b6fc97c)
 
 ## Relationships between tables:
 
