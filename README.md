@@ -44,7 +44,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ## Tables:
 
-![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/b9326354-170b-4b65-9a6b-7d9c3b6fc97c)
+![image](https://github.com/jmorma3/Project_3_WaveWeb/assets/122170615/3e73d6b7-329d-4580-9729-4a532832370a)
 
 ## Relationships between tables:
 
@@ -68,7 +68,7 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 | METHOD | ENDPOINT          | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                               | RETURNS               |
 |--------|-------------------|-------|------|--------------------------|-------------------------------------------|------------------------|
-| POST   | /auth/client/signup | -     | user | Client Signup           | first_name, last_name, email, password, profile_type | { token: token }       |
+| POST   | /auth/client/signup | -     | user | Client Signup           | first_name, last_name, email, password, role | { token: token }       |
 | POST   | /auth/client/login  | -     | user | Client Login            | email, password                           | { token: token }       |
 
 #### Developer Login
@@ -84,9 +84,9 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 | GET    | /user            | YES   | admin| Get all users            | Query params                                    | [{user}]              |
 | GET    | /user/:userId    | YES   | admin| Get one user             | -                                               | {user}                |
 | GET    | /user/profile    | YES   | -    | Get own profile          | -                                               | {user}                |
-| POST   | /user            | YES   | admin| Create one user          | first_name, last_name, email, password, profile_type | {user}        |
-| PUT    | /user/:userId    | YES   | admin| Update one user          | first_name, last_name, email, password, profile_type | {message: "User updated!"} |
-| PUT    | /user/profile    | YES   | -    | Update user profile (client and developer only update own profile)         | first_name, last_name, email, password, profile_type | {message: "Profile updated!"} |
+| POST   | /user            | YES   | admin| Create one user          | first_name, last_name, email, password, role | {user}        |
+| PUT    | /user/:userId    | YES   | admin| Update one user          | first_name, last_name, email, password, role | {message: "User updated!"} |
+| PUT    | /user/profile    | YES   | -    | Update user profile (client and developer only update own profile)         | first_name, last_name, email, password, role | {message: "Profile updated!"} |
 | PUT    | /user/profile/password   | YES   | -    | Reset user password (client and developer only reset own password)         | newPassword, repeatPassword | {message: "Password updated!"} |
 | DELETE | /user/:userId    | YES   | admin | Delete one user          | -                                               | {message: "User deleted!"} |
 | DELETE | /user/profile    | YES   | -    | Delete user profile (client and developer only delete own profile)         | -                                               | {message: "Profile deleted!"} |
