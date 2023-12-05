@@ -67,7 +67,7 @@ const getOwnProfile = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const { first_name, last_name, email, password, profile_type } = req.body
+        const { first_name, last_name, email, password, role } = req.body
 
         if (password.length < 8) {
             return res.status(400).json({ message: 'Password too short' })
@@ -82,7 +82,7 @@ const createUser = async (req, res) => {
             last_name: last_name,
             email: email,
             password: hashedPassword,
-            profile_type: profile_type
+            role: role
         })
 
         return res.status(200).json({ message: 'User created', user: user })
@@ -99,7 +99,7 @@ const updateUser = async (req, res) => {
             last_name: req.body.last_name,
             email: req.body.email,
             password: req.body.hashedPassword,
-            profile_type: req.body.profile_type
+            role: req.body.role
         }, {
             where: {
                 id: req.params.userId
