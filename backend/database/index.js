@@ -21,7 +21,7 @@ async function checkConnection(){
 async function syncModels(value) {
     const state = {
         // alter: { alter: true },
-        // force: { force: true },
+        force: { force: true },
     }
 
     try {

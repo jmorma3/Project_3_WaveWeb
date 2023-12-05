@@ -7,7 +7,7 @@ const ChatMessage = sequelize.define(
         message_text: {
             type: DataTypes.STRING,
             allowNull: false
-        },
+        },        
         message_date: {
             type: DataTypes.STRING,
             allowNull: false,

@@ -15,9 +15,7 @@ const Agenda = sequelize.define(
                     }
                 },
             },
-        }
-    },
-    {
+        },
         meeting_time: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -30,9 +28,11 @@ const Agenda = sequelize.define(
                 },
             },
         },
-    },
 
-    { timestamps: false }
+    },
+    {
+        timestamps: false
+    }
 )
 
 module.exports = Agenda
