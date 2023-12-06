@@ -32,7 +32,7 @@ const getOwnMessages = async (req, res) => {
     try {
         const messages = await ChatMessage.findAll({
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
         if (messages) {
@@ -49,7 +49,7 @@ const getOneOwnMessage = async (req, res) => {
     try {
         const message = await ChatMessage.findByPk(req.params.messageId, {
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
         if (message) {
@@ -64,11 +64,12 @@ const getOneOwnMessage = async (req, res) => {
 
 const createMessage = async (req, res) => {
     try {
-        const { message_text, message_date_time } = req.body
+        const { message_text, message_date, message_time } = req.body
 
         const message = await ChatMessage.create({
             message_text: message_text,
-            message_date_time: message_date_time,
+            message_date: message_date,
+            message_time: message_time
           
         })
 
@@ -84,7 +85,8 @@ const updateMessage = async (req, res) => {
         const [message] = await ChatMessage.update({
             messageId: req.body.messageId,
             message_text: req.body.message_text,
-            message_date_time: req.body.message_date_time,
+            message_date: req.body.message_date,
+            message_time: req.body.message_time
         
         }, {
             where: {
@@ -106,7 +108,7 @@ const updateOwnMessage = async (req, res) => {
     try {
         await ChatMessage.update(req.body, {
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
 
@@ -141,7 +143,7 @@ const deleteOwnMessage = async (req, res) => {
     try {
         await ChatMessage.destroy(req.body, {
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
 

@@ -33,7 +33,7 @@ const getOwnInvoices = async (req, res) => {
     try {
         const invoices = await Invoice.findAll({
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
         if (invoices) {
@@ -50,7 +50,7 @@ const getOneOwnInvoice = async (req, res) => {
     try {
         const invoice = await Invoice.findByPk(req.params.invoiceId, {
             where: {
-                id: res.locals.user.id
+                userId: res.locals.user.id
             }
         })
         if (invoice) {
@@ -65,15 +65,14 @@ const getOneOwnInvoice = async (req, res) => {
 
 const createInvoice = async (req, res) => {
     try {
-        const { clientID, developerID, projectID, invoice_date, amount, payment_date_time, payment_method } = req.body
+        const { userId, projectID, invoice_date, amount, payment_date, payment_method } = req.body
 
         const invoice = await Invoice.create({
-            clientID: clientID,
-            developerID: developerID,
+            userId: userId,
             projectID: projectID,
             invoice_date: invoice_date,
             amount: amount,
-            payment_date_time: payment_date_time,
+            payment_date: payment_date,
             payment_method: payment_method,
         })
 
@@ -87,12 +86,11 @@ const createInvoice = async (req, res) => {
 const updateInvoice = async (req, res) => {
     try {
         const [invoice] = await Invoice.update({
-            clientID: req.body.clientID,
-            developerID: req.body.developerID,
+            userId: req.body.userId,
             projectID: req.body.projectID,
             invoice_date: req.body.invoice_date,
             amount: req.body.amount,
-            payment_date_time: req.body.payment_date_time,
+            payment_date: req.body.payment_date,
             payment_method: req.body.payment_method,
 
         }, {

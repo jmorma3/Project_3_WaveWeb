@@ -16,11 +16,52 @@ VALUES
   (2, 'Project Two', 'Dynamic Web', 4000, 'Not Started', 5, false),
   (3, 'Project Three', 'Basic Web', 2000, 'Completed', 6, true),
   (4, 'Project Four', 'E-Commerce Web', 6000, 'In Progress Step 1', 7, false);
-
--- Inserción en la tabla "invoices"
+  
+-- Inserción en la tabla "project_developers"
+INSERT INTO project_developers (userId, projectId)
+VALUES 
+  (2, 1), -- Asociar Developer 1 con Project One
+  (2, 2), -- Asociar Developer 1 con Project Two
+  (3, 3), -- Asociar Developer 2 con Project Three
+  (3, 4); -- Asociar Developer 2 con Project Four
+  
+  -- Inserción en la tabla "invoices"
 INSERT INTO invoices (id, invoice_date, amount, payment_date, payment_method, userId, projectId)
 VALUES 
   (1, '2023-01-01', 1200, '2023-01-15', 'Credit Card', 4, 1),
   (2, '2023-02-01', 4000, '2023-02-15', 'PayPal', 5, 2),
   (3, '2023-03-01', 2000, '2023-03-15', 'Credit Card', 6, 3),
   (4, '2023-04-01', 6000, '2023-04-15', 'Bank Transfer', 7, 4);
+  
+  -- Inserción en la tabla "chat_messages"
+INSERT INTO chat_messages (id, message_text, message_date, message_time, projectId, userId)
+VALUES 
+  -- Conversaciones para Project 1
+  (1, 'Hello! Let''s discuss the details of Project One.', '2023-12-01', '10:15', 1, 4),
+  (2, 'Sure! I''m excited to work on it. When can we schedule a meeting?', '2023-12-02', '14:30', 1, 2),
+  (3, 'How about tomorrow at 3 PM?', '2023-12-02', '16:45', 1, 4),
+  (4, 'Perfect! See you then.', '2023-12-03', '09:00', 1, 2),
+  -- Conversaciones para Project 2
+  (5, 'Hi there! Just checking in on the progress of Project Two.', '2023-12-05', '11:30', 2, 6),
+  (6, 'Everything is going smoothly. We are currently in the planning phase.', '2023-12-06', '13:45', 2, 3),
+  (7, 'Great to hear! Let me know if you need any additional information.', '2023-12-07', '10:00', 2, 6),
+  -- Conversaciones para Project 3
+  (8, 'Hello! I have some questions about Project Three.', '2023-12-10', '15:20', 3, 5),
+  (9, 'Sure, feel free to ask. I''m here to help!', '2023-12-11', '10:45', 3, 2),
+  (10, 'I was wondering about the timeline and milestones. Can you provide an update?', '2023-12-12', '12:30', 3, 5),
+  (11, 'Certainly! Let me share the detailed timeline with you.', '2023-12-13', '14:15', 3, 2),
+  -- Conversaciones para Project 4
+  (12, 'Hi! Excited to start working on Project Four.', '2023-12-15', '09:30', 4, 3),
+  (13, 'Great to have you on board! Let''s discuss the project requirements.', '2023-12-16', '11:00', 4, 7),
+  (14, 'I have some ideas for the design. Can we schedule a design review?', '2023-12-17', '14:45', 4, 3),
+  (15, 'Absolutely! Let''s meet next week to go over the design details.', '2023-12-18', '10:30', 4, 7);
+
+  -- Inserción en la tabla "agendas"
+INSERT INTO agendas (id, meeting_date, meeting_time, userId, projectId)
+VALUES 
+  (1, '2023-01-05', '10:00', 5, 2),
+  (2, '2023-01-10', '14:30', 6, 3),
+  (3, '2023-02-15', '11:00', 5, 1),
+  (4, '2023-02-20', '15:45', 7, 4),
+  (5, '2023-03-05', '09:30', 6, 2),
+  (6, '2023-03-10', '16:00', 7, 3);
