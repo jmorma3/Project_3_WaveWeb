@@ -10,30 +10,22 @@ VALUES
   (7, 'Client4', 'Client', 'client4@email.com', '$2b$10$Zgc4GCIRE1v7aTdXriyMau0xNvYc5qOcEf/hTySjZbwPJVE77iR7G', 'client');
  
 -- Inserción en la tabla "projects"
-INSERT INTO projects (id, project_name, project_type, price, progress_status, userId, plus_prototype)
+INSERT INTO projects (id, project_name, project_type, price, progress_status, devId, clientId, plus_prototype)
 VALUES 
-  (1, 'Project One', 'Basic Web', 1200, 'In Progress Step 2', 4, true),
-  (2, 'Project Two', 'Dynamic Web', 4000, 'Not Started', 5, false),
-  (3, 'Project Three', 'Basic Web', 2000, 'Completed', 6, true),
-  (4, 'Project Four', 'E-Commerce Web', 6000, 'In Progress Step 1', 7, false);
-  
--- Inserción en la tabla "project_developers"
-INSERT INTO project_developers (userId, projectId)
+  (1, 'Project One', 'Basic Web', 1200, 'In Progress Step 2', 2, 4, true),
+  (2, 'Project Two', 'Dynamic Web', 4000, 'Not Started', 3, 5, false),
+  (3, 'Project Three', 'Basic Web', 2000, 'Completed', 2, 6, true),
+  (4, 'Project Four', 'E-Commerce Web', 6000, 'In Progress Step 1', 3, 7, false);
+   
+-- Inserción en la tabla "invoices"
+INSERT INTO invoices (id, invoice_date, amount, payment_date, payment_method, clientId, devId, projectId)
 VALUES 
-  (2, 1), -- Asociar Developer 1 con Project One
-  (2, 2), -- Asociar Developer 1 con Project Two
-  (3, 3), -- Asociar Developer 2 con Project Three
-  (3, 4); -- Asociar Developer 2 con Project Four
+  (1, '2023-01-01', 1200, '2023-01-15', 'Credit Card', 4, 2, 1),
+  (2, '2023-02-01', 4000, '2023-02-15', 'PayPal', 5, 3, 2),
+  (3, '2023-03-01', 2000, '2023-03-15', 'Credit Card', 6, 2, 3),
+  (4, '2023-04-01', 6000, '2023-04-15', 'Bank Transfer', 7, 3, 4);
   
-  -- Inserción en la tabla "invoices"
-INSERT INTO invoices (id, invoice_date, amount, payment_date, payment_method, userId, projectId)
-VALUES 
-  (1, '2023-01-01', 1200, '2023-01-15', 'Credit Card', 4, 1),
-  (2, '2023-02-01', 4000, '2023-02-15', 'PayPal', 5, 2),
-  (3, '2023-03-01', 2000, '2023-03-15', 'Credit Card', 6, 3),
-  (4, '2023-04-01', 6000, '2023-04-15', 'Bank Transfer', 7, 4);
-  
-  -- Inserción en la tabla "chat_messages"
+-- Inserción en la tabla "chat_messages"
 INSERT INTO chat_messages (id, message_text, message_date, message_time, projectId, userId)
 VALUES 
   -- Conversaciones para Project 1
@@ -57,11 +49,11 @@ VALUES
   (15, 'Absolutely! Let''s meet next week to go over the design details.', '2023-12-18', '10:30', 4, 7);
 
   -- Inserción en la tabla "agendas"
-INSERT INTO agendas (id, meeting_date, meeting_time, userId, projectId)
+INSERT INTO agendas (id, meeting_date, meeting_time, devId, clientId, projectId)
 VALUES 
-  (1, '2023-01-05', '10:00', 5, 2),
-  (2, '2023-01-10', '14:30', 6, 3),
-  (3, '2023-02-15', '11:00', 5, 1),
-  (4, '2023-02-20', '15:45', 7, 4),
-  (5, '2023-03-05', '09:30', 6, 2),
-  (6, '2023-03-10', '16:00', 7, 3);
+  (1, '2023-01-05', '10:00', 2, 5, 2),
+  (2, '2023-01-10', '14:30', 3, 6, 3),
+  (3, '2023-02-15', '11:00', 2, 5, 1),
+  (4, '2023-02-20', '15:45', 3, 7, 4),
+  (5, '2023-03-05', '09:30', 2, 6, 2),
+  (6, '2023-03-10', '16:00', 3, 7, 3);

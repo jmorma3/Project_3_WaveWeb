@@ -5,39 +5,32 @@ const Invoice = require("../api/models/invoice.model")
 const Project = require("../api/models/project.model")
 const User = require("../api/models/user.model")
 
-function addRelationsToModels(){
+function addRelationsToModels() {
     try {
         //One to Many:
-        User.hasMany(Project)
-        Project.belongsTo(User)
+        // Relaciones en la tabla Project
+        Project.belongsTo(User, { foreignKey: 'devId', as: 'developer' });
+        Project.belongsTo(User, { foreignKey: 'clientId', as: 'client' });
 
-        User.hasMany(Agenda)
-        Agenda.belongsTo(User)
+        // Relaciones en la tabla Invoice
+        Invoice.belongsTo(Project, { foreignKey: 'projectId', as: 'project' });
+        Invoice.belongsTo(User, { foreignKey: 'clientId', as: 'client' });
+        Invoice.belongsTo(User, { foreignKey: 'devId', as: 'developer' });
 
-        User.hasMany(Invoice)
-        Invoice.belongsTo(User)
+        // Relaciones en la tabla Agenda (anteriormente conocida como Meeting)
+        Agenda.belongsTo(Project, { foreignKey: 'projectId', as: 'project' });
+        Agenda.belongsTo(User, { foreignKey: 'clientId', as: 'client' });
+        Agenda.belongsTo(User, { foreignKey: 'devId', as: 'developer' });
 
-        Project.hasMany(Agenda)
-        Agenda.belongsTo(Project)
-
-        Project.hasMany(Invoice)
-        Invoice.belongsTo(Project)
-
-        Project.hasMany(ChatMessage)
-        ChatMessage.belongsTo(Project)
-
-        User.hasMany(ChatMessage)
-        ChatMessage.belongsTo(User)
-
-        //Many to Many:
-        User.belongsToMany(Project, {through: "project_developers", timestamps: false})
-        Project.belongsToMany(User, {through: "project_developers", timestamps: false})
+        // Relaciones en la tabla ChatMessage
+        ChatMessage.belongsTo(Project, { foreignKey: 'projectId', as: 'project' });
+        ChatMessage.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
         console.log("Relations added to models!")
 
     } catch (error) {
         throw error
     }
-} 
+}
 
 module.exports = addRelationsToModels
