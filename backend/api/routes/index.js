@@ -14,9 +14,9 @@ const { checkAuth } = require("../middlewares/index")
 router
         .use("/auth", authRouter)
         .use("/user", checkAuth, userRouter)
-        .use("/project", checkAuth,projectRouter)
-        .use("/agenda", checkAuth,agendaRouter)
-        .use("/invoice", checkAuth,invoiceRouter)
-        .use("/message", checkAuth,chat_messageRouter)       
+        .use("/project", checkAuth, projectRouter)
+        .use("/agenda", checkAuth, agendaRouter)
+        .use("/invoice", checkAuth, invoiceRouter)
+        .use("/message", checkAuth, chat_messageRouter)
 
 module.exports = router

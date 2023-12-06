@@ -7,6 +7,7 @@ const {
 
 router
     .post("/client/signup", signUp)
+    .post("/admin/login", logIn)
     .post("/client/login", logIn)
     .post("/developer/login", logIn)
 

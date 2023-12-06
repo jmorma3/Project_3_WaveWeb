@@ -41,7 +41,7 @@ const logIn = async (req, res) => {
         const comparePass = bcrypt.compareSync(req.body.password, user.password)
 
         if (comparePass) {
-            const payload = { email: user.email, username: user.username }
+            const payload = { email: user.email, password: user.password }
             const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
             return res.status(200).json({ token })
         } else {
