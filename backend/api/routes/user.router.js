@@ -15,14 +15,14 @@ const {
 } = require("../controllers/user.controller")
 
 router
+    .get("/profile", getOwnProfile)
     .get("/", checkAdmin, getAllUsers)
     .get("/:userId", checkAdmin, getOneUser)
-    .get("/profile", getOwnProfile)
     .post("/", checkAdmin, createUser)
-    .put("/:userId", updateUser)
     .put("/profile", updateOwnProfile)
     .put("/profile/password", updateOwnPassword)
-    .delete("/:userId", checkAdmin, deleteUser)
+    .put("/:userId", updateUser)
     .delete("/profile", deleteOwnProfile)
+    .delete("/:userId", checkAdmin, deleteUser)
 
 module.exports = router

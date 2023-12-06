@@ -15,13 +15,13 @@ const {
 } = require("../controllers/chat_message.controller")
 
 router
+    .get("/myMessages", getOwnMessages)
     .get("/", checkAdmin, getAllMessages)
     .get("/:messageId", checkAdmin, getOneMessage)
-    .get("/myMessages", getOwnMessages)
     .get("/myMessages/:messageId", getOneOwnMessage)
     .post("/", createMessage)
-    .put("/:messageId", checkAdmin, updateMessage)
     .put("/myMessages/:messageId", updateOwnMessage)
+    .put("/:messageId", checkAdmin, updateMessage)
     .delete("/:messageId", deleteMessage)
     .delete("/myMessages/:messageId", deleteOwnMessage)
 

@@ -73,7 +73,7 @@ const getOwnMeetings = async (req, res) => {
 
 const getOneOwnMeeting = async (req, res) => {
     try {
-        const meeting = await Agenda.findByPk({
+        const meeting = await Agenda.findOne({
             where: {
                 userId: res.locals.user.id,
                 id: req.params.meetingId
@@ -104,7 +104,7 @@ const createMeeting = async (req, res) => {
     try {
         const { meeting_date, meeting_time, userId, projectId } = req.body
 
-        const project = await Agenda.create({
+        const meeting = await Agenda.create({
             meeting_date: meeting_date,
             meeting_time: meeting_time,
             userId: userId,
@@ -120,7 +120,7 @@ const createMeeting = async (req, res) => {
 
 //Pendiente revisar este controlador: ¿Cómo permito que sólo el DEV pueda añadir meetings nuevos a sus projects?
 const createOwnMeeting = async (req, res) => {
-    
+
 }
 
 const updateMeeting = async (req, res) => {
@@ -149,13 +149,22 @@ const updateMeeting = async (req, res) => {
 
 const updateOwnMeeting = async (req, res) => {
     try {
-        await Agenda.update(req.body, {
+        const meeting = await Agenda.findOne({
             where: {
                 userId: res.locals.user.id
             }
         })
 
-        return res.status(200).json({ message: 'Meeting updated' })
+        if (meeting) {
+            await Agenda.update(req.body, {
+                where: {
+                    id: req.params.meetingId
+                }
+            })
+            return res.status(200).json({ message: 'Meeting updated' })
+        }else {
+            return res.status(404).send('Meeting not found')
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)
@@ -185,13 +194,22 @@ const deleteMeeting = async (req, res) => {
 
 const deleteOwnMeeting = async (req, res) => {
     try {
-        await Agenda.destroy({
+        const meeting = await Agenda.findOne({
             where: {
                 userId: res.locals.user.id
             }
         })
 
-        return res.status(200).json({ message: 'Meeting deleted' })
+        if (meeting) {
+            await Agenda.destroy( {
+                where: {
+                    id: req.params.meetingId
+                }
+            })
+            return res.status(200).json({ message: 'Meeting deleted' })
+        }else {
+            return res.status(404).send('Meeting not found')
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)

@@ -2,7 +2,7 @@
 INSERT INTO users (id, first_name, last_name, email, password, role)
 VALUES
   (1, 'Admin', 'Admin', 'admin@email.com', '$2b$10$fSJM8JmMV5AEag0DVXdKi.JYACVlCgvV/7Wlix71VjxZBfBXaSXQa', 'admin'),
-  (2, 'Dev1', 'Developer', 'dev1@email..com', '$2b$10$K26XeVXWRxzilIq85s1tD.iPLj9885ZeAT9z5IZgxSGcksrFZq4.C', 'dev'),
+  (2, 'Dev1', 'Developer', 'dev1@email.com', '$2b$10$K26XeVXWRxzilIq85s1tD.iPLj9885ZeAT9z5IZgxSGcksrFZq4.C', 'dev'),
   (3, 'Dev2', 'Developer', 'dev2@email.com', '$2b$10$QrK35x4GE.sFaMylPPFuK.hMdN9EqHh/QG.QIBVLmM6joiqUB4BSq', 'dev'),
   (4, 'Client1', 'Client', 'client1@email.com', '$2b$10$vd8MGv36KXSfRp8LZgw3j.eZQbp87663H22z8r..QERJhakU.Wuma', 'client'),
   (5, 'Client2', 'Client', 'client2@email.com', '$2b$10$45mU8Ay9NtJ1oYb86D2BzOIgUBLu80kGu0N20HcfMbl9uTIBASvhq', 'client'),

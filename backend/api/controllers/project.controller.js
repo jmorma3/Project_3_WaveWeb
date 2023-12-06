@@ -68,10 +68,9 @@ const getOwnProjects = async (req, res) => {
 
 const getOneOwnProject = async (req, res) => {
     try {
-        const project = await Project.findByPk({
+        const project = await Project.findByPk(req.params.projectId,{
             where: {
-                userId: res.locals.user.id,
-                projectId: req.params.projectId
+                userId: res.locals.user.id
             },
             attributes: ['project_name', 'project_type', "price", "progress_status", "plus_prototype"],
             include: {
@@ -93,15 +92,15 @@ const getOneOwnProject = async (req, res) => {
 
 const createProject = async (req, res) => {
     try {
-        const { project_name, project_type, price, project_status, plus_prototype, developerId } = req.body
+        const { project_name, project_type, price, progress_status, plus_prototype, userId } = req.body
 
         const project = await Project.create({
             project_name: project_name,
             project_type: project_type,
             price: price,
-            project_status: project_status,
+            progress_status: progress_status,
             plus_prototype: plus_prototype,
-            developerId: developerId
+            userId: userId
         })
 
         return res.status(200).json({ message: 'Project created', project: project })
@@ -113,13 +112,13 @@ const createProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
     try {
-        const [project] = await User.update({
+        const [project] = await Project.update({
             project_name: req.body.project_name,
             project_type: req.body.project_type,
             price: req.body.price,
-            project_status: req.body.project_status,
+            progress_status: req.body.progress_status,
             plus_prototype: req.body.plus_prototype,
-            developerId: req.body.developerId
+            userId: req.body.userId
 
         }, {
             where: {
@@ -139,13 +138,22 @@ const updateProject = async (req, res) => {
 
 const updateOwnProject = async (req, res) => {
     try {
-        await Project.update(req.body, {
+        const project = await Project.findOne({
             where: {
                 userId: res.locals.user.id
             }
         })
 
-        return res.status(200).json({ message: 'Project updated' })
+        if (project) {
+            await Project.update(req.body, {
+                where: {
+                    id: req.params.projectId
+                }
+            })
+            return res.status(200).json({ message: 'Project updated' })
+        }else {
+            return res.status(404).send('Project not found')
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)
@@ -175,13 +183,22 @@ const deleteProject = async (req, res) => {
 
 const deleteOwnProject = async (req, res) => {
     try {
-        await Project.destroy({
+        const project = await Project.findOne({
             where: {
                 userId: res.locals.user.id
             }
         })
 
-        return res.status(200).json({ message: 'Project deleted' })
+        if (project) {
+            await Project.destroy( {
+                where: {
+                    id: req.params.projectId
+                }
+            })
+            return res.status(200).json({ message: 'Project deleted' })
+        }else {
+            return res.status(404).send('Project not found')
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)

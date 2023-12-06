@@ -15,9 +15,9 @@ const {
 } = require("../controllers/agenda.controller")
 
 router
+    .get("/myAgenda", getOwnMeetings)
     .get("/", checkAdmin, getAllMeetings)
     .get("/:meetingId", checkAdmin, getOneMeeting)
-    .get("/myAgenda", getOwnMeetings)
     .get("/myAgenda/:meetingId", getOneOwnMeeting)
     .post("/", checkAdmin, createMeeting)
     //Pendiente añadir ".post" para el controlador "createOwnMeeting"

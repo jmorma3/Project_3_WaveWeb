@@ -65,11 +65,11 @@ const getOneOwnInvoice = async (req, res) => {
 
 const createInvoice = async (req, res) => {
     try {
-        const { userId, projectID, invoice_date, amount, payment_date, payment_method } = req.body
+        const { userId, projectId, invoice_date, amount, payment_date, payment_method } = req.body
 
         const invoice = await Invoice.create({
             userId: userId,
-            projectID: projectID,
+            projectId: projectId,
             invoice_date: invoice_date,
             amount: amount,
             payment_date: payment_date,
@@ -87,7 +87,7 @@ const updateInvoice = async (req, res) => {
     try {
         const [invoice] = await Invoice.update({
             userId: req.body.userId,
-            projectID: req.body.projectID,
+            projectId: req.body.projectId,
             invoice_date: req.body.invoice_date,
             amount: req.body.amount,
             payment_date: req.body.payment_date,

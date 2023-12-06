@@ -64,15 +64,17 @@ const getOneOwnMessage = async (req, res) => {
 
 const createMessage = async (req, res) => {
     try {
-        const { message_text, message_date, message_time } = req.body
+        const { message_text, message_date, message_time, userId } = req.body
 
         const message = await ChatMessage.create({
             message_text: message_text,
             message_date: message_date,
-            message_time: message_time
+            message_time: message_time,
+            userId: res.locals.user.id
+            
           
         })
-
+       
         return res.status(200).json({ message: 'Message created', message: message })
 
     } catch (error) {
@@ -104,20 +106,29 @@ const updateMessage = async (req, res) => {
     }
 }
 
-const updateOwnMessage = async (req, res) => {
-    try {
-        await ChatMessage.update(req.body, {
-            where: {
-                userId: res.locals.user.id
+    const updateOwnMessage = async (req, res) => {
+        try {
+            const message = await ChatMessage.findOne({
+                where: {
+                    userId: res.locals.user.id
+                }
+            })
+    
+            if (message) {
+                await ChatMessage.update(req.body, {
+                    where: {
+                        id: req.params.messageId
+                    }
+                })
+                return res.status(200).json({ message: 'Message updated' })
+            }else {
+                return res.status(404).send('Message not found')
             }
-        })
-
-        return res.status(200).json({ message: 'Message updated' })
-
-    } catch (error) {
-        return res.status(500).send(error.message)
+    
+        } catch (error) {
+            return res.status(500).send(error.message)
+        }
     }
-}
 
 const deleteMessage = async (req, res) => {
     try {
@@ -139,15 +150,25 @@ const deleteMessage = async (req, res) => {
     }
 }
 
+
 const deleteOwnMessage = async (req, res) => {
     try {
-        await ChatMessage.destroy(req.body, {
+        const message = await ChatMessage.findOne({
             where: {
                 userId: res.locals.user.id
             }
         })
 
-        return res.status(200).json({ message: 'Message deleted' })
+        if (message) {
+            await ChatMessage.destroy( {
+                where: {
+                    id: req.params.messageId
+                }
+            })
+            return res.status(200).json({ message: 'Message deleted' })
+        }else {
+            return res.status(404).send('Message not found')
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)
