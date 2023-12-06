@@ -17,7 +17,7 @@ const Project = sequelize.define(
             allowNull: false
         }, 
         progress_status: {
-            type: DataTypes.ENUM("Finished", "Unfinished"), 
+            type: DataTypes.ENUM("Not Started", "In Progress Step 1", "In Progress Step 2", "Completed"), 
             allowNull: false
         }, 
         plus_prototype: {

@@ -1,0 +1,26 @@
+-- Inserción en tabla "users".
+INSERT INTO users (id, first_name, last_name, email, password, role)
+VALUES
+  (1, 'Admin', 'Admin', 'admin@email.com', '$2b$10$fSJM8JmMV5AEag0DVXdKi.JYACVlCgvV/7Wlix71VjxZBfBXaSXQa', 'admin'),
+  (2, 'Dev1', 'Developer', 'dev1@email..com', '$2b$10$K26XeVXWRxzilIq85s1tD.iPLj9885ZeAT9z5IZgxSGcksrFZq4.C', 'dev'),
+  (3, 'Dev2', 'Developer', 'dev2@email.com', '$2b$10$QrK35x4GE.sFaMylPPFuK.hMdN9EqHh/QG.QIBVLmM6joiqUB4BSq', 'dev'),
+  (4, 'Client1', 'Client', 'client1@email.com', '$2b$10$vd8MGv36KXSfRp8LZgw3j.eZQbp87663H22z8r..QERJhakU.Wuma', 'client'),
+  (5, 'Client2', 'Client', 'client2@email.com', '$2b$10$45mU8Ay9NtJ1oYb86D2BzOIgUBLu80kGu0N20HcfMbl9uTIBASvhq', 'client'),
+  (6, 'Client3', 'Client', 'client3@email.com', '$2b$10$IKj4gFQMsPRASsu6/Mj4POwG8OuVu53Y0mu7OsBccz4m8g1OGhU.K', 'client'),
+  (7, 'Client4', 'Client', 'client4@email.com', '$2b$10$Zgc4GCIRE1v7aTdXriyMau0xNvYc5qOcEf/hTySjZbwPJVE77iR7G', 'client');
+ 
+-- Inserción en la tabla "projects"
+INSERT INTO projects (id, project_name, project_type, price, progress_status, userId, plus_prototype)
+VALUES 
+  (1, 'Project One', 'Basic Web', 1200, 'In Progress Step 2', 4, true),
+  (2, 'Project Two', 'Dynamic Web', 4000, 'Not Started', 5, false),
+  (3, 'Project Three', 'Basic Web', 2000, 'Completed', 6, true),
+  (4, 'Project Four', 'E-Commerce Web', 6000, 'In Progress Step 1', 7, false);
+
+-- Inserción en la tabla "invoices"
+INSERT INTO invoices (id, invoice_date, amount, payment_date, payment_method, userId, projectId)
+VALUES 
+  (1, '2023-01-01', 1200, '2023-01-15', 'Credit Card', 4, 1),
+  (2, '2023-02-01', 4000, '2023-02-15', 'PayPal', 5, 2),
+  (3, '2023-03-01', 2000, '2023-03-15', 'Credit Card', 6, 3),
+  (4, '2023-04-01', 6000, '2023-04-15', 'Bank Transfer', 7, 4);
