@@ -8,6 +8,7 @@ const {
     getOwnProjects,
     getOneOwnProject,
     createProject,
+    createOneOwnProject,
     updateProject,
     updateOwnProject,
     deleteProject,
@@ -19,7 +20,8 @@ router
     .get("/myProjects/:projectId", getOneOwnProject)
     .get("/", checkAdmin, getAllProjects)
     .get("/:projectId", checkAdmin, getOneProject)
-    .post("/", checkAdmin, createProject)  //OJO: pendiente añadir middleware para que sólo el ADMIN y Client puedan "Crear projects..."
+    .post("/myProjects", createOneOwnProject)
+    .post("/", checkAdmin, createProject)  
     .put("/myProjects/:projectId", updateOwnProject) //OJO: Añadir middleware para que sólo DEV pueda actualizar su project. 
     .put("/:projectId", checkAdmin, updateProject)
     .delete("/:projectId", checkAdmin, deleteProject)

@@ -31,15 +31,28 @@ const getOneInvoice = async (req, res) => {
 
 const getOwnInvoices = async (req, res) => {
     try {
-        const invoices = await Invoice.findAll({
-            where: {
-                userId: res.locals.user.id
-            }
-        })
+        let invoices = []
+        if (res.locals.user.role === "dev") {
+            invoices = await Invoice.findAll({
+                where: {
+                    devId: res.locals.user.id
+                },
+                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "clientId"],
+            })
+        } else if (res.locals.user.role === "client") {
+            invoices = await Invoice.findAll({
+                where: {
+                    clientId: res.locals.user.id
+                },
+                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "devId"],
+            })
+        }
+
         if (invoices) {
-            return res.status(200).json(invoices)
+            const message = `Hi ${res.locals.user.first_name}! These are your invoices:`
+            return res.status(200).json({ message, invoices })
         } else {
-            return res.status(404).send('Invoice not found')
+            return res.status(404).send('Invoices not found')
         }
     } catch (error) {
         return res.status(500).send(error.message)
@@ -48,18 +61,34 @@ const getOwnInvoices = async (req, res) => {
 
 const getOneOwnInvoice = async (req, res) => {
     try {
-        const invoice = await Invoice.findByPk(req.params.invoiceId, {
-            where: {
-                userId: res.locals.user.id
-            }
-        })
+        let invoice;
+
+        if (res.locals.user.role === "dev") {
+            invoice = await Invoice.findOne({
+                where: {
+                    id: req.params.invoiceId,
+                    devId: res.locals.user.id,
+                },
+                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "clientId"],
+            });
+        } else if (res.locals.user.role === "client") {
+            invoice = await Invoice.findOne({
+                where: {
+                    id: req.params.invoiceId,
+                    clientId: res.locals.user.id,
+                },
+                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "devId"],
+            });
+        }
+
         if (invoice) {
-            return res.status(200).json(invoice)
+            const message = `Hi ${res.locals.user.first_name}! This is your invoice:`;
+            return res.status(200).json({ message, invoice });
         } else {
-            return res.status(404).send('Invoice not found')
+            return res.status(404).send('Invoice not found or not associated with the user');
         }
     } catch (error) {
-        return res.status(500).send(error.message)
+        return res.status(500).send(error.message);
     }
 }
 
@@ -68,7 +97,8 @@ const createInvoice = async (req, res) => {
         const { userId, projectId, invoice_date, amount, payment_date, payment_method } = req.body
 
         const invoice = await Invoice.create({
-            userId: userId,
+            devId: devId,
+            clientId: clientId,
             projectId: projectId,
             invoice_date: invoice_date,
             amount: amount,
@@ -86,7 +116,8 @@ const createInvoice = async (req, res) => {
 const updateInvoice = async (req, res) => {
     try {
         const [invoice] = await Invoice.update({
-            userId: req.body.userId,
+            devId: req.body.devId,
+            clientId: req.body.clientId,
             projectId: req.body.projectId,
             invoice_date: req.body.invoice_date,
             amount: req.body.amount,

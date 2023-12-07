@@ -9,10 +9,7 @@ require('dotenv').config()
 const getAllProjects = async (req, res) => {
     try {
         const projects = await Project.findAll({
-            where: req.query,
-            // attributes: {
-            //     exclude: ["price"]
-            // }
+            where: req.query
         })
         if (projects) {
             return res.status(200).json(projects)
@@ -27,9 +24,6 @@ const getAllProjects = async (req, res) => {
 const getOneProject = async (req, res) => {
     try {
         const project = await Project.findByPk(req.params.projectId, {
-            // attributes: {
-            //     exclude: ["price"]
-            // }
         })
 
         if (project) {
@@ -44,19 +38,25 @@ const getOneProject = async (req, res) => {
 
 const getOwnProjects = async (req, res) => {
     try {
-        const projects = await Project.findAll({
-            where: {
-                userId: res.locals.user.id
-            },
-            attributes: ['project_name', 'project_type', "price", "progress_status", "plus_prototype"],
-            include: {
-                model: User,
-                attributes: ['first_name', 'last_name']
-            }
-        })
+        let projects = []
+        if (res.locals.user.role === "dev") {
+            projects = await Project.findAll({
+                where: {
+                    devId: res.locals.user.id
+                },
+                attributes: ["id", 'project_name', 'project_type', "price", "progress_status", "plus_prototype", "clientId"],
+            })
+        } else if (res.locals.user.role === "client") {
+            projects = await Project.findAll({
+                where: {
+                    clientId: res.locals.user.id
+                },
+                attributes: ["id", 'project_name', 'project_type', "price", "progress_status", "plus_prototype", "devId"],
+            })
+        }
 
         if (projects) {
-            const message = `These are your projects:`
+            const message = `Hi ${res.locals.user.first_name}! These are your projects:`
             return res.status(200).json({ message, projects })
         } else {
             return res.status(404).send('Project not found')
@@ -68,31 +68,41 @@ const getOwnProjects = async (req, res) => {
 
 const getOneOwnProject = async (req, res) => {
     try {
-        const project = await Project.findByPk(req.params.projectId,{
-            where: {
-                userId: res.locals.user.id
-            },
-            attributes: ['project_name', 'project_type', "price", "progress_status", "plus_prototype"],
-            include: {
-                model: User,
-                attributes: ['first_name', 'last_name']
-            }
-        })
+        let project;
+
+        if (res.locals.user.role === "dev") {
+            project = await Project.findOne({
+                where: {
+                    id: req.params.projectId,
+                    devId: res.locals.user.id,
+                },
+                attributes: ["id", "project_name", "project_type", "price", "progress_status", "plus_prototype", "clientId"],
+            });
+        } else if (res.locals.user.role === "client") {
+            project = await Project.findOne({
+                where: {
+                    id: req.params.projectId,
+                    clientId: res.locals.user.id,
+                },
+                attributes: ["id", "project_name", "project_type", "price", "progress_status", "plus_prototype", "devId"],
+            });
+        }
 
         if (project) {
-            const message = `This is your projects:`
-            return res.status(200).json({ message, project })
+            const message = `Hi ${res.locals.user.first_name}! This is your project:`;
+            return res.status(200).json({ message, project });
         } else {
-            return res.status(404).send('Project not found')
+            return res.status(404).send('Project not found or not associated with the user');
         }
     } catch (error) {
-        return res.status(500).send(error.message)
+        return res.status(500).send(error.message);
     }
-}
+};
+
 
 const createProject = async (req, res) => {
     try {
-        const { project_name, project_type, price, progress_status, plus_prototype, userId } = req.body
+        const { project_name, project_type, price, progress_status, plus_prototype, devId, clientId } = req.body
 
         const project = await Project.create({
             project_name: project_name,
@@ -100,10 +110,37 @@ const createProject = async (req, res) => {
             price: price,
             progress_status: progress_status,
             plus_prototype: plus_prototype,
-            userId: userId
+            devId: devId,
+            clientId: clientId
         })
 
         return res.status(200).json({ message: 'Project created', project: project })
+
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+const createOneOwnProject = async (req,res)=>{
+    try {
+        if(res.locals.user.role !== "dev"){
+            const { project_name, project_type, price, progress_status, plus_prototype, devId, clientId } = req.body
+    
+            const project = await Project.create({
+                project_name: project_name,
+                project_type: project_type,
+                price: price,
+                progress_status: progress_status,
+                plus_prototype: plus_prototype,
+                devId: null,
+                clientId: res.locals.user.id
+            })
+    
+            return res.status(200).json({ message: 'Project created', project: project })
+
+        }else{
+            return res.status(404).send('You are not authorized to create a project');
+        }
 
     } catch (error) {
         return res.status(500).send(error.message)
@@ -138,21 +175,27 @@ const updateProject = async (req, res) => {
 
 const updateOwnProject = async (req, res) => {
     try {
-        const project = await Project.findOne({
-            where: {
-                userId: res.locals.user.id
-            }
-        })
-
-        if (project) {
-            await Project.update(req.body, {
+        if (res.locals.user.role !== "client") {
+            const project = await Project.findOne({
                 where: {
-                    id: req.params.projectId
+                    id: req.params.projectId,
+                    devId: res.locals.user.id
                 }
             })
-            return res.status(200).json({ message: 'Project updated' })
-        }else {
-            return res.status(404).send('Project not found')
+
+            if (project) {
+                await Project.update(req.body, {
+                    where: {
+                        id: req.params.projectId,
+                        devId: res.locals.user.id
+                    }
+                })
+                return res.status(200).json({ message: 'Project updated' })
+            } else {
+                return res.status(404).send('Project not found')
+            }
+        } else {
+            return res.status(404).send('You are not authorized to update this project');
         }
 
     } catch (error) {
@@ -183,21 +226,27 @@ const deleteProject = async (req, res) => {
 
 const deleteOwnProject = async (req, res) => {
     try {
-        const project = await Project.findOne({
-            where: {
-                userId: res.locals.user.id
-            }
-        })
-
-        if (project) {
-            await Project.destroy( {
+        if (res.locals.user.role !== "client") {
+            const project = await Project.findOne({
                 where: {
-                    id: req.params.projectId
+                    id: req.params.projectId,
+                    devId: res.locals.user.id
                 }
             })
-            return res.status(200).json({ message: 'Project deleted' })
-        }else {
-            return res.status(404).send('Project not found')
+
+            if (project) {
+                await Project.destroy({
+                    where: {
+                        id: req.params.projectId,
+                        devId: res.locals.user.id
+                    }
+                })
+                return res.status(200).json({ message: 'Project deleted' })
+            } else {
+                return res.status(404).send('Project not found')
+            }
+        } else {
+            return res.status(404).send('You are not authorized to delete this project');
         }
 
     } catch (error) {
@@ -205,12 +254,14 @@ const deleteOwnProject = async (req, res) => {
     }
 }
 
+
 module.exports = {
     getAllProjects,
     getOneProject,
     getOwnProjects,
     getOneOwnProject,
     createProject,
+    createOneOwnProject,
     updateProject,
     updateOwnProject,
     deleteProject,

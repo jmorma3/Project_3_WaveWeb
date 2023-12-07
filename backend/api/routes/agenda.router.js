@@ -8,6 +8,7 @@ const {
     getOwnMeetings,
     getOneOwnMeeting,
     createMeeting,
+    createOwnMeeting,
     updateMeeting,
     updateOwnMeeting,
     deleteMeeting,
@@ -20,9 +21,9 @@ router
     .get("/:meetingId", checkAdmin, getOneMeeting)
     .get("/myAgenda/:meetingId", getOneOwnMeeting)
     .post("/", checkAdmin, createMeeting)
-    //Pendiente añadir ".post" para el controlador "createOwnMeeting"
+    .post("/myAgenda/:projectId", createOwnMeeting)
     .put("/:meetingId", checkAdmin, updateMeeting)
-    .put("/myAgenda/:meetingId", updateOwnMeeting) //OJO: Añadir middleware para que sólo DEV pueda actualizar su AGENDA. 
+    .put("/myAgenda/:meetingId", updateOwnMeeting)
     .delete("/:meetingId", checkAdmin, deleteMeeting)
     .delete("/myAgenda/:meetingId", deleteOwnMeeting)
 

@@ -1,19 +1,12 @@
 const Agenda = require("../models/agenda.model")
-const User = require("../models/user.model")
 const Project = require("../models/project.model")
-
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 require('dotenv').config()
 
 const getAllMeetings = async (req, res) => {
     try {
         const meetings = await Agenda.findAll({
-            where: req.query,
-            // attributes: {
-            //     exclude: ["price"]
-            // }
+            where: req.query
         })
         if (meetings) {
             return res.status(200).json(meetings)
@@ -28,9 +21,6 @@ const getAllMeetings = async (req, res) => {
 const getOneMeeting = async (req, res) => {
     try {
         const meeting = await Agenda.findByPk(req.params.meetingId, {
-            // attributes: {
-            //     exclude: ["price"]
-            // }
         })
 
         if (meeting) {
@@ -45,26 +35,28 @@ const getOneMeeting = async (req, res) => {
 
 const getOwnMeetings = async (req, res) => {
     try {
-        const meetings = await Agenda.findAll({
-            where: {
-                userId: res.locals.user.id
-            },
-            attributes: ['meeting_date', 'meeting_time'],
-            include: {
-                model: User,
-                attributes: ['first_name', 'last_name']
-            },
-            include: {
-                model: Project,
-                attributes: ['project_name']
-            }
-        })
+        let meetings = []
+        if (res.locals.user.role === "dev") {
+            meetings = await Agenda.findAll({
+                where: {
+                    devId: res.locals.user.id
+                },
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "clientId"],
+            })
+        } else if (res.locals.user.role === "client") {
+            meetings = await Agenda.findAll({
+                where: {
+                    clientId: res.locals.user.id
+                },
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "devId"],
+            })
+        }
 
         if (meetings) {
-            const message = `Your next meetings:`
+            const message = `Hi ${res.locals.user.first_name}! These are your next meetings:`
             return res.status(200).json({ message, meetings })
         } else {
-            return res.status(404).send('Meeting not found')
+            return res.status(404).send('Meetings not found')
         }
     } catch (error) {
         return res.status(500).send(error.message)
@@ -73,42 +65,47 @@ const getOwnMeetings = async (req, res) => {
 
 const getOneOwnMeeting = async (req, res) => {
     try {
-        const meeting = await Agenda.findOne({
-            where: {
-                userId: res.locals.user.id,
-                id: req.params.meetingId
-            },
-            attributes: ['meeting_date', 'meeting_time'],
-            include: {
-                model: User,
-                attributes: ['first_name', 'last_name']
-            },
-            include: {
-                model: Project,
-                attributes: ['project_name']
-            }
-        })
+        let meeting;
+
+        if (res.locals.user.role === "dev") {
+            meeting = await Agenda.findOne({
+                where: {
+                    id: req.params.meetingId,
+                    devId: res.locals.user.id,
+                },
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "clientId"],
+            });
+        } else if (res.locals.user.role === "client") {
+            meeting = await Agenda.findOne({
+                where: {
+                    id: req.params.meetingId,
+                    clientId: res.locals.user.id,
+                },
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "devId"],
+            });
+        }
 
         if (meeting) {
-            const message = `Meeting info:`
-            return res.status(200).json({ message, meeting })
+            const message = `Hi ${res.locals.user.first_name}! This is your next neeting:`;
+            return res.status(200).json({ message, meeting });
         } else {
-            return res.status(404).send('Meeting not found')
+            return res.status(404).send('Meeting not found or not associated with the user');
         }
     } catch (error) {
-        return res.status(500).send(error.message)
+        return res.status(500).send(error.message);
     }
 }
 
 const createMeeting = async (req, res) => {
     try {
-        const { meeting_date, meeting_time, userId, projectId } = req.body
+        const { meeting_date, meeting_time, projectId, clientId, devId } = req.body
 
         const meeting = await Agenda.create({
             meeting_date: meeting_date,
             meeting_time: meeting_time,
-            userId: userId,
-            projectId: projectId
+            projectId: projectId,
+            clientId: clientId,
+            devId: devId
         })
 
         return res.status(200).json({ message: 'Meeting created', meeting: meeting })
@@ -118,18 +115,50 @@ const createMeeting = async (req, res) => {
     }
 }
 
-//Pendiente revisar este controlador: ¿Cómo permito que sólo el DEV pueda añadir meetings nuevos a sus projects?
 const createOwnMeeting = async (req, res) => {
+    try {
+        if (res.locals.user.role === "dev") {
+            const { meeting_date, meeting_time, projectId, clientId, devId } = req.body
 
+            // Verifica si el proyecto está asociado al dev que está autenticado
+            const isProjectAssociated = await Project.findOne({
+                where: {
+                    id: req.params.projectId,
+                    devId: res.locals.user.id
+                }
+            });
+
+            if (isProjectAssociated) {
+                const meeting = await Agenda.create({
+                    meeting_date: meeting_date,
+                    meeting_time: meeting_time,
+                    projectId: req.params.projectId,
+                    clientId: clientId,
+                    devId: res.locals.user.id
+                });
+
+                return res.status(200).json({ message: 'Meeting created', meeting: meeting });
+            } else {
+                return res.status(403).send('You are not authorized to create a meeting for this project');
+            }
+        } else {
+            return res.status(403).send('You are not authorized to create a meeting');
+        }
+
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
 }
+
 
 const updateMeeting = async (req, res) => {
     try {
         const [meeting] = await Agenda.update({
             meeting_date: req.body.meeting_date,
             meeting_time: req.body.meeting_time,
-            userId: req.body.userId,
-            projectId: req.body.projectId
+            projectId: req.body.projectId,
+            clientId: req.body.clientId,
+            devId: req.body.devId
 
         }, {
             where: {
@@ -149,21 +178,27 @@ const updateMeeting = async (req, res) => {
 
 const updateOwnMeeting = async (req, res) => {
     try {
-        const meeting = await Agenda.findOne({
-            where: {
-                userId: res.locals.user.id
-            }
-        })
-
-        if (meeting) {
-            await Agenda.update(req.body, {
+        if (res.locals.user.role !== "client") {
+            const meeting = await Agenda.findOne({
                 where: {
-                    id: req.params.meetingId
+                    id: req.params.meetingId,
+                    devId: res.locals.user.id
                 }
             })
-            return res.status(200).json({ message: 'Meeting updated' })
-        }else {
-            return res.status(404).send('Meeting not found')
+
+            if (meeting) {
+                await Agenda.update(req.body, {
+                    where: {
+                        id: req.params.meetingId,
+                        devId: res.locals.user.id
+                    }
+                })
+                return res.status(200).json({ message: 'Meeting updated' })
+            } else {
+                return res.status(404).send('Meeting not found')
+            }
+        } else {
+            return res.status(404).send('You are not authorized to update this meeting');
         }
 
     } catch (error) {
@@ -194,21 +229,27 @@ const deleteMeeting = async (req, res) => {
 
 const deleteOwnMeeting = async (req, res) => {
     try {
-        const meeting = await Agenda.findOne({
-            where: {
-                userId: res.locals.user.id
-            }
-        })
-
-        if (meeting) {
-            await Agenda.destroy( {
+        if (res.locals.user.role !== "client") {
+            const meeting = await Agenda.findOne({
                 where: {
-                    id: req.params.meetingId
+                    id: req.params.meetingId,
+                    devId: res.locals.user.id
                 }
             })
-            return res.status(200).json({ message: 'Meeting deleted' })
-        }else {
-            return res.status(404).send('Meeting not found')
+
+            if (meeting) {
+                await Agenda.destroy({
+                    where: {
+                        id: req.params.meetingId,
+                        devId: res.locals.user.id
+                    }
+                })
+                return res.status(200).json({ message: 'Meeting deleted' })
+            } else {
+                return res.status(404).send('Meeting not found')
+            }
+        } else {
+            return res.status(404).send('You are not authorized to delete this meeting');
         }
 
     } catch (error) {
@@ -222,6 +263,7 @@ module.exports = {
     getOwnMeetings,
     getOneOwnMeeting,
     createMeeting,
+    createOwnMeeting,
     updateMeeting,
     updateOwnMeeting,
     deleteMeeting,

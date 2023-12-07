@@ -5,8 +5,7 @@ const { checkAdmin } = require("../middlewares/index")
 const {
     getAllMessages,
     getOneMessage,
-    getOwnMessages,
-    getOneOwnMessage,
+    getProjectChatMessages,
     createMessage,
     updateMessage,
     updateOwnMessage,
@@ -15,10 +14,9 @@ const {
 } = require("../controllers/chat_message.controller")
 
 router
-    .get("/myMessages", getOwnMessages)
     .get("/", checkAdmin, getAllMessages)
     .get("/:messageId", checkAdmin, getOneMessage)
-    .get("/myMessages/:messageId", getOneOwnMessage)
+    .get("/myMessages/:projectId", getProjectChatMessages)
     .post("/", createMessage)
     .put("/myMessages/:messageId", updateOwnMessage)
     .put("/:messageId", checkAdmin, updateMessage)
