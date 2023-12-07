@@ -1,5 +1,7 @@
 const Project = require("../models/project.model")
 const User = require("../models/user.model")
+const Invoice = require("../models/invoice.model")
+
 
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -123,9 +125,10 @@ const createProject = async (req, res) => {
 
 const createOneOwnProject = async (req,res)=>{
     try {
-        if(res.locals.user.role !== "dev"){
-            const { project_name, project_type, price, progress_status, plus_prototype, devId, clientId } = req.body
-    
+        if (res.locals.user.role !== "dev") {
+            const { project_name, project_type, price, progress_status, plus_prototype } = req.body;
+
+            // Crear el proyecto
             const project = await Project.create({
                 project_name: project_name,
                 project_type: project_type,
@@ -133,29 +136,42 @@ const createOneOwnProject = async (req,res)=>{
                 progress_status: progress_status,
                 plus_prototype: plus_prototype,
                 devId: null,
-                clientId: res.locals.user.id
-            })
-    
-            return res.status(200).json({ message: 'Project created', project: project })
+                clientId: res.locals.user.id,
+            });
 
-        }else{
+            // Crear la factura asociada al proyecto
+            const { id: projectId } = project; // Obtener el ID del proyecto creado
+            const { invoice_date, amount, payment_date, payment_method } = req.body;
+
+            const invoice = await Invoice.create({
+                devId: null, // Puedes establecer estos valores según tus necesidades
+                clientId: res.locals.user.id,
+                projectId: projectId,
+                invoice_date: invoice_date,
+                amount: amount,
+                payment_date: payment_date,
+                payment_method: payment_method,
+            });
+
+            return res.status(200).json({ message: 'Project and invoice created', project: project, invoice: invoice });
+        } else {
             return res.status(404).send('You are not authorized to create a project');
         }
-
     } catch (error) {
-        return res.status(500).send(error.message)
+        return res.status(500).send(error.message);
     }
 }
 
 const updateProject = async (req, res) => {
     try {
-        const [project] = await Project.update({
+            const [project] = await Project.update({
             project_name: req.body.project_name,
             project_type: req.body.project_type,
             price: req.body.price,
             progress_status: req.body.progress_status,
             plus_prototype: req.body.plus_prototype,
-            userId: req.body.userId
+            devId: req.body.devId,
+            clientId: req.body.clientId,
 
         }, {
             where: {
