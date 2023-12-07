@@ -35,6 +35,10 @@ const Invoice = sequelize.define(
         payment_method: {
             type: DataTypes.STRING, 
             allowNull: false
+        },
+        payment_currency: {
+            type: DataTypes.STRING, 
+            allowNull: false
         }
     }, 
     {

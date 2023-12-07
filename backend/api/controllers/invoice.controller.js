@@ -37,14 +37,14 @@ const getOwnInvoices = async (req, res) => {
                 where: {
                     devId: res.locals.user.id
                 },
-                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "clientId"],
+                attributes: ["id","invoice_date", 'amount', 'payment_method','payment_currency', "projectId", "clientId"],
             })
         } else if (res.locals.user.role === "client") {
             invoices = await Invoice.findAll({
                 where: {
                     clientId: res.locals.user.id
                 },
-                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "devId"],
+                attributes: ["id","invoice_date", 'amount', 'payment_method','payment_currency', "projectId", "devId"],
             })
         }
 
@@ -69,7 +69,7 @@ const getOneOwnInvoice = async (req, res) => {
                     id: req.params.invoiceId,
                     devId: res.locals.user.id,
                 },
-                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "clientId"],
+                attributes: ["id","invoice_date", 'amount', 'payment_method','payment_currency', "projectId", "clientId"],
             });
         } else if (res.locals.user.role === "client") {
             invoice = await Invoice.findOne({
@@ -77,7 +77,7 @@ const getOneOwnInvoice = async (req, res) => {
                     id: req.params.invoiceId,
                     clientId: res.locals.user.id,
                 },
-                attributes: ["id","invoice_date", 'amount', 'payment_method', "projectId", "devId"],
+                attributes: ["id","invoice_date", 'amount', 'payment_method','payment_currency', "projectId", "devId"],
             });
         }
 
@@ -94,7 +94,7 @@ const getOneOwnInvoice = async (req, res) => {
 
 const createInvoice = async (req, res) => {
     try {
-        const { userId, projectId, invoice_date, amount, payment_date, payment_method } = req.body
+        const { devId, clientId, projectId, invoice_date, amount, payment_date, payment_method,payment_currency} = req.body
 
         const invoice = await Invoice.create({
             devId: devId,
@@ -104,6 +104,7 @@ const createInvoice = async (req, res) => {
             amount: amount,
             payment_date: payment_date,
             payment_method: payment_method,
+            payment_currency: payment_currency
         })
 
         return res.status(200).json({ message: 'Invoice created', invoice: invoice })
@@ -123,7 +124,7 @@ const updateInvoice = async (req, res) => {
             amount: req.body.amount,
             payment_date: req.body.payment_date,
             payment_method: req.body.payment_method,
-
+            payment_currency: req.body.payment_currency
         }, {
             where: {
                 id: req.params.invoiceId
