@@ -65,20 +65,10 @@ In summary, "Wave Web" encapsulates the idea of a dynamic project, in constant c
 
 ### User Signup/Login
 
-#### Client Signup/Login
-
 | METHOD | ENDPOINT          | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                               | RETURNS               |
 |--------|-------------------|-------|------|--------------------------|-------------------------------------------|------------------------|
-| POST   | /auth/client/signup | -     | client | Client Signup           | first_name, last_name, email, password | { token: token }       |
-| POST   | /auth/client/login  | -     | client | Client Login            | email, password                           | { token: token }       |
-
-
-#### Developer & Admin Login
-
-| METHOD | ENDPOINT             | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                       | RETURNS               |
-|--------|----------------------|-------|-----------|--------------------------|-----------------------------------|------------------------|
-| POST   | /auth/developer/login| -     | dev | Developer Login          | email, password                   | { token: token }       |
-| POST   | /auth/admin/login| -     | admin | Admin Login          | email, password                   | { token: token }       |
+| POST   | /auth/signup | -     | client | New client Signup           | first_name, last_name, email, password | { token: token }       |
+| POST   | /auth/login  | -     | - | User Login            | email, password                           | { token: token }       |
 
 ### User Endpoints
 
