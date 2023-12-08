@@ -10,7 +10,8 @@ import {
   CardContent,
   Divider,
   Button,
-  CardActions
+  CardActions,
+  Typography
 } from "@mui/material"
 
 //Importamos los servicios:
@@ -38,38 +39,41 @@ function LoginForm() {
   }
 
   return (
-    <Card sx={{ width: "50%" }}>
-      <CardHeader title="Iniciar Sesión" />
-      <CardContent>
-        <TextField
-          onChange={(e) => setEmail(e.target.value)}
-          label="Email"
-          variant="outlined"
-          fullWidth={true}
-          sx={{ marginBottom: "20px" }}
-        />
-        <TextField
-          onChange={(e) => setPassword(e.target.value)}
-          label="Password"
-          variant="outlined"
-          fullWidth={true}
-        />
-      </CardContent>
-      <Divider />
-      <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-        
-        <Button color="success" onClick={ handleClick }>
-          Login
-        </Button>
-      </CardActions>
-      <CardHeader title="¿Olvidaste tu contraseña?" />
-      <Divider />
-      <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button color="success" onClick={ handleClick }>
-          Sign Up
-        </Button>
-      </CardActions>
-    </Card>
+    <div className="loginForm-container">
+
+      <Card sx={{ width: "50%", padding: "30px", margin: "auto" }}>
+        <CardHeader title="Iniciar Sesión" />
+        <CardContent>
+          <TextField
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            variant="outlined"
+            fullWidth={true}
+            sx={{ marginBottom: "20px" }}
+          />
+          <TextField
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            variant="outlined"
+            fullWidth={true}
+          />
+        </CardContent>
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}>
+          <Button variant="contained" onClick={handleClick}>
+            Login
+          </Button>
+          <Button variant="contained" onClick={handleClick}>
+            Sign Up
+          </Button>
+        </CardActions>
+        <Divider />
+
+        <Typography variant="h6" component="a" href="/">
+          ¿Olvidaste tu contraseña?
+        </Typography>
+      </Card>
+
+    </div>
   );
 }
 

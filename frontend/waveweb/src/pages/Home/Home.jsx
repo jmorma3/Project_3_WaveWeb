@@ -10,32 +10,32 @@ import NavBar from "../../components/NavBar/NavBar"
 
 const Home = () => {
 
-    // const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([])
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const result = await getAllUsers()
-    //         setUsers(result)
-    //     }
-    //     fetchData()
-    // }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getAllUsers()
+            setUsers(result)
+        }
+        fetchData()
+    }, [])
 
-    // console.log(users)
-    // const displayUsers = () => {
-    //     const result = users.map((user, index) => {
-    //         return (
-    //             <div key={index}>
-    //                 {user.name}
-    //             </div>
-    //         )
-    //     })
-    //     return result
-    // }
+    const displayUsers = () => {
+        const result = users.map((user) => {
+            return (
+                <div key={user.id}>
+                    {user.first_name}
+                </div>
+            )
+        })
+        return result
+    }
 
     return (
         <>
             <NavBar />
             <div>Esta es la Home!</div>
+            {displayUsers()}
         </>
 
     )
