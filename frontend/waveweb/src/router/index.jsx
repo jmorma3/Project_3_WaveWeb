@@ -8,7 +8,7 @@ import Home from "../pages/Home/Home";
 import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
-import ProjectDashboard from "../pages/ProjectDashboard/ProjectDashboard";
+import MyProjects from "../pages/MyProjects/MyProjects";
 
 
 //Creamos el router principal, que contendrá los diferentes endpoints:
@@ -31,14 +31,8 @@ const router = createBrowserRouter([
                 element: <Signup />
             },
             {
-                path: "/myProjects", 
-                element: <ProjectDashboard/>, 
-                children: [
-                    {
-                        path: "/myProjects/:projectId",
-                        element: <ProjectDashboard/>  
-                    }
-                ]
+                path: "/myProjects",
+                element: <MyProjects />
             }
         ]
     }

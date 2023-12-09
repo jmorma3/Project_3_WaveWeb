@@ -17,9 +17,12 @@ const Project = sequelize.define(
             allowNull: false
         }, 
         progress_status: {
-            type: DataTypes.ENUM("Not Started", "In Progress Step 1", "In Progress Step 2", "Completed"), 
-            allowNull: false
-        }, 
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+              isIn: [[0, 1, 2, 3]]  // Validar que solo acepte estos valores
+            }
+          },
         plus_prototype: {
             type: DataTypes.BOOLEAN, 
             allowNull: false

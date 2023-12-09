@@ -1,4 +1,4 @@
-import "./NavBarDashboard.css"
+import "./NavBarMyProjects.css"
 
 import {useState} from "react" ;
 
@@ -17,7 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import WavesIcon from "@mui/icons-material/Waves";
 
 
-export default function NavBarDashboard() {
+export default function NavBarMyProjects() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
