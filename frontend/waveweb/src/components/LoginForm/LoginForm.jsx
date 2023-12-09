@@ -14,6 +14,7 @@ import {
   Typography
 } from "@mui/material"
 
+import backgroundImage from "../../assets/login-wave.png"
 //Importamos los servicios:
 import { login } from "../../services/authService"
 
@@ -39,8 +40,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="loginForm-container">
-
+    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}> {/* Estilo de fondo aplicado aquí */}
       <Card sx={{ width: "50%", padding: "30px", margin: "auto" }}>
         <CardHeader title="Iniciar Sesión" />
         <CardContent>

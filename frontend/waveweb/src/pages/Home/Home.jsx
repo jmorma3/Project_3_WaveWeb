@@ -35,7 +35,7 @@ const Home = () => {
         <>
             <NavBar />
             <div>Esta es la Home!</div>
-            {displayUsers()}
+            {/* {displayUsers()} */}
         </>
 
     )
