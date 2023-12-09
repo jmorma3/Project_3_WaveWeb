@@ -11,9 +11,9 @@ import NavBar from "../../components/NavBar/NavBar";
 // Importa tus imágenes para las secciones aquí
 import sectionImage1 from "../../assets/home-1.jpg";
 import sectionImage2 from "../../assets/home-2.jpg";
-// import sectionImage3 from "../../assets/section-image-3.jpg";
+import sectionImage3 from "../../assets/home-3.jpg";
 import sectionImage4 from "../../assets/home-4.jpg";
-import sectionImage5 from "../../assets/home-5.png";
+import sectionImage5 from "../../assets/home-5.jpg";
 
 SwiperCore.use([Pagination]);
 
@@ -31,7 +31,7 @@ const sections = [
     {
         title: "Paso 2. Elige el plan perfecto para ti",
         description: "",
-        imageUrl: sectionImage1, 
+        imageUrl: sectionImage3, 
     },
     {
         title: 'Paso 3. Seleccionamos a tu desarrollador',

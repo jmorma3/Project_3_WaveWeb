@@ -21,7 +21,7 @@
 .card-image {
     width: 100%;
     height: auto;
-    filter: sepia(30%) contrast(100%) brightness(0.7);
+    filter: sepia(5%) contrast(80%);
 
 }
 
@@ -31,7 +31,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     text-align: center;
     width: 100%;
