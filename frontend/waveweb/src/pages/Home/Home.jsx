@@ -19,28 +19,28 @@ SwiperCore.use([Pagination]);
 
 const sections = [
     {
-        title: "Bienvenido a Wave Web",
-        description: "Innovación y creatividad a tu alcance",
+        title: "Welcome to Wave Web",
+        description: "Tailored digital solutions to take your business to the next level",
         imageUrl: sectionImage1, 
     },
     {
-        title: "Paso 1: Define tu proyecto",
-        description: "Realiza un breve cuestionario y define tus objetivos",
+        title: "Step 1: Define your project",
+        description: "Fill out our short form and define your goals",
         imageUrl: sectionImage2, 
     },
     {
-        title: "Paso 2. Elige el plan perfecto para ti",
-        description: "",
+        title: "Step 2. Choose the plan that's right for you",
+        description: "Select the plan that best fits your needs and budget with our expert help",
         imageUrl: sectionImage3, 
     },
     {
-        title: 'Paso 3. Seleccionamos a tu desarrollador',
-        description: 'Nuestro equipo ha superando rigurosas pruebas técnicas y entrevistas',
+        title: "Step 3. We select your develope",
+        description: "Our team has successfully passed rigorous technical tests and interviews",
         imageUrl: sectionImage4, 
     },
     {
-        title: 'Paso 4. Primer Meeting y posible "match" en 48 horas',
-        description: 'Tendrás una primera reunión y a partir de ahí comienza la aventura',
+        title: "Step 4. First Meeting and Match in 48 hours",
+        description: "You will have a first meeting with your dev and from there the adventure begins",
         imageUrl: sectionImage5, 
     }
 
@@ -50,7 +50,7 @@ const Home = () => {
     const isDesktop = useMediaQuery('(min-width:769px)');
     return (
         <>
-            <NavBar />
+            <NavBar/>
             <div className="content-container">
                 {isDesktop ? (
                     // Versión de escritorio: secciones en una lista
