@@ -14,6 +14,20 @@ const getUserProjects = async () => {
     }
 }
 
+const getUserOneProject = async (projectId) => {
+    try {
+        const { data } = await api.get(`/project/myProjects/${projectId}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+        return data.project
+    } catch (error) {
+        return error
+    }
+}
+
 export {
-    getUserProjects
+    getUserProjects,
+    getUserOneProject
 }

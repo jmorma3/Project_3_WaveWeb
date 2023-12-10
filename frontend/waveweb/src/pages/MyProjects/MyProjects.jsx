@@ -19,8 +19,6 @@ const MyProjects = () => {
         fetchData()
     }, [])
 
-    console.log(userProjects)
-
     const displayUserProjects = () => {
         const result = userProjects.map(project => {
             return (

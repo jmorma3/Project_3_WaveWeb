@@ -74,13 +74,14 @@ const getProjectChatMessages = async (req, res) => {
 
 const createMessage = async (req, res) => {
     try {
-        const { message_text, message_date, message_time, userId } = req.body
+        const { projectId, message_text, message_date, message_time, userId } = req.body
 
         const message = await ChatMessage.create({
+            projectId: projectId,
             message_text: message_text,
             message_date: message_date,
             message_time: message_time,
-            userId: res.locals.user.id
+            userId: res.locals.user
 
 
         })

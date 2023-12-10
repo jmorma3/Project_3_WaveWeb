@@ -9,6 +9,7 @@ import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import MyProjects from "../pages/MyProjects/MyProjects";
+import ProjectInfo from "../pages/ProjectInfo/ProjectInfo";
 
 
 //Creamos el router principal, que contendrá los diferentes endpoints:
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
             {
                 path: "/myProjects",
                 element: <MyProjects />
+            },
+            {
+                path: "/myProjects/:projectId",
+                element: <ProjectInfo />
             }
+
+
         ]
     }
 ])

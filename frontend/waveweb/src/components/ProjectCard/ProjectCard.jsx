@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
+import { Link } from "react-router-dom";
 
 const steps = ['Not Started', 'In Progress Step 1', 'In Progress Step 2', 'Completed'];
 
@@ -22,10 +23,12 @@ export default function ProjectCard({ data }) {
                     {`Project "${data.project_name}"`}
                 </Typography>
                 <Button
+                    component={Link} to={`/myProjects/${data.id}`}
                     size="small"
                     variant="contained"
                     endIcon={<AddIcon />}
                     sx={{ mt: 2, mr: 2 }}
+                    
                 >
                     info
                 </Button>

@@ -32,7 +32,7 @@ function LoginForm() {
       }
       const result = await login(payload)
       if (result === 200) {
-        navigate('/')
+        navigate('/myProjects')
       }
     } catch (error) {
       console.log(error)
