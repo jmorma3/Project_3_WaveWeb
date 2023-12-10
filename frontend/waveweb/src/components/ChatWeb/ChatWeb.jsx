@@ -19,13 +19,14 @@ const ChatWeb = () => {
       setChatHistory(result);
     };
     fetchData();
-  }, [projectId]);
+  }, [projectId, chatHistory]);
 
+  
   const handleMessageSend = async () => {
     try {
       if (messageInput.trim() !== '') {
         const newMessage = await sendNewChatMessage(projectId, messageInput);
-        
+  
         if (newMessage) {
           // Actualizar el estado de chatHistory con el nuevo mensaje
           setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
@@ -44,7 +45,7 @@ const ChatWeb = () => {
         {chatHistory.map((message) => (
           <ListItem key={message.id}>
             {message.message_text}
-            {/* (sent at {message.message_time} {message.message_date} by user: {message.userId}) */}
+            (sent at {message.message_time} {message.message_date} by user: {message.userId})
           </ListItem>
         ))}
       </List>

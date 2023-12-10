@@ -81,8 +81,7 @@ const createMessage = async (req, res) => {
             message_text: message_text,
             message_date: message_date,
             message_time: message_time,
-            userId: res.locals.user
-
+            userId: userId
 
         })
 

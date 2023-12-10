@@ -14,26 +14,27 @@ const getProjectMessages = async (projectId) => {
     }
 }
 
-const sendNewChatMessage = async (projectId, messageBody) => {
-    
+const sendNewChatMessage = async (project_Id, messageBody) => {
     try {
-        const {data} = await api.post("/message",
-            {
-                projectId: projectId,
-                message_text: messageBody,
-                message_date: "today",
-                message_time: "right now",
-                userId: parseInt(localStorage.getItem("userId"))
-            })
-
-       console.log(data)
-       return data
-
+      const { data } = await api.post("/message", {
+        projectId: project_Id,
+        message_text: messageBody,
+        message_date: "2023-12-10",
+        message_time: "19:57",
+        userId: parseInt(localStorage.getItem("userId"))
+      }, {
+        headers: {
+            authorization: localStorage.getItem('token')
+        }
+      });
+  
+      console.log(data);
+      return data;
     } catch (error) {
-        console.log(error.message);
-
+      console.log(error.message);
+      throw error; // Re-lanza el error para que puedas manejarlo en la llamada a la función
     }
-};
+  };
 
 export {
     getProjectMessages,
