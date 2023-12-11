@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -10,27 +10,41 @@ import { useParams } from 'react-router-dom';
 const ChatWeb = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [messageInput, setMessageInput] = useState('');
+  const [refreshChat, setRefreshChat] = useState(false);
 
   const { projectId } = useParams();
+
+  //Usamos el hook "useRef" para poder manejar el autoscroll. 
+  //Según documentación de React, este hook permite referencia a un valor que no es necesario para renderizar el componente. 
+  const chatListRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await getProjectMessages(projectId);
       setChatHistory(result);
+      scrollToBottom();
     };
     fetchData();
-  }, [projectId, chatHistory]);
+  }, [projectId, refreshChat]);
 
-  
+
+  //función creada para automatizar el scroll hacia abajo acada vez que se actualice el "chatHistory":
+  const scrollToBottom = () => {
+    if (chatListRef.current) {
+      chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
+    }
+  };
+
   const handleMessageSend = async () => {
     try {
       if (messageInput.trim() !== '') {
         const newMessage = await sendNewChatMessage(projectId, messageInput);
-  
+
         if (newMessage) {
-          // Actualizar el estado de chatHistory con el nuevo mensaje
           setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
           setMessageInput('');
+          setRefreshChat(!refreshChat);
+          scrollToBottom();
         }
       }
     } catch (error) {
@@ -38,16 +52,31 @@ const ChatWeb = () => {
     }
   };
 
+  const displayChatHistory = () => {
+    return chatHistory.map((message) => (
+      <ListItem
+        key={message.id}
+        sx={{
+          margin: "2px",
+          border: "1px solid red",
+          width: "fit-content",
+          backgroundColor: `${parseInt(localStorage.getItem("userId")) === message.userId ? 'lightblue' : 'white'}`, 
+          alignSelf: `${parseInt(localStorage.getItem("userId")) === message.userId ? 'flex-end' : 'flex-start'}`
+        }}
+      >
+        {message.message_text}
+        {console.log(localStorage.getItem("userId"))}
+        {console.log(message.userId)}
+        {parseInt(localStorage.getItem("userId")) === message.userId ? " (sent by me)" : ""}
+
+      </ListItem>
+    ));
+  };
+
   return (
     <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', borderTop: '1px solid #ccc', backgroundColor: '#fff' }}>
-      <List sx={{ overflowY: 'auto', maxHeight: '60vh' }}>
-        {/* Mostrar historial de mensajes */}
-        {chatHistory.map((message) => (
-          <ListItem key={message.id}>
-            {message.message_text}
-            (sent at {message.message_time} {message.message_date} by user: {message.userId})
-          </ListItem>
-        ))}
+      <List ref={chatListRef} sx={{ maxHeight: '25vh', overflowY: 'auto', display: "flex", flexDirection: "column"}}>
+        {displayChatHistory()}
       </List>
       <div style={{ display: 'flex', marginTop: '8px' }}>
         <TextField

@@ -10,7 +10,7 @@ const getProjectMessages = async (projectId) => {
         })
         return data.chatMessages
     } catch (error) {
-        return error
+        console.log(error)
     }
 }
 
@@ -27,12 +27,11 @@ const sendNewChatMessage = async (project_Id, messageBody) => {
             authorization: localStorage.getItem('token')
         }
       });
-  
-      console.log(data);
+
       return data;
+
     } catch (error) {
-      console.log(error.message);
-      throw error; // Re-lanza el error para que puedas manejarlo en la llamada a la función
+      console.log(error);
     }
   };
 

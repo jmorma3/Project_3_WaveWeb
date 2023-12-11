@@ -27,7 +27,31 @@ const getUserOneProject = async (projectId) => {
     }
 }
 
+const updateOwnProject = async (projectId, newProgressStatus) => {
+    try {
+      const { data } = await api.put(`/project/myProjects/${projectId}`,
+        {
+          progress_status: newProgressStatus,
+          userId: parseInt(localStorage.getItem("userId")),
+        },
+        {
+          headers: {
+            authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+  
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
 export {
     getUserProjects,
-    getUserOneProject
+    getUserOneProject,
+    updateOwnProject
 }

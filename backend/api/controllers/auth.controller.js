@@ -54,7 +54,8 @@ const logIn = async (req, res) => {
             const payload = { email: user.email, password: user.password }
             const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
             const userId = user.id
-            return res.status(200).json({ token, userId })
+            const userRole = user.role
+            return res.status(200).json({ token, userId, userRole })
         } else {
             return res.status(404).json('Error: Email or Password incorrect')
         }
