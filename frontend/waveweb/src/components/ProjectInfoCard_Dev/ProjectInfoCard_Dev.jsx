@@ -40,7 +40,7 @@ const ProjectInfoCard_Dev = ({ data }) => {
   };
 
   return (
-    <Box sx={{ width: '50%', mt: 2, border: '1px solid black' }}>
+    <Box sx={{ height: "fit-content", width: '50%', mt: 2, border: '1px solid black' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Typography variant="h5" sx={{ mt: 2, ml: 2 }}>
           {`Project "${data.project_name}"`}

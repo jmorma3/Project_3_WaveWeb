@@ -8,7 +8,7 @@ import NavBarMyProjects from "../../components/NavBarMyProjects/NavBarMyProjects
 import ChatWeb from "../../components/ChatWeb/ChatWeb"
 import ProjectInfoCard_Client from "../../components/ProjectInfoCard_Client/ProjectInfoCard_Client"
 import ProjectInfoCard_Dev from "../../components/ProjectInfoCard_Dev/ProjectInfoCard_Dev"
-import Agenda from "../../components/Agenda/Agenda"
+import Agenda_Dev from "../../components/Agenda_Dev/Agenda_Dev"
 
 const ProjectInfo = () => {
 
@@ -31,8 +31,11 @@ const ProjectInfo = () => {
 
                 {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
                 {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
+                
+                {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
+                {localStorage.getItem("userRole") === "client" ? "Pendiente añadir componente Agenda_Client" : <Agenda_Dev data={userOneProject}/>}
 
-                <Agenda />
+                
             </div>
 
 
