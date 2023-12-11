@@ -58,11 +58,11 @@ function LoginForm() {
             fullWidth={true}
           />
         </CardContent>
-        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}>
-          <Button variant="contained" onClick={handleClick}>
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px"}}>
+          <Button variant="contained" onClick={handleClick} sx={{marginRight: "10px"}}>
             Login
           </Button>
-          <Button variant="contained" onClick={handleClick}>
+          <Button variant="contained" href="/signup">
             Sign Up
           </Button>
         </CardActions>
