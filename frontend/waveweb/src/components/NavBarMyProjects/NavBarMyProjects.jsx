@@ -54,10 +54,10 @@ export default function NavBarMyProjects() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Mi suscripción</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Facturación</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Soporte </MenuItem>
+            <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My Subscription</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Invoices</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Support </MenuItem>
             <MenuItem onClick={handleMenuClose}>About Us</MenuItem>
             <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
         </Menu>
