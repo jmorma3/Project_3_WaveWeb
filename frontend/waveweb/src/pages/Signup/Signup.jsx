@@ -1,10 +1,12 @@
 import { Box, Card, Typography, Button, Link, Avatar } from '@mui/material';
 import WavesIcon from "@mui/icons-material/Waves";
 import signupImage from '../../assets/signup.jpg';
+import backgroundImage from "../../assets/login-wave.png"
 import "./Signup.css"
 
 const SignUp = () => {
   return (
+    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}> 
     <Box
       component="main"
       sx={{
@@ -39,6 +41,7 @@ const SignUp = () => {
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
           <Button
             variant="contained"
+            href="/signupForm"
             color="primary"
             sx={{ px: 5 }}
           >
@@ -53,6 +56,7 @@ const SignUp = () => {
         </Typography>
       </Card>
     </Box>
+    </div>
   );
 };
 

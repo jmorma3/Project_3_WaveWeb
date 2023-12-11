@@ -10,6 +10,7 @@ import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import MyProjects from "../pages/MyProjects/MyProjects";
 import ProjectInfo from "../pages/ProjectInfo/ProjectInfo";
+import SignupForm from "../pages/SignupForm/SignupForm";
 
 
 //Creamos el router principal, que contendrá los diferentes endpoints:
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
                 path: "/signup",
                 element: <Signup />
             },
+            {
+                path: "/signupForm",
+                element: <SignupForm />
+            },            
             {
                 path: "/myProjects",
                 element: <MyProjects />

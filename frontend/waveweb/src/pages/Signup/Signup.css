@@ -3,3 +3,11 @@
   height: auto;
   filter: sepia(5%) contrast(80%);
 }
+.loginForm-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('../../assets/login-wave.png')no-repeat center center;
+  background-size: 180% auto;
+}

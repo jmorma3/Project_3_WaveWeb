@@ -40,7 +40,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}> {/* Estilo de fondo aplicado aquí */}
+    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}> 
       <Card sx={{ width: "50%", padding: "30px", margin: "auto" }}>
         <CardHeader title="Iniciar Sesión" />
         <CardContent>
