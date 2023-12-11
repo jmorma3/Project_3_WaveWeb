@@ -57,7 +57,7 @@ const Home = () => {
                     <Grid container justifyContent="center" className="section-container">
                         {sections.map((section, index) => (
                             <Grid item xs={12} key={index} className="section">
-                                <Card className="card">
+                                <Card style={{ boxShadow: 'none', border: 'none' }} className="card">
                                     <img src={section.imageUrl} alt={section.title} className="card-image" />
                                     <div className="text-content">
                                         <Typography variant="h5" component="h2">{section.title}</Typography>
@@ -79,7 +79,7 @@ const Home = () => {
                         >
                             {sections.map((section, index) => (
                                 <SwiperSlide key={index}>
-                                    <Card className="card">
+                                    <Card style={{ boxShadow: 'none', border: 'none' }} className="card">
                                         <img src={section.imageUrl} alt={section.title} className="card-image" />
                                         <div className="text-content">
                                             <Typography variant="h5" component="h2">{section.title}</Typography>
