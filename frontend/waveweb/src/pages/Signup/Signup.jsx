@@ -24,7 +24,7 @@ const SignUp = () => {
           <WavesIcon />
         </Avatar>
       </Link>
-      <Typography variant="h5" align="center" gutterBottom>
+      <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
         WAVE WEB
       </Typography>
 

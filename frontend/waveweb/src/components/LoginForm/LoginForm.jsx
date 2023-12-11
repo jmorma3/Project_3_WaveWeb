@@ -40,9 +40,9 @@ function LoginForm() {
   }
 
   return (
-    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}> 
+    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Card sx={{ width: "50%", padding: "30px", margin: "auto" }}>
-        <CardHeader title="Iniciar Sesión" />
+        <CardHeader title="Log in to your account" />
         <CardContent>
           <TextField
             onChange={(e) => setEmail(e.target.value)}
@@ -58,8 +58,8 @@ function LoginForm() {
             fullWidth={true}
           />
         </CardContent>
-        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px"}}>
-          <Button variant="contained" onClick={handleClick} sx={{marginRight: "10px"}}>
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}>
+          <Button variant="contained" onClick={handleClick} sx={{ marginRight: "10px" }}>
             Login
           </Button>
           <Button variant="contained" href="/signup">
@@ -69,7 +69,7 @@ function LoginForm() {
         <Divider />
 
         <Typography variant="h6" component="a" href="/">
-          ¿Olvidaste tu contraseña?
+          Forgot your password?
         </Typography>
       </Card>
 

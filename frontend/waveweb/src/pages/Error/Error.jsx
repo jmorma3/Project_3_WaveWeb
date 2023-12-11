@@ -8,7 +8,7 @@ const Error = () => {
     <>
     <NavBarLogin/>
     <div className="error-container">
-      <Card className="card">
+      <Card style={{ boxShadow: 'none', border: 'none' }}className="card">
         <img src={errorImage} alt="Error" className="card-image" />
         <div className="text-content">
           <Typography variant="h5">Sorry, wave not found...</Typography>
