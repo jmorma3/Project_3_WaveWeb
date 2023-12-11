@@ -50,7 +50,7 @@ const SignUp = () => {
         </Box>
         <Typography align="center" sx={{ mt: 2 }}>
           Do you already have an account?{' '}
-          <Link href="/login" variant="body2" sx={{ textDecoration: 'none', color: 'primary.main' }}>
+          <Link href="/login" variant="body2" sx={{ textDecoration: 'underline', color: 'primary.main' }}>
             Log IN
           </Link>
         </Typography>

@@ -1,5 +1,5 @@
 .section-container {
-    margin: 40px 0;
+    margin: 10px 0;
 }
 
 .section {
@@ -36,7 +36,6 @@
     text-align: center;
     width: 100%;
 }
-
 
 
 /* Estilos del carrusel en dispositivos móviles */
