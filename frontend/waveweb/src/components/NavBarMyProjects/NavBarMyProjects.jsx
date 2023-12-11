@@ -1,6 +1,6 @@
 import "./NavBarMyProjects.css"
 
-import {useState} from "react" ;
+import { useState } from "react";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -107,8 +107,17 @@ export default function NavBarMyProjects() {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
-                        sx={{ display: { xs: 'flex', sm: 'flex' } }}
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
                     >
                         Wave Web
                     </Typography>

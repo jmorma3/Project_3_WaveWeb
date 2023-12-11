@@ -27,13 +27,13 @@ const ProjectInfo = () => {
     return (
         <>
             <NavBarMyProjects />
-        <div style={{display: "flex", alignItems: "row", justifyContent: "space-evenly"}}>
+            <div style={{ display: "flex", alignItems: "row", justifyContent: "space-evenly" }}>
 
-            {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
-            {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject}/>}
-            
-            <Agenda/>
-        </div>
+                {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
+                {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
+
+                <Agenda />
+            </div>
 
 
             <ChatWeb />
