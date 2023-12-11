@@ -58,15 +58,14 @@ const ChatWeb = () => {
         key={message.id}
         sx={{
           margin: "2px",
-          border: "1px solid red",
+          border: "1px solid",
+          borderRadius: "15px",
           width: "fit-content",
-          backgroundColor: `${parseInt(localStorage.getItem("userId")) === message.userId ? 'lightblue' : 'white'}`, 
+          backgroundColor: `${parseInt(localStorage.getItem("userId")) === message.userId ? 'lightblue' : 'white'}`,
           alignSelf: `${parseInt(localStorage.getItem("userId")) === message.userId ? 'flex-end' : 'flex-start'}`
         }}
       >
         {message.message_text}
-        {console.log(localStorage.getItem("userId"))}
-        {console.log(message.userId)}
         {parseInt(localStorage.getItem("userId")) === message.userId ? " (sent by me)" : ""}
 
       </ListItem>
@@ -75,7 +74,7 @@ const ChatWeb = () => {
 
   return (
     <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', borderTop: '1px solid #ccc', backgroundColor: '#fff' }}>
-      <List ref={chatListRef} sx={{ maxHeight: '25vh', overflowY: 'auto', display: "flex", flexDirection: "column"}}>
+      <List ref={chatListRef} sx={{ maxHeight: '25vh', overflowY: 'auto', display: "flex", flexDirection: "column" }}>
         {displayChatHistory()}
       </List>
       <div style={{ display: 'flex', marginTop: '8px' }}>
