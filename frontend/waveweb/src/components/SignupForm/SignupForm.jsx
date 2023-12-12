@@ -1,4 +1,5 @@
 import "./SignupForm.css"
+import { signup } from "../../services/authService";
 
 import React, { useState } from 'react';
 
@@ -17,7 +18,6 @@ import {
 } from '@mui/material';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorIcon from '@mui/icons-material/Error';
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -44,20 +44,20 @@ function SignupComponent() {
     const isDesktop = useMediaQuery('(min-width:769px)');
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        validateField(name, value);
+        const { name: input, value } = e.target;
+        setFormData({ ...formData, [input]: value });
+        validateField(input, value);
     };
 
-    const validateField = (name, value) => {
+    const validateField = (input, value) => {
         let tempErrors = { ...errors };
-        if (name === 'email') {
+        if (input === 'email') {
             tempErrors.email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) ? '' : 'Email is not valid.';
         }
-        if (name === 'password') {
+        if (input === 'password') {
             tempErrors.password = value.length >= 8 ? '' : 'Password must be at least 8 characters.';
         }
-        if (name === 'confirmPassword') {
+        if (input === 'confirmPassword') {
             tempErrors.confirmPassword = value === formData.password ? '' : 'Passwords do not match.';
         }
         setErrors({ ...tempErrors });
@@ -65,16 +65,49 @@ function SignupComponent() {
 
 
     const handlePlanSelect = (e) => {
-        setFormData({ ...formData, selectedPlan: e.target.value });
+        const plan = e.target.value;
+        setFormData({ ...formData, selectedPlan: plan });
+
+        let projectType, planPrice;
+
+        switch (plan) {
+            case "Basic web":
+                projectType = "Basic web"; 
+                planPrice = 2000.00;
+                break;
+            case "Dynamic web":
+                projectType = "Dynamic web"; 
+                planPrice = 4000.00;
+                break;
+            case "E-Commerce":
+                projectType = "E-Commerce"; 
+                planPrice = 6000.00;
+                break;
+            default:
+                projectType = "Basic web"; 
+                planPrice = 2000.00;
+        }
+
+        setFormData({ ...formData, project_type: projectType, price: planPrice });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes enviar los datos al servidor (backend) y mostrar el mensaje de éxito después de la respuesta del servidor.
-        // Puedes usar fetch o axios para hacer la solicitud al backend.
-        // Después de recibir una respuesta exitosa, puedes establecer setSubmitted(true) para mostrar el mensaje de éxito.
-        setSubmitted(true);
+        try {
+            const { first_name, last_name, email, password, role, project_name, project_type, price } = formData;
+            const userData = { first_name, last_name, email, password, role };
+            const projectData = { project_name, project_type, price };
+
+            const response = await signup(userData, projectData);
+            console.log('Usuario y proyecto creados', response.user, response.project);
+
+            setSubmitted(true);
+        } catch (error) {
+            console.error('Error al crear usuario y proyecto', error);
+            return;
+        }
     };
+
 
     return (
         <Container maxWidth="sm">
