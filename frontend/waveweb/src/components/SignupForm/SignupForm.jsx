@@ -12,14 +12,17 @@ import {
     Container,
     Typography,
     Box,
-    useMediaQuery
+    useMediaQuery,
+    InputAdornment
 } from '@mui/material';
+
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import SwiperCore from "swiper/core";
-import { Pagination } from "swiper/modules";
 
 function SignupComponent() {
     const [formData, setFormData] = useState({
@@ -36,13 +39,30 @@ function SignupComponent() {
         selectedPlan: '',
     });
 
+    const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const isDesktop = useMediaQuery('(min-width:769px)');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        validateField(name, value);
     };
+
+    const validateField = (name, value) => {
+        let tempErrors = { ...errors };
+        if (name === 'email') {
+            tempErrors.email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) ? '' : 'Email is not valid.';
+        }
+        if (name === 'password') {
+            tempErrors.password = value.length >= 8 ? '' : 'Password must be at least 8 characters.';
+        }
+        if (name === 'confirmPassword') {
+            tempErrors.confirmPassword = value === formData.password ? '' : 'Passwords do not match.';
+        }
+        setErrors({ ...tempErrors });
+    };
+
 
     const handlePlanSelect = (e) => {
         setFormData({ ...formData, selectedPlan: e.target.value });
@@ -62,9 +82,9 @@ function SignupComponent() {
                 {isDesktop ? (
                     // Formulario sin carrusel para escritorio
                     <>
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del usuario</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '25px' }}>User information:</Typography>
                         <TextField
-                            label="Nombre"
+                            label="Name"
                             name="first_name"
                             value={formData.first_name}
                             onChange={handleInputChange}
@@ -73,7 +93,7 @@ function SignupComponent() {
                             margin="normal"
                         />
                         <TextField
-                            label="Apellido"
+                            label="Last name"
                             name="last_name"
                             value={formData.last_name}
                             onChange={handleInputChange}
@@ -90,9 +110,20 @@ function SignupComponent() {
                             required
                             fullWidth
                             margin="normal"
+                            error={!!errors.email}
+                            helperText={errors.email}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        {formData.email && !errors.email && (
+                                            <CheckCircleIcon style={{ color: 'green' }} />
+                                        )}
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                         <TextField
-                            label="Contraseña"
+                            label="Password"
                             name="password"
                             type="password"
                             value={formData.password}
@@ -100,9 +131,20 @@ function SignupComponent() {
                             required
                             fullWidth
                             margin="normal"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        {formData.password && !errors.password ? (
+                                            <CheckCircleIcon style={{ color: 'green' }} />
+                                        ) : null}
+                                    </InputAdornment>
+                                ),
+                            }}
+                            error={!!errors.password}
+                            helperText={errors.password}
                         />
                         <TextField
-                            label="Confirmar Contraseña"
+                            label="Confirm password"
                             name="confirmPassword"
                             type="password"
                             value={formData.confirmPassword}
@@ -110,10 +152,21 @@ function SignupComponent() {
                             required
                             fullWidth
                             margin="normal"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        {formData.confirmPassword && !errors.confirmPassword ? (
+                                            <CheckCircleIcon style={{ color: 'green' }} />
+                                        ) : null}
+                                    </InputAdornment>
+                                ),
+                            }}
+                            error={!!errors.confirmPassword}
+                            helperText={errors.confirmPassword}
                         />
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del Proyecto</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Project information:</Typography>
                         <TextField
-                            label="Nombre del Proyecto"
+                            label="Project name"
                             name="project_name"
                             value={formData.project_name}
                             onChange={handleInputChange}
@@ -122,7 +175,7 @@ function SignupComponent() {
                             margin="normal"
                         />
                         <TextField
-                            label="Nombre de la Empresa"
+                            label="Company name"
                             name="company_name"
                             value={formData.company_name}
                             onChange={handleInputChange}
@@ -138,7 +191,7 @@ function SignupComponent() {
                             margin="normal"
                         />
                         <TextField
-                            label="Observaciones"
+                            label="Observations (0-300)"
                             name="observations"
                             multiline
                             rows={4}
@@ -147,9 +200,9 @@ function SignupComponent() {
                             fullWidth
                             margin="normal"
                         />
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del suscripción</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Subscription plan information:</Typography>
                         <FormControl fullWidth margin="normal">
-                            <InputLabel>Selecciona un plan</InputLabel>
+                            <InputLabel>Select a plan</InputLabel>
                             <Select
                                 name="selectedPlan"
                                 value={formData.selectedPlan}
@@ -162,26 +215,28 @@ function SignupComponent() {
                         </FormControl>
                         <Box mt={2}>
                             <Button type="submit" variant="contained" color="primary">
-                                Registrarse
+                                Submit
                             </Button>
                         </Box>
                         {submitted && (
                             <Typography variant="body1" color="primary">
-                                Tu formulario ha sido enviado correctamente
+                                Your form has been successfully submitted!
                             </Typography>
                         )}
                     </>
                 ) : (
                     // Carrusel con formulario para móviles
                     <Swiper
+                        noSwipingClass="swiper-no-swiping"
                         navigation
                         pagination={{ clickable: true, dynamicBullets: true }}
                         className="swiper-container"
+
                     >
-                        <SwiperSlide>
-                            <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del usuario</Typography>
+                        <SwiperSlide >
+                            <Typography variant="h5" sx={{ marginTop: '25px' }}>User information:</Typography>
                             <TextField
-                                label="Nombre"
+                                label="First name"
                                 name="first_name"
                                 value={formData.first_name}
                                 onChange={handleInputChange}
@@ -190,7 +245,7 @@ function SignupComponent() {
                                 margin="normal"
                             />
                             <TextField
-                                label="Apellido"
+                                label="Last name"
                                 name="last_name"
                                 value={formData.last_name}
                                 onChange={handleInputChange}
@@ -207,9 +262,20 @@ function SignupComponent() {
                                 required
                                 fullWidth
                                 margin="normal"
+                                error={!!errors.email}
+                                helperText={errors.email}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            {formData.email && !errors.email && (
+                                                <CheckCircleIcon style={{ color: 'green' }} />
+                                            )}
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <TextField
-                                label="Contraseña"
+                                label="Password"
                                 name="password"
                                 type="password"
                                 value={formData.password}
@@ -217,9 +283,20 @@ function SignupComponent() {
                                 required
                                 fullWidth
                                 margin="normal"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            {formData.password && !errors.password ? (
+                                                <CheckCircleIcon style={{ color: 'green' }} />
+                                            ) : null}
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                error={!!errors.password}
+                                helperText={errors.password}
                             />
                             <TextField
-                                label="Confirmar Contraseña"
+                                label="Confirm password"
                                 name="confirmPassword"
                                 type="password"
                                 value={formData.confirmPassword}
@@ -227,13 +304,25 @@ function SignupComponent() {
                                 required
                                 fullWidth
                                 margin="normal"
+                                style={{ marginBottom: '30px' }}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            {formData.confirmPassword && !errors.confirmPassword ? (
+                                                <CheckCircleIcon style={{ color: 'green' }} />
+                                            ) : null}
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                error={!!errors.confirmPassword}
+                                helperText={errors.confirmPassword}
                             />
                         </SwiperSlide>
                         <SwiperSlide>
 
-                            <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del Proyecto</Typography>
+                            <Typography variant="h5" sx={{ marginTop: '25px' }}>Project information:</Typography>
                             <TextField
-                                label="Nombre del Proyecto"
+                                label="Project name"
                                 name="project_name"
                                 value={formData.project_name}
                                 onChange={handleInputChange}
@@ -242,7 +331,7 @@ function SignupComponent() {
                                 margin="normal"
                             />
                             <TextField
-                                label="Nombre de la Empresa"
+                                label="Company name"
                                 name="company_name"
                                 value={formData.company_name}
                                 onChange={handleInputChange}
@@ -258,7 +347,7 @@ function SignupComponent() {
                                 margin="normal"
                             />
                             <TextField
-                                label="Observaciones"
+                                label="Observations (0-300)"
                                 name="observations"
                                 multiline
                                 rows={4}
@@ -269,9 +358,9 @@ function SignupComponent() {
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <Typography variant="h5" sx={{ marginTop: '25px' }}>Datos del suscripción</Typography>
-                            <FormControl fullWidth margin="normal">
-                                <InputLabel>Selecciona un plan</InputLabel>
+                            <Typography variant="h5" sx={{ marginTop: '25px' }}>Subscription plan information:</Typography>
+                            <FormControl fullWidth margin="normal" className="swiper-no-swiping">
+                                <InputLabel>Select a plan</InputLabel>
                                 <Select
                                     name="selectedPlan"
                                     value={formData.selectedPlan}
@@ -294,16 +383,16 @@ function SignupComponent() {
 
                         }}
                     >
-                        <Box mt={10}>
-                            <Button  type="submit" variant="contained" color="primary">
-                                Registrarse
+                        <Box mt={2} >
+                            <Button type="submit" variant="contained" color="primary">
+                                Submit
                             </Button>
                         </Box>
                     </div>
                 )}
                 {submitted && (
                     <Typography variant="body1" color="primary">
-                        Tu formulario ha sido enviado correctamente
+                        Your form has been successfully submitted!
                     </Typography>
                 )}
             </form>
