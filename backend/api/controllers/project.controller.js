@@ -126,7 +126,7 @@ const createProject = async (req, res) => {
 const createOneOwnProject = async (req,res)=>{
     try {
         if (res.locals.user.role !== "dev") {
-            const { project_name, project_type, price, progress_status, plus_prototype } = req.body;
+            const { project_name, project_type, price, progress_status, plus_prototype, clientId } = req.body;
 
             // Crear el proyecto
             const project = await Project.create({
@@ -140,18 +140,19 @@ const createOneOwnProject = async (req,res)=>{
             });
 
             // Crear la factura asociada al proyecto
-            const { id: projectId } = project; // Obtener el ID del proyecto creado
-            const { invoice_date, amount, payment_date, payment_method } = req.body;
+            // const { id: projectId } = project; // Obtener el ID del proyecto creado
+            // const { invoice_date, amount, payment_date, payment_method, payment_currency } = req.body;
 
-            const invoice = await Invoice.create({
-                devId: null, // Puedes establecer estos valores según tus necesidades
-                clientId: res.locals.user.id,
-                projectId: projectId,
-                invoice_date: invoice_date,
-                amount: amount,
-                payment_date: payment_date,
-                payment_method: payment_method,
-            });
+            // const invoice = await Invoice.create({
+            //     devId: null, // Puedes establecer estos valores según tus necesidades
+            //     clientId: clientId,
+            //     projectId: projectId,
+            //     invoice_date: invoice_date,
+            //     amount: amount,
+            //     payment_date: payment_date,
+            //     payment_method: payment_method,
+            //     payment_currency: payment_currency
+            // });
 
             return res.status(200).json({ message: 'Project and invoice created', project: project, invoice: invoice });
         } else {

@@ -18,6 +18,7 @@ const signUp = async (req, res) => {
         }
 
         // Generar el hash de la contraseña
+        const payload = { email: req.body.email }
         const salt = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS));
         const encrypted = bcrypt.hashSync(req.body.password, salt);
         req.body.password = encrypted;
@@ -26,10 +27,15 @@ const signUp = async (req, res) => {
         const user = await User.create(req.body);
 
         // Generar el token
-        const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
+        const userId= user.dataValues.id
+        const userRole =user.dataValues.role
+
         return res.status(200).json({
             message: 'User created',
-            token: token
+            token: token,
+            userId: userId,
+            userRole: userRole
         });
 
     } catch (error) {
