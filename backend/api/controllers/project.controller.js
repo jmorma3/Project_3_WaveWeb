@@ -136,7 +136,7 @@ const createOneOwnProject = async (req,res)=>{
                 progress_status: progress_status,
                 plus_prototype: plus_prototype,
                 devId: null,
-                clientId: res.locals.user.id,
+                clientId: clientId,
             });
 
             // Crear la factura asociada al proyecto
