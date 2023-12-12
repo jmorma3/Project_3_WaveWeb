@@ -85,13 +85,15 @@ const MyProjects = () => {
                     {userProjects.length > 0 ? displayUserProjects() : console.log("loading")}
                 </div>
 
-                <List sx={{ border: '1px solid', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', margin: '15px 0px' }}>
-                    <Typography margin="0px 10px" variant="h5" >
-                        Next meetings:
-                    </Typography>
-                    {/* Aquí mostramos la agenda del Dev: */}
-                    {devMeetings.length > 0 ? displayDevAgenda() : <Typography padding={2} variant="h6" > Sorry, you don´t have any meetings yet </Typography>}
-                </List>
+                {localStorage.getItem("userRole") === "dev" ? (
+                    <List sx={{ border: '1px solid', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', margin: '15px 0px' }}>
+                        <Typography margin="0px 10px" variant="h5" >
+                            Next meetings:
+                        </Typography>
+                        {/* Aquí mostramos la agenda del Dev: */}
+                        {devMeetings.length > 0 ? displayDevAgenda() : <Typography padding={2} variant="h6" > Sorry, you don´t have any meetings yet </Typography>}
+                    </List>
+                ) : null}
 
             </div>
         </>
