@@ -41,14 +41,14 @@ const getOwnMeetings = async (req, res) => {
                 where: {
                     devId: res.locals.user.id
                 },
-                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "clientId"],
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "clientId", "devId"],
             })
         } else if (res.locals.user.role === "client") {
             meetings = await Agenda.findAll({
                 where: {
                     clientId: res.locals.user.id
                 },
-                attributes: ["id", "meeting_date", 'meeting_time', 'projectId', "devId"],
+                attributes: ["id", "meeting_date", 'meeting_time', 'projectId',"clientId", "devId"],
             })
         }
 
