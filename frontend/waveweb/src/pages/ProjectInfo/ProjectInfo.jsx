@@ -9,6 +9,7 @@ import ChatWeb from "../../components/ChatWeb/ChatWeb"
 import ProjectInfoCard_Client from "../../components/ProjectInfoCard_Client/ProjectInfoCard_Client"
 import ProjectInfoCard_Dev from "../../components/ProjectInfoCard_Dev/ProjectInfoCard_Dev"
 import Agenda_Dev from "../../components/Agenda_Dev/Agenda_Dev"
+import Agenda_Client from "../../components/Agenda_Client/Agenda_Client"
 
 const ProjectInfo = () => {
 
@@ -33,7 +34,7 @@ const ProjectInfo = () => {
                 {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
                 
                 {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
-                {localStorage.getItem("userRole") === "client" ? "Pendiente añadir componente Agenda_Client" : <Agenda_Dev data={userOneProject}/>}
+                {localStorage.getItem("userRole") === "client" ? <Agenda_Client data={userOneProject}/> : <Agenda_Dev data={userOneProject}/>}
 
                 
             </div>

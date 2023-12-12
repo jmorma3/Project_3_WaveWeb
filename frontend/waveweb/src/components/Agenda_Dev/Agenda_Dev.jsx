@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -22,8 +21,6 @@ export default function Agenda_Dev({ data }) {
     const chosenDate = `${dateValue.$y}-${(dateValue.$M + 1).toString().length < 2 ? (`0${dateValue.$M + 1}`) : (`${dateValue.$M + 1}`)}-${dateValue.$D.toString().length < 2 ? (`0${dateValue.$D}`) : (`${dateValue.$D}`)}`;
     const chosenTime = `${timeValue.$H}:${timeValue.$m}`
 
-    const { projectId } = useParams()
-
     const handleAddMeeting = () => {
         setPopupOpen(true);
     };
@@ -31,7 +28,7 @@ export default function Agenda_Dev({ data }) {
     const handleConfirmMeeting = async () => {
         // Aquí se realiza la llamada a la API para enviar la información al backend
         try {
-            await createNewMeeting(projectId, data.clientId, chosenDate, chosenTime)
+            await createNewMeeting(data.id, data.clientId, chosenDate, chosenTime)
         } catch (error) {
             console.log(error)
         }
@@ -45,7 +42,7 @@ export default function Agenda_Dev({ data }) {
     };
 
     return (
-        <div style={{ border: '1px solid', marginTop: '2%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '5px 16px' }}>
+        <div style={{  border: '1px solid', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '15px 0px'}}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar value={dateValue} onChange={(newValue) => setDateValue(newValue)} />
             </LocalizationProvider>

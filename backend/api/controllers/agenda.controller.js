@@ -132,9 +132,9 @@ const createOwnMeeting = async (req, res) => {
                 const meeting = await Agenda.create({
                     meeting_date: meeting_date,
                     meeting_time: meeting_time,
-                    projectId: req.params.projectId,
+                    projectId: projectId,
                     clientId: clientId,
-                    devId: res.locals.user.id
+                    devId: devId
                 });
 
                 return res.status(200).json({ message: 'Meeting created', meeting: meeting });

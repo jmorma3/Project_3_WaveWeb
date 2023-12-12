@@ -21,6 +21,21 @@ const createNewMeeting = async (project_Id, client_Id, newMeetingDate, newMeetin
     }
 };
 
+const getOwnMeetings = async()=>{
+    try {
+        const {data} = await api.get("/agenda/myAgenda", {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+        
+        return data.meetings
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export {
-    createNewMeeting
+    createNewMeeting,
+    getOwnMeetings
 }
