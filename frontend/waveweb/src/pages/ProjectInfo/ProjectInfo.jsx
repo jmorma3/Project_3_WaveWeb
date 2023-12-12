@@ -33,7 +33,7 @@ const ProjectInfo = () => {
                 {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
                 {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
                 
-                {/* En función del "role" del usuario logeado, podrá ver una ProjectInfoCard u otra: */}
+                {/* En función del "role" del usuario logeado, podrá ver una Agenda u otra: */}
                 {localStorage.getItem("userRole") === "client" ? <Agenda_Client data={userOneProject}/> : <Agenda_Dev data={userOneProject}/>}
 
                 
