@@ -3,6 +3,9 @@ import backgroundImage from "../../assets/login-wave.png"
 
 import { useState } from 'react';
 
+import { useNavigate } from "react-router-dom";
+
+
 import {
     TextField,
     Button,
@@ -22,8 +25,10 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    breadcrumbsClasses
 } from '@mui/material';
+
 import MuiAlert from '@mui/material/Alert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
@@ -48,7 +53,6 @@ function SignupComponent() {
         company_name: '',
         sector: '',
         observations: '',
-        payment_details: '',
         price: 0
     });
 
@@ -74,10 +78,8 @@ function SignupComponent() {
         setErrors({ ...tempErrors });
     };
 
-
-
-    const handlePlanSelect = (e) => {
-        const plan = e.target.value;
+    const handlePlanSelect = (input) => {
+        const plan = typeof input === 'string' ? input : input.target.value;
         let projectType, planPrice;
 
         switch (plan) {
@@ -88,6 +90,7 @@ function SignupComponent() {
             case "Dynamic Web":
                 projectType = "Dynamic Web";
                 planPrice = 4000.00;
+
                 break;
             case "E-Commerce Web":
                 projectType = "E-Commerce Web";
@@ -100,6 +103,7 @@ function SignupComponent() {
 
         setFormData({ ...formData, project_type: projectType, price: planPrice });
     };
+
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -120,8 +124,13 @@ function SignupComponent() {
         setOpenSnackbar(false);
     };
 
+    //Creamos la instancia del navigate:
+    const navigate = useNavigate()
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
+        //Una vez se cree el proyecto y cliquemos en "OK", navegamos directamente al Dashboard del cliente para ver su proyecto. 
+        navigate("/myProjects")
     };
 
     const handleSubmitUser = async () => {
@@ -139,7 +148,15 @@ function SignupComponent() {
         }
     };
 
-    const handleSubmitProject = async () => {
+    const handleSubmitProject = () => {
+        handleNext();
+
+    };
+
+
+    const handleFinish = async () => {
+    
+        //Creación del proyecto:
         try {
             const { project_name, company_name, sector, observations, project_type, price } = formData;
             const projectData = {
@@ -154,21 +171,33 @@ function SignupComponent() {
                 devId: 2,
                 clientId: parseInt(localStorage.getItem('userId')),
             };
-           
+
             await createProject(projectData);
 
-            handleNext();
+
         } catch (error) {
             setSnackbarMessage('Error creating project. Please try again.');
             setOpenSnackbar(true);
 
         }
-    };
 
-    const handleFinish = () => {
-        console.log('Oleeee tuuuuu!!!!');
         setOpenDialog(true);
-        // Pendiente de opciones y pasarela de pago
+
+        // Opciones y pasarela de pago
+        ////////////////////////STRIPE/////////////////////
+        switch (formData.project_type) {
+            case "Basic Web":
+                window.open("https://buy.stripe.com/test_14k9Dk2lX8BE1CocMN");
+                break;
+            case "Dynamic Web":
+                window.open("https://buy.stripe.com/test_bIY2aSaStaJM4OA8wy");
+                break;
+            case "E-Commerce Web":
+                window.open("https://buy.stripe.com/test_5kAcPw0dP8BE5SE6or");
+                break;
+        }
+        ////////////////////////STRIPE/////////////////////
+
     };
 
 
@@ -282,18 +311,6 @@ function SignupComponent() {
                                 fullWidth
                                 margin="normal"
                             />
-                            <FormControl fullWidth margin="normal">
-                                <InputLabel>Project type</InputLabel>
-                                <Select
-                                    name="proyect_type"
-                                    value={formData.project_type}
-                                    onChange={handlePlanSelect}
-                                >
-                                    <MenuItem value="Basic Web">Basic Web</MenuItem>
-                                    <MenuItem value="Dynamic Web">Dynamic Web</MenuItem>
-                                    <MenuItem value="E-Commerce Web">E-Commerce Web</MenuItem>
-                                </Select>
-                            </FormControl>
                             <TextField
                                 label="Company name"
                                 name="company_name"
@@ -324,17 +341,29 @@ function SignupComponent() {
                     )}
                     {activeStep === 2 && (
                         <>
-                            <Typography variant="h5" sx={{ marginTop: '10px' }}>Subscription plan information:</Typography>
-                            <TextField
-                                label="Payment details (0-300)"
-                                name="payment_details"
-                                multiline
-                                rows={4}
-                                value={formData.payment_details}
-                                onChange={handleInputChange}
-                                fullWidth
-                                margin="normal"
-                            />
+                            <div>
+                                <Typography variant="h5" sx={{ marginTop: '10px' }}>Subscription plan information:</Typography>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => handlePlanSelect('Basic Web')}
+                                    >
+                                        Basic Web - 2000EUR
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => handlePlanSelect('Dynamic Web')}
+                                    >
+                                        Dynamic Web - 4000EUR
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => handlePlanSelect('E-Commerce Web')}
+                                    >
+                                        E-Commerce Web - 6000EUR
+                                    </Button>
+                                </div>
+                            </div>
                         </>
                     )}
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>

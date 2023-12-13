@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.15.0",
     "@mui/x-date-pickers": "^6.18.4",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.2.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "jsonwebtoken": "^9.0.2",

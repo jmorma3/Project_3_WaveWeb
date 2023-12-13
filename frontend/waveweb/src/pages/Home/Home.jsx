@@ -33,7 +33,7 @@ const sections = [
         imageUrl: sectionImage3,
     },
     {
-        title: "Step 3. We select your develope",
+        title: "Step 3. We select your developer",
         description: "Our team has successfully passed rigorous technical tests and interviews",
         imageUrl: sectionImage4,
     },
