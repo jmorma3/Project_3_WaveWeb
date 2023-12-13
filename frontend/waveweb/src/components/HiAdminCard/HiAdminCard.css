@@ -1,0 +1,19 @@
+.polaroid {
+    padding: 10px;
+    padding-bottom: 30px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4); 
+    text-align: center;
+    margin: 15px auto;
+}
+
+.card-image {
+    width: 580px;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px;
+    filter: sepia(5%) contrast(80%);
+    border: 1px solid #ccc;
+}
