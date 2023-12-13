@@ -13,8 +13,16 @@ const steps = ['Not Started', 'In Progress Step 1', 'In Progress Step 2', 'Compl
 
 export default function ProjecInfoCard_Client({ data }) {
 
+    const cardStyle = {
+        height: "fit-content",
+        width: "100%",
+        marginTop: 2,
+        border: '1px solid black',
+        padding: 2,
+    };
+
     return (
-        <Box sx={{ height: "fit-content", width: '50%', mt: 2, border: '1px solid black' }}>
+        <Box sx={cardStyle}>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <Typography variant="h5" sx={{ mt: 2, ml: 2 }}>

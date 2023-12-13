@@ -22,11 +22,11 @@ const ProjectInfoCard_Dev = ({ data }) => {
 
   //Esta función actualizará el estado del proyecto, tanto en el backend (mediante la llamada a la API a través del service) como en el frontend (a través de la variable de estado "progressStatus")
   const handleUpdateProgress = async (newProgressStatus) => {
-      // Llamamos al servicio para actualizar el estado del proyecto, pasándole además el "newProgressStatus" como nuevo valor para actualizarlo.
-      await updateOwnProject(data.id, newProgressStatus);
+    // Llamamos al servicio para actualizar el estado del proyecto, pasándole además el "newProgressStatus" como nuevo valor para actualizarlo.
+    await updateOwnProject(data.id, newProgressStatus);
 
-      // Actualizamos la variable de estado "progressStatus", pasándole el valor que recoge por parámetro la función "handleUpdateProgress"
-      setProgressStatus(newProgressStatus);
+    // Actualizamos la variable de estado "progressStatus", pasándole el valor que recoge por parámetro la función "handleUpdateProgress"
+    setProgressStatus(newProgressStatus);
   };
 
   const handleNext = () => {
@@ -39,8 +39,16 @@ const ProjectInfoCard_Dev = ({ data }) => {
     handleUpdateProgress(prevStep);
   };
 
+  const cardStyle = {
+    height: "fit-content",
+    width: "100%", 
+    marginTop: 2,
+    border: '1px solid black',
+    padding: 2, 
+  };
+
   return (
-    <Box sx={{ height: "fit-content", width: '50%', mt: 2, border: '1px solid black' }}>
+    <Box sx={cardStyle}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Typography variant="h5" sx={{ mt: 2, ml: 2 }}>
           {`Project "${data.project_name}"`}

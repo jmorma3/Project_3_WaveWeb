@@ -1,7 +1,8 @@
 import "./ProjectInfo.css"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Paper, Grid, Typography } from "@mui/material";
+
+import {Divider} from "@mui/material";
 
 // Importaciones de tus servicios y componentes
 import { getUserOneProject } from "../../services/projectService";
@@ -25,26 +26,24 @@ const ProjectInfo = () => {
 
     return (
         <>
-            <NavBarMyProjects />
-            <Grid container spacing={2} style={{ padding: '20px' }}>
-                <Grid item xs={12} md={6}>
-                    {localStorage.getItem("userRole") === "client" ?
-                        <ProjectInfoCard_Client data={userOneProject} /> :
-                        <ProjectInfoCard_Dev data={userOneProject} />
-                    }
-                </Grid>
-                {localStorage.getItem("userRole") === "dev" &&
-                    <Grid item xs={12} md={6}>
-                        <Agenda_Dev data={userOneProject} />
-                    </Grid>
-                }
-            </Grid>
+        <NavBarMyProjects />
 
-            <Paper elevation={3} style={{ margin: '20px', padding: '20px' }}>
-                <Typography variant="h5" style={{ marginBottom: '20px' }}>Project Chat</Typography>
-                <ChatWeb />
-            </Paper>
-        </>
+        <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
+            <div style={{ flex: 1, margin: '10px', overflowY: 'auto', maxHeight: '600px' }}>
+                {localStorage.getItem("userRole") === "client" ? 
+                    <ProjectInfoCard_Client data={userOneProject} /> : 
+                    <ProjectInfoCard_Dev data={userOneProject} />}
+            </div>
+
+            <Divider orientation="vertical" flexItem />
+
+            <div style={{  display: "flex", justifyContent: "center", flex: 1, margin: '10px', overflowY: 'auto', maxHeight: '600px' }}>
+                {localStorage.getItem("userRole") === "dev" && <Agenda_Dev data={userOneProject} />}
+            </div>
+        </div>
+
+        <ChatWeb />
+    </>
     );
 };
 

@@ -37,6 +37,10 @@ export default function NavBarMyProjects() {
         handleMobileMenuClose();
     };
 
+    const handleNotificationsClick = () => {
+        console.log("ALgún día mostraremos las notificaciones....")
+    }
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -81,19 +85,6 @@ export default function NavBarMyProjects() {
             onClose={handleMobileMenuClose}
         >
 
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-
         </Menu>
     );
 
@@ -128,13 +119,15 @@ export default function NavBarMyProjects() {
 
                         <IconButton
                             size="large"
-                            aria-label="show 17 new notifications"
+                            aria-label="show 1 new notifications"
                             color="inherit"
+                            onClick={handleNotificationsClick}
                         >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
+                            <Badge badgeContent={1} color="error">
+                                <NotificationsIcon  />
                             </Badge>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             edge="end"

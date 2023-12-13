@@ -52,9 +52,11 @@ const MyProjects = () => {
     return (
         <>
             <NavBarMyProjects />
+
             <div style={{ display: "flex", justifyContent: "flex-end", padding: "10px", borderBottom: "1px solid #ccc" }}>
                 {localStorage.getItem("userRole") === "dev" && <ToggleNewProjects />}
             </div>
+            
             <Typography variant="h4" align="center" style={{ margin: '20px' }}>
                 {localStorage.getItem("userRole").toUpperCase() + " Dashboard"}
             </Typography>
@@ -66,13 +68,15 @@ const MyProjects = () => {
                 </div>
 
                 <Divider orientation="vertical" flexItem />
+                <div style={{ width: '45%', margin: '10px', overflowY: 'auto', maxHeight: '600px' }}>
 
-                <Paper style={{ width: '45%', padding: '10px', margin: '10px' }}>
-                    <Typography variant="h5" style={{ marginBottom: '10px' }}>Next meetings:</Typography>
-                    <List>
-                        {userMeetings.length > 0 ? displayUserAgenda() : <Typography>No meetings yet</Typography>}
+                    <List sx={{ border: '1px solid', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', margin: '15px 0px' }}>
+                        <Typography margin="0px 10px" variant="h5" >
+                            Next meetings:
+                        </Typography>
+                        {userMeetings.length > 0 ? displayUserAgenda() : <Typography padding={2} variant="h6" > Sorry, you don´t have any meetings yet </Typography>}
                     </List>
-                </Paper>
+                </div>
 
             </div>
         </>

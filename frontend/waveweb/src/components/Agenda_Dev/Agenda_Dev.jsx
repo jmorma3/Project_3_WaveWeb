@@ -41,8 +41,20 @@ export default function Agenda_Dev({ data }) {
         setPopupOpen(false);
     };
 
+    const agendaStyle = {
+        border: '1px solid',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        margin: '15px 0px',
+        padding: '10px',
+        width: '100%', // Mantener el ancho al 100% del contenedor
+        maxWidth: '400px', // Establecer un ancho máximo para la agenda
+        alignSelf: 'center' 
+    };
+
     return (
-        <div style={{  border: '1px solid', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '15px 0px'}}>
+        <div style={agendaStyle}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar value={dateValue} onChange={(newValue) => setDateValue(newValue)} />
             </LocalizationProvider>
