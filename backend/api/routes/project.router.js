@@ -22,7 +22,7 @@ router
     .get("/:projectId", checkAdmin, getOneProject)
     .post("/myProjects", createOneOwnProject)
     .post("/", checkAdmin, createProject)  
-    .put("/myProjects/:projectId", updateOwnProject) //OJO: Añadir middleware para que sólo DEV pueda actualizar su project. 
+    .put("/myProjects/:projectId", updateOwnProject) 
     .put("/:projectId", checkAdmin, updateProject)
     .delete("/:projectId", checkAdmin, deleteProject)
     .delete("/myProjects/:projectId", deleteOwnProject)

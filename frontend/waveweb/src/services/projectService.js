@@ -63,6 +63,58 @@ const updateOwnProject = async (projectId, newProgressStatus) => {
   }
 };
 
+const getAllProjects = async () => {
+  try {
+      const { data } = await api.get("/project", {
+          headers: {
+              authorization: localStorage.getItem('token')
+          }
+      })
+      return data
+  } catch (error) {
+      return error
+  }
+}
+
+const getOneProject = async (projectId) => {
+  try {
+      const { data } = await api.get(`/project/${projectId}`, {
+          headers: {
+              authorization: localStorage.getItem('token')
+          }
+      })
+      return data
+  } catch (error) {
+      return error
+  }
+}
+
+const updateOneProject = async (projectId, body) => {
+  try {
+      const { data } = await api.put(`/project/${projectId}`, body, {
+          headers: {
+              authorization: localStorage.getItem('token')
+          }
+      })
+      return data
+  } catch (error) {
+      return error
+  }
+}
+
+const deleteOneProject = async (projectId) => {
+  try {
+      const { data } = await api.delete(`/project/${projectId}`, {
+          headers: {
+              authorization: localStorage.getItem('token')
+          }
+      })
+      return data
+  } catch (error) {
+      return error
+  }
+}
+
 
 
 
@@ -70,5 +122,9 @@ export {
   getUserProjects,
   getUserOneProject,
   createProject,
-  updateOwnProject
+  updateOwnProject, 
+  getAllProjects, 
+  getOneProject, 
+  updateOneProject, 
+  deleteOneProject
 }

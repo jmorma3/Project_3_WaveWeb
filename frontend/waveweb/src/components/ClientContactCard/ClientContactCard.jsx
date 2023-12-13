@@ -1,43 +1,41 @@
 import "./ClientContactCard.css";
 
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import ChatIcon from '@mui/icons-material/Chat';
-import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 import { Link } from 'react-router-dom';
 
-export default function ClientContactCard() {
+export default function ClientContactCard({data}) {
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <Stack
-                direction="row"
-                alignItems="center"
-                spacing={2}>
-                <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
-                    sx={{ width: 56, height: 56 }} />
-                <Typography
-                    gutterBottom variant="h6"
-                    component="div">
-                    Customer name
+        <Box sx={{ minWidth: '60%', mt: 5, border: "1px solid black" }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <Typography variant="h5" sx={{ mt: 2, ml: 2 }}>
+                    {`User: "${data.first_name}"`}
                 </Typography>
-            </Stack>
-            <CardActions sx={{ display: { xs: 'flex', md: 'none' } }}>
-                <Button size="small" component={Link} to="/chat-mobile">
-                    <ChatIcon sx={{ marginRight: 1 }} />
-                    CHAT
+                <Button
+                    component={Link} to={localStorage.getItem("userRole") === "admin" ? `/admin/user/${data.id}` : null}  //OJO, pendiente cambiar para navegar a info del cliente si la usamos finalmente...
+                    size="small"
+                    variant="contained"
+                    endIcon={<AddIcon />}
+                    sx={{ mt: 2, mr: 2 }}
+                    
+                >
+                    info
                 </Button>
-                <Button size="small" component={Link} to="/meetings-calendar-mobile">
-                    <EditCalendarIcon sx={{ marginRight: 1 }} /> NEW MEETING
-                </Button>
-            </CardActions>
-        </Card>
+            </div>
+
+            <Divider variant="middle" sx={{ mt: 2, mb: 3 }} />
+
+            <Typography variant="subtitle2" sx={{ mb: 2, ml: 2 }}>
+                {`role: ${data.role}`}
+            </Typography>
+
+
+            
+        </Box>
     );
 }

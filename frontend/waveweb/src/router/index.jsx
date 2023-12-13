@@ -11,6 +11,9 @@ import Signup from "../pages/Signup/Signup";
 import MyProjects from "../pages/MyProjects/MyProjects";
 import ProjectInfo from "../pages/ProjectInfo/ProjectInfo";
 import SignupForm from "../pages/SignupForm/SignupForm";
+import Admin from "../pages/Admin/Admin";
+import Admin_User_Info from "../pages/Admin_User_Info/Admin_User_Info";
+import Admin_Project_Info from "../pages/Admin_Project_Info/Admin_Project_Info";
 
 
 //Creamos el router principal, que contendrá los diferentes endpoints:
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
             {
                 path: "/myProjects/:projectId",
                 element: <ProjectInfo />
+            },
+            {
+                path: "/admin",
+                element: <Admin />
+            },
+            {
+                path: "/admin/user/:userId",
+                element: <Admin_User_Info />
+            }, 
+            {
+                path: "/admin/project/:projectId",
+                element: <Admin_Project_Info />
             }
 
 

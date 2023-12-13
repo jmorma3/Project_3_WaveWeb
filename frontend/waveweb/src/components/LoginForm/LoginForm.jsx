@@ -31,8 +31,10 @@ function LoginForm() {
         password
       }
       const result = await login(payload)
-      if (result === 200) {
+      if (result === 200 && localStorage.getItem("userRole") !== "admin") {
         navigate('/myProjects')
+      }else{
+        navigate('/admin')
       }
     } catch (error) {
       console.log(error)
