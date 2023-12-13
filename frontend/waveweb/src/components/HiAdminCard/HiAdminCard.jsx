@@ -2,7 +2,7 @@ import './HiAdminCard.css'
 import { Card, Typography } from "@mui/material";
 import coffeeImage from '../../assets/coffee.jpg'
 
-const HiAdmin = () => {
+const HiAdminCard = () => {
     return (
         <>
             <Card className="polaroid" >
@@ -16,4 +16,4 @@ const HiAdmin = () => {
     )
 }
 
-export default HiAdmin
+export default HiAdminCard
