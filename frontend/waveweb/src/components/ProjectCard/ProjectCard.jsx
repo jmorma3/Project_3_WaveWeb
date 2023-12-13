@@ -23,7 +23,7 @@ export default function ProjectCard({ data }) {
                     {`Project "${data.project_name}"`}
                 </Typography>
                 <Button
-                    component={Link} to={`/myProjects/${data.id}`}
+                    component={Link} to={localStorage.getItem("userRole") === "admin" ? `/admin/project/${data.id}` : `/myProjects/${data.id}`}
                     size="small"
                     variant="contained"
                     endIcon={<AddIcon />}
