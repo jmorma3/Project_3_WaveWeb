@@ -1,73 +1,57 @@
-.section-container {
-    margin: 10px 0;
+.polaroid {
+    padding: 10px;
+    padding-bottom: 30px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4); 
+    text-align: center;
+    margin: 15px auto;
 }
 
-.section {
-    padding: 20px;
+.content-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 5px auto;
+
 }
 
-.card {
-    margin: 20px;
-    padding: 0;
-    border: 0px solid #ddd;
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+
 }
 
-.card-content {
-    position: relative;
+.carousel-button {
+    position: absolute;
+    top: 50%;
+}
+
+.stepper {
+    padding: 0 15%;
+    box-sizing: content-box;
 }
 
 .card-image {
-    width: 100%;
-    height: auto;
+    width: 580px;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px;
     filter: sepia(5%) contrast(80%);
-
+    border: 1px solid #ccc;
 }
 
 .text-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    text-align: center;
-    width: 100%;
-}
-
-
-/* Estilos del carrusel en dispositivos móviles */
-@media (max-width: 768px) {
-    .carousel {
-        margin-top: 20px;
-    }
-
-    .swiper-pagination-bullet-active {
-        background-color: #000;
-    }
-}
-
-
-@media (min-width: 769px) {
-    .carousel-container {
-        display: none;
-        /* Oculta el carrusel en escritorio */
-    }
+    padding: 0 10px;
+    background-color: transparent;
+    color: black;
 }
 
 .auth-buttons-container {
     text-align: center;
-    margin-top: 20px;
-}
-
-.auth-button {
-    margin: 10px;
-}
-
-.auth-text {
     margin-top: 10px;
-    color: inherit;
 }
 
 .auth-link {

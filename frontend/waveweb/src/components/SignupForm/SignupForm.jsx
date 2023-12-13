@@ -1,4 +1,5 @@
 import "./SignupForm.css"
+import backgroundImage from "../../assets/login-wave.png"
 
 import { useState } from 'react';
 
@@ -154,8 +155,9 @@ function SignupComponent() {
 
 
     return (
-        <Container maxWidth="sm">
-            <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '40px' }}>
+        <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <Container maxWidth="sm" style={({ backgroundColor: "white"})} >
+            <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '20px' }}>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>
@@ -341,6 +343,7 @@ function SignupComponent() {
                 </Box>
             </form>
         </Container>
+        </div>
     );
 }
 
