@@ -29,16 +29,16 @@ const getUserOneProject = async (projectId) => {
 
 const createProject = async (projectData) => {
   try {
-    console.log(localStorage)
     const { data } = await api.post('/project/myProjects', projectData,
       {
         headers: {
           authorization: localStorage.getItem('token')
         }
       })
-      
+
     return data.project
   } catch (error) {
+    console.error(error)
     return error
   }
 }

@@ -1,15 +1,12 @@
 .form-container {
+    padding: 15px;
+}
+
+.signForm-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin-top: 50px;
+    justify-content: center;
+    height: 100vh;
+    background: url('../../assets/login-wave.png')no-repeat center center;
+    background-size: 180% auto;
 }
-
-.button-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-

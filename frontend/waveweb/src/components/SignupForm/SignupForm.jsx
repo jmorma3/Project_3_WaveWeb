@@ -74,20 +74,20 @@ function SignupComponent() {
         let projectType, planPrice;
 
         switch (plan) {
-            case "Basic web":
-                projectType = "Basic web";
+            case "Basic Web":
+                projectType = "Basic Web";
                 planPrice = 2000.00;
                 break;
-            case "Dynamic web":
-                projectType = "Dynamic web";
+            case "Dynamic Web":
+                projectType = "Dynamic Web";
                 planPrice = 4000.00;
                 break;
-            case "E-Commerce":
-                projectType = "E-Commerce";
+            case "E-Commerce Web":
+                projectType = "E-Commerce Web";
                 planPrice = 6000.00;
                 break;
             default:
-                projectType = "Basic web";
+                projectType = "Basic Web";
                 planPrice = 2000.00;
         }
 
@@ -126,16 +126,10 @@ function SignupComponent() {
                 observations,
                 project_type,
                 price,
-
                 progress_status: 0,
                 plus_prototype: false,
-                // devId: 2,
+                devId: 2,
                 clientId: parseInt(localStorage.getItem('userId')),
-                // invoice_date: "2023-12-12",
-                // amount: price,
-                // payment_date: "2023-12-12",
-                // payment_method: "Credit card",
-                // payment_currency: "EUR"
             };
             console.log(projectData)
             await createProject(projectData);
@@ -155,9 +149,9 @@ function SignupComponent() {
 
 
     return (
-        <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-        <Container maxWidth="sm" style={({ backgroundColor: "white"})} >
-            <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '20px' }}>
+        <div className="signForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <Container className= "form-container" maxWidth="sm" style={({ backgroundColor: "white"})} >
+            <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '10px' }}>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>
@@ -167,7 +161,7 @@ function SignupComponent() {
             <form>
                 {activeStep === 0 && (
                     <>
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>User information:</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '10px' }}>User information:</Typography>
                         <TextField
                             label="Name"
                             name="first_name"
@@ -253,7 +247,7 @@ function SignupComponent() {
                 )}
                 {activeStep === 1 && (
                     <>
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Project information:</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '10px' }}>Project information:</Typography>
                         <TextField
                             label="Project name"
                             name="project_name"
@@ -270,9 +264,9 @@ function SignupComponent() {
                                 value={formData.project_type}
                                 onChange={handlePlanSelect}
                             >
-                                <MenuItem value="Basic web">Basic web</MenuItem>
-                                <MenuItem value="Dynamic web">Dynamic web</MenuItem>
-                                <MenuItem value="E-Commerce">E-Commerce</MenuItem>
+                                <MenuItem value="Basic Web">Basic Web</MenuItem>
+                                <MenuItem value="Dynamic Web">Dynamic Web</MenuItem>
+                                <MenuItem value="E-Commerce Web">E-Commerce Web</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
@@ -295,7 +289,7 @@ function SignupComponent() {
                             label="Observations (0-300)"
                             name="observations"
                             multiline
-                            rows={4}
+                            rows={2}
                             value={formData.observations}
                             onChange={handleInputChange}
                             fullWidth
@@ -305,13 +299,13 @@ function SignupComponent() {
                 )}
                 {activeStep === 2 && (
                     <>
-                        <Typography variant="h5" sx={{ marginTop: '25px' }}>Subscription plan information:</Typography>
+                        <Typography variant="h5" sx={{ marginTop: '10px' }}>Subscription plan information:</Typography>
                         <TextField
                             label="Payment details (0-300)"
                             name="payment_details"
                             multiline
                             rows={4}
-                            value={formData.observations}
+                            value={formData.payment_details}
                             onChange={handleInputChange}
                             fullWidth
                             margin="normal"

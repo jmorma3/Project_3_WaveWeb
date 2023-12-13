@@ -18,13 +18,11 @@ const login = async (body) => {
 
 const signup = async (userData) => {
   try {
-    const {data} = await api.post("/auth/signup", userData);
+    const { data } = await api.post("/auth/signup", userData);
     localStorage.setItem('token', data.token)
     localStorage.setItem("userId", data.userId)
     localStorage.setItem('userRole', data.userRole)
- 
-    console.log(localStorage)
-    
+
     return 200
 
   } catch (error) {

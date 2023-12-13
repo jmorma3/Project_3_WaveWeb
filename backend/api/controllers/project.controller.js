@@ -126,7 +126,7 @@ const createProject = async (req, res) => {
 const createOneOwnProject = async (req,res)=>{
     try {
         if (res.locals.user.role !== "dev") {
-            const { project_name, project_type, price, progress_status, plus_prototype, clientId } = req.body;
+            const { project_name, project_type, price, progress_status, plus_prototype, clientId, devId } = req.body;
 
             // Crear el proyecto
             const project = await Project.create({
@@ -135,7 +135,7 @@ const createOneOwnProject = async (req,res)=>{
                 price: price,
                 progress_status: progress_status,
                 plus_prototype: plus_prototype,
-                devId: null,
+                devId: devId,
                 clientId: clientId,
             });
 
@@ -154,7 +154,7 @@ const createOneOwnProject = async (req,res)=>{
             //     payment_currency: payment_currency
             // });
 
-            return res.status(200).json({ message: 'Project and invoice created', project: project, invoice: invoice });
+            return res.status(200).json({ message: 'Project and invoice created', project: project });
         } else {
             return res.status(404).send('You are not authorized to create a project');
         }
