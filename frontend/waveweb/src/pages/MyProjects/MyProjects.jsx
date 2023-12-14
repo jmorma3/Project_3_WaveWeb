@@ -63,7 +63,7 @@ const MyProjects = () => {
 
             <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
                 <div style={{ width: '45%', margin: '10px', overflowY: 'auto', maxHeight: '600px' }}>
-                    <Typography variant="h5" style={{ marginBottom: '10px' }}>Your Projects</Typography>
+                    <Typography variant="h5" style={{ marginBottom: '10px' }}>My Projects:</Typography>
                     {userProjects.length > 0 ? displayUserProjects() : <Typography>You still don´t have any project</Typography>}
                 </div>
 

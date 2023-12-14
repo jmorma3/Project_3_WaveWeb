@@ -53,9 +53,9 @@ const ChatWeb = () => {
   };
 
   const displayChatHistory = () => {
-    return chatHistory.map((message) => (
+    return chatHistory.map((message, index) => (
       <ListItem
-        key={message.id}
+        key={message.id || index} //Con esto resolvimos el "warning" que aparecía con la key única para cada child al renderizar el chatHistory ("message.id") estaba dando problemas. 
         sx={{
           margin: "2px",
           border: "1px solid",

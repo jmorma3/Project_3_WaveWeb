@@ -21,6 +21,11 @@ export default function NavBarMyProjects() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+    // Estado para el menú de notificaciones
+    const [notifAnchorEl, setNotifAnchorEl] = useState(null);
+    const isNotifMenuOpen = Boolean(notifAnchorEl);
+
+    // Estado para el menú de Perfil
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -37,9 +42,37 @@ export default function NavBarMyProjects() {
         handleMobileMenuClose();
     };
 
-    const handleNotificationsClick = () => {
-        console.log("ALgún día mostraremos las notificaciones....")
+    const handleNotificationsMenuOpen = (event) => {
+        //El menú sólo se abrirá si estamos logeados como el usuario con id = 2 ("dev1")
+        if (parseInt(localStorage.getItem("userId")) === 2) {
+            setNotifAnchorEl(event.currentTarget);
+        }
     }
+
+    const handleNotificationsMenuClose = () => {
+        setNotifAnchorEl(null);
+    };
+
+    const renderNotificationsMenu = (
+        <Menu
+            anchorEl={notifAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            id="notifications-menu"
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isNotifMenuOpen}
+            onClose={handleNotificationsMenuClose}
+        >
+            <MenuItem onClick={handleNotificationsMenuClose}> You have a new project! </MenuItem>
+        </Menu>
+    );
+
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -119,12 +152,13 @@ export default function NavBarMyProjects() {
 
                         <IconButton
                             size="large"
-                            aria-label="show 1 new notifications"
+                            aria-label="show new notifications"
                             color="inherit"
-                            onClick={handleNotificationsClick}
+                            onClick={handleNotificationsMenuOpen}
                         >
-                            <Badge badgeContent={1} color="error">
-                                <NotificationsIcon  />
+                            {/* El icono de "1" nueva notificación sólo le aparecerá al user con id = 2 ("dev1") */}
+                            <Badge badgeContent={parseInt(localStorage.getItem("userId")) === 2 ? 1 : 0} color="error">
+                                <NotificationsIcon />
                             </Badge>
                         </IconButton>
 
@@ -145,6 +179,7 @@ export default function NavBarMyProjects() {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
+            {renderNotificationsMenu}
         </Box>
     );
 }
