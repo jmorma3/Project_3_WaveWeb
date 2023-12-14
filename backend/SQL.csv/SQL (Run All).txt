@@ -2,28 +2,28 @@
 INSERT INTO users (id, first_name, last_name, email, password, role)
 VALUES
   (1, 'Admin', 'Admin', 'admin@email.com', '$2b$10$fSJM8JmMV5AEag0DVXdKi.JYACVlCgvV/7Wlix71VjxZBfBXaSXQa', 'admin'),
-  (2, 'Dev1', 'Developer', 'dev1@email.com', '$2b$10$K26XeVXWRxzilIq85s1tD.iPLj9885ZeAT9z5IZgxSGcksrFZq4.C', 'dev'),
-  (3, 'Dev2', 'Developer', 'dev2@email.com', '$2b$10$QrK35x4GE.sFaMylPPFuK.hMdN9EqHh/QG.QIBVLmM6joiqUB4BSq', 'dev'),
-  (4, 'Client1', 'Client', 'client1@email.com', '$2b$10$vd8MGv36KXSfRp8LZgw3j.eZQbp87663H22z8r..QERJhakU.Wuma', 'client'),
-  (5, 'Client2', 'Client', 'client2@email.com', '$2b$10$45mU8Ay9NtJ1oYb86D2BzOIgUBLu80kGu0N20HcfMbl9uTIBASvhq', 'client'),
-  (6, 'Client3', 'Client', 'client3@email.com', '$2b$10$IKj4gFQMsPRASsu6/Mj4POwG8OuVu53Y0mu7OsBccz4m8g1OGhU.K', 'client'),
-  (7, 'Client4', 'Client', 'client4@email.com', '$2b$10$Zgc4GCIRE1v7aTdXriyMau0xNvYc5qOcEf/hTySjZbwPJVE77iR7G', 'client');
+  (2, 'Neo', 'Chosenone', 'neodev@email.com', '$2b$10$K26XeVXWRxzilIq85s1tD.iPLj9885ZeAT9z5IZgxSGcksrFZq4.C', 'dev'),
+  (3, 'Trinity', 'Notchosenone', 'trinitydev@email.com', '$2b$10$QrK35x4GE.sFaMylPPFuK.hMdN9EqHh/QG.QIBVLmM6joiqUB4BSq', 'dev'),
+  (4, 'Tyler', 'Durden', 'durden@email.com', '$2b$10$vd8MGv36KXSfRp8LZgw3j.eZQbp87663H22z8r..QERJhakU.Wuma', 'client'),
+  (5, 'Darth', 'Vader', 'vader@email.com', '$2b$10$45mU8Ay9NtJ1oYb86D2BzOIgUBLu80kGu0N20HcfMbl9uTIBASvhq', 'client'),
+  (6, 'Edward', 'Scissorhands', 'scissorhands@email.com', '$2b$10$IKj4gFQMsPRASsu6/Mj4POwG8OuVu53Y0mu7OsBccz4m8g1OGhU.K', 'client'),
+  (7, 'Tyrion', 'Lannister', 'tyrion@email.com', '$2b$10$Zgc4GCIRE1v7aTdXriyMau0xNvYc5qOcEf/hTySjZbwPJVE77iR7G', 'client');
  
 -- Inserción en la tabla "projects"
 INSERT INTO projects (id, project_name, project_type, price, progress_status, devId, clientId, plus_prototype)
 VALUES 
-  (1, 'Project One', 'Basic Web', 2000, 2, 2, 4, true),
-  (2, 'Project Two', 'Dynamic Web', 4000, 0, 3, 5, false),
-  (3, 'Project Three', 'Basic Web', 2000, 2, 2, 6, true),
-  (4, 'Project Four', 'E-Commerce Web', 6000, 1, 3, 7, false);
+  (1, 'Fight Club Gym Web', 'Basic Web', 2000, 2, 2, 4, true),
+  (2, 'Scissorhands Beauty Saloon Web', 'Dynamic Web', 4000, 0, 2, 5, false),
+  (3, 'Death Star Empire´s Web', 'Basic Web', 2000, 2, 2, 6, true),
+  (4, 'Tyrion´s Winestore Web', 'E-Commerce Web', 6000, 1, 2, 7, false);
    
 -- Inserción en la tabla "invoices"
 INSERT INTO invoices (id, invoice_date, amount,payment_currency, payment_date, payment_method, clientId, devId, projectId)
 VALUES 
   (1, '2023-01-01', 2000, 'EUR', '2023-01-15', 'Credit Card', 4, 2, 1),
-  (2, '2023-02-01', 4000,'EUR', '2023-02-15', 'PayPal', 5, 3, 2),
+  (2, '2023-02-01', 4000,'EUR', '2023-02-15', 'PayPal', 5, 2, 2),
   (3, '2023-03-01', 2000,'EUR', '2023-03-15', 'Credit Card', 6, 2, 3),
-  (4, '2023-04-01', 6000,'EUR', '2023-04-15', 'Bank Transfer', 7, 3, 4);
+  (4, '2023-04-01', 6000,'EUR', '2023-04-15', 'Bank Transfer', 7, 2, 4);
   
 -- Inserción en la tabla "chat_messages"
 INSERT INTO chat_messages (id, message_text, message_date, message_time, projectId, userId)
@@ -35,7 +35,7 @@ VALUES
   (4, 'Perfect! See you then.', '2023-12-03', '09:00', 1, 2),
   -- Conversaciones para Project 2
   (5, 'Hi there! Just checking in on the progress of Project Two.', '2023-12-05', '11:30', 2, 6),
-  (6, 'Everything is going smoothly. We are currently in the planning phase.', '2023-12-06', '13:45', 2, 3),
+  (6, 'Everything is going smoothly. We are currently in the planning phase.', '2023-12-06', '13:45', 2, 2),
   (7, 'Great to hear! Let me know if you need any additional information.', '2023-12-07', '10:00', 2, 6),
   -- Conversaciones para Project 3
   (8, 'Hello! I have some questions about Project Three.', '2023-12-10', '15:20', 3, 5),
@@ -43,17 +43,17 @@ VALUES
   (10, 'I was wondering about the timeline and milestones. Can you provide an update?', '2023-12-12', '12:30', 3, 5),
   (11, 'Certainly! Let me share the detailed timeline with you.', '2023-12-13', '14:15', 3, 2),
   -- Conversaciones para Project 4
-  (12, 'Hi! Excited to start working on Project Four.', '2023-12-15', '09:30', 4, 3),
+  (12, 'Hi! Excited to start working on Project Four.', '2023-12-15', '09:30', 4, 2),
   (13, 'Great to have you on board! Let''s discuss the project requirements.', '2023-12-16', '11:00', 4, 7),
-  (14, 'I have some ideas for the design. Can we schedule a design review?', '2023-12-17', '14:45', 4, 3),
+  (14, 'I have some ideas for the design. Can we schedule a design review?', '2023-12-17', '14:45', 4, 2),
   (15, 'Absolutely! Let''s meet next week to go over the design details.', '2023-12-18', '10:30', 4, 7);
 
   -- Inserción en la tabla "agendas"
 INSERT INTO agendas (id, meeting_date, meeting_time, devId, clientId, projectId)
 VALUES 
   (1, '2023-01-05', '10:00', 2, 5, 2),
-  (2, '2023-01-10', '14:30', 3, 6, 3),
+  (2, '2023-01-10', '14:30', 2, 6, 3),
   (3, '2023-02-15', '11:00', 2, 4, 1),
-  (4, '2023-02-20', '15:45', 3, 7, 4),
+  (4, '2023-02-20', '15:45', 2, 7, 4),
   (5, '2023-03-05', '09:30', 2, 5, 2),
-  (6, '2023-03-10', '16:00', 3, 6, 3);
+  (6, '2023-03-10', '16:00', 2, 6, 3);
