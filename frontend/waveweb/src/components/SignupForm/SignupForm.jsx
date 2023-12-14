@@ -215,13 +215,13 @@ function SignupComponent() {
         ////////////////////////STRIPE/////////////////////
         switch (formData.project_type) {
             case "Basic Web":
-                window.open("https://buy.stripe.com/test_14k9Dk2lX8BE1CocMN");
+                window.open("https://buy.stripe.com/test_6oE7vc2lX2dg80MeV0");
                 break;
             case "Dynamic Web":
-                window.open("https://buy.stripe.com/test_bIY2aSaStaJM4OA8wy");
+                window.open("https://buy.stripe.com/test_14keXE5y9f0280M8wD");
                 break;
             case "E-Commerce Web":
-                window.open("https://buy.stripe.com/test_5kAcPw0dP8BE5SE6or");
+                window.open("https://buy.stripe.com/test_6oEbLs9Op2dggxiaEM");
                 break;
         }
         ////////////////////////STRIPE/////////////////////
