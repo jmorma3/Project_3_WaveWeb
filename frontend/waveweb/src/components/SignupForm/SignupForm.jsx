@@ -1,18 +1,14 @@
 import "./SignupForm.css"
+
 import backgroundImage from "../../assets/login-wave.png"
+import PlanCard from "../PlanCard/PlanCard";
 
 import { useState } from 'react';
-
 import { useNavigate } from "react-router-dom";
-
 
 import {
     TextField,
     Button,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
     Container,
     Typography,
     Box,
@@ -26,7 +22,6 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    breadcrumbsClasses
 } from '@mui/material';
 
 import MuiAlert from '@mui/material/Alert';
@@ -39,6 +34,39 @@ import { createProject } from "../../services/projectService";
 function SignupComponent() {
     const [activeStep, setActiveStep] = useState(0);
     const steps = ['User information', 'Project information', 'Subscription plan information'];
+
+    const plans = [
+        {
+            title: 'Basic Web',
+            subtitle: 'A static site ideal for simple online presence.',
+            features: [
+                'Info Display',
+                'Contact Page',
+                'Image Gallery'
+            ],
+            price: '2.000 EUR'
+        },
+        {
+            title: 'Dynamic Web',
+            subtitle: 'Interactive site with CMS for dynamic content.',
+            features: [
+                'User Forms',
+                'Blog Section',
+                'Custom CMS'
+            ],
+            price: '4.000 EUR'
+        },
+        {
+            title: 'E-Commerce Web',
+            subtitle: 'Complete solution for online stores with cart.',
+            features: [
+                'Shopping Cart',
+                'Product Lists',
+                'Payment Gateway'
+            ],
+            price: '6.000 EUR'
+        }
+    ];
 
 
     const [formData, setFormData] = useState({
@@ -155,7 +183,7 @@ function SignupComponent() {
 
 
     const handleFinish = async () => {
-    
+
         //Creación del proyecto:
         try {
             const { project_name, company_name, sector, observations, project_type, price } = formData;
@@ -201,10 +229,9 @@ function SignupComponent() {
     };
 
 
-
     return (
         <div className="signForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <Container className="form-container" maxWidth="sm" style={({ backgroundColor: "white" })} >
+            <Container className="form-container" maxWidth="sm" style={({ backgroundColor: "white", marginTop: '-50px' })} >
                 <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '10px' }}>
                     {steps.map((label) => (
                         <Step key={label}>
@@ -343,26 +370,23 @@ function SignupComponent() {
                         <>
                             <div>
                                 <Typography variant="h5" sx={{ marginTop: '10px' }}>Subscription plan information:</Typography>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                                    <Button
-                                        variant="contained"
-                                        onClick={() => handlePlanSelect('Basic Web')}
-                                    >
-                                        Basic Web - 2000EUR
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        onClick={() => handlePlanSelect('Dynamic Web')}
-                                    >
-                                        Dynamic Web - 4000EUR
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        onClick={() => handlePlanSelect('E-Commerce Web')}
-                                    >
-                                        E-Commerce Web - 6000EUR
-                                    </Button>
-                                </div>
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    mx: 'auto', // Centra el Box de las tarjetas
+                                    maxWidth: 'lg', // Este es el ancho máximo para las tarjetas
+                                }}>
+                                    {plans.map((plan) => (
+                                        <PlanCard
+                                            key={plan.title}
+                                            plan={plan}
+                                            selected={formData.project_type === plan.title}
+                                            onSelect={handlePlanSelect}
+                                        />
+                                    ))}
+                                </Box>
                             </div>
                         </>
                     )}
