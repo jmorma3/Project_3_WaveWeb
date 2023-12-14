@@ -18,16 +18,16 @@ const SignUp = () => {
           width: '100%',
         }}
       >
-      
+      <div className='logo-name'>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
-          <Avatar sx={{ bgcolor: 'primary.main', margin: '15px', width: 56, height: 56 }}>
+          <Avatar sx={{ bgcolor: 'primary.main', margin: '10px', width: 56, height: 56 }}>
             <WavesIcon />
           </Avatar>
         </Link>
         <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
           WAVE WEB
         </Typography>
-
+        </div>
         <div className='sign-container'>
           <Card className="polaroid" >
 

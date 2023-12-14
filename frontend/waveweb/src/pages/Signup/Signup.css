@@ -27,3 +27,7 @@
   filter: sepia(5%) contrast(80%);
   border: 1px solid #ccc;
 }
+
+.logo-name{
+  margin-left: 18px;
+}
