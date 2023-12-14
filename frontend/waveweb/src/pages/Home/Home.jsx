@@ -1,12 +1,13 @@
-import "./Home.css";
-import NavBar from "../../components/NavBar/NavBar";
-import { Card, Button, Typography, Stepper, Step, StepLabel, Box } from "@mui/material";
+//Importaciones de librerías externas
+import { useState } from 'react';
+import { Card, Button, Typography, Stepper, Step, StepLabel, Box, IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import { useState } from 'react';
+//Importamos componentes y estilos
+import "./Home.css";
+import NavBar from "../../components/NavBar/NavBar";
 
-import IconButton from '@mui/material/IconButton';
 
 // Importamos las imágenes de las secciones
 import sectionImage1 from "../../assets/home-1.jpg";
@@ -61,34 +62,78 @@ const Home = () => {
             <NavBar />
             <div className="content-container">
                 <Box className="carousel-container">
-                    <IconButton className="carousel-button" onClick={handleBack}  >
+
+                    <IconButton
+                        className="carousel-button"
+                        onClick={handleBack}
+                    >
                         <ArrowBackIosNewIcon />
                     </IconButton>
+
                     <Card style={{ boxShadow: 'none', border: 'none' }} >
                         <div className="polaroid">
-                            <img src={sections[activeStep].imageUrl} alt={sections[activeStep].title} className="card-image" />
+                            <img
+                                src={sections[activeStep].imageUrl}
+                                alt={sections[activeStep].title}
+                                className="card-image" />
+
                             <div className="text-content">
-                                <Typography variant="h5" component="h2">{sections[activeStep].title}</Typography>
-                                <Typography>{sections[activeStep].description}</Typography>
+                                <Typography
+                                    variant="h5"
+                                    component="h2">
+                                    {sections[activeStep].title}
+                                </Typography>
+                                <Typography>
+                                    {sections[activeStep].description}
+                                </Typography>
                             </div>
                         </div>
-
                     </Card>
-                    <IconButton className="carousel-button" onClick={handleNext} >
+
+                    <IconButton
+                        className="carousel-button"
+                        onClick={handleNext}
+                    >
                         <ArrowForwardIosIcon />
                     </IconButton>
                 </Box>
-                <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '15px' }} className="stepper">
+
+                <Stepper
+                    activeStep={activeStep}
+                    alternativeLabel
+                    sx={{ marginTop: '15px' }}
+                    className="stepper">
                     {sections.map((section, index) => (
                         <Step key={index} >
                             <StepLabel>{section.title}</StepLabel>
                         </Step>
                     ))}
                 </Stepper>
-                <Box sx={{ textAlign: 'center', mt: 4 }}>
-                    <Button variant="contained" href="/signup">Sign Up</Button>
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        mt: 4
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        href="/signup"
+                        sx={{
+                            borderRadius: '25px',
+                            padding: '1px 20px'
+                        }}
+                    >
+                        Sign Up
+                    </Button>
                     <Typography sx={{ mt: 1 }}>
-                        Already have an account?<a href="/login" style={{ marginLeft: '5px', textDecoration: 'underline' }}>Log In</a>
+                        Already have an account?
+                        <a href="/login"
+                            style={{
+                                marginLeft: '5px',
+                                textDecoration: 'underline'
+                            }}
+                        >Log In
+                        </a>
                     </Typography>
                 </Box>
             </div>

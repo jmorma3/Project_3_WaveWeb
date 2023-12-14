@@ -1,11 +1,6 @@
-import "./SignupForm.css"
-
-import backgroundImage from "../../assets/login-wave.png"
-import PlanCard from "../PlanCard/PlanCard";
-
+//Importaciones de librerías externas
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
 import {
     TextField,
     Button,
@@ -27,6 +22,14 @@ import {
 import MuiAlert from '@mui/material/Alert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
+//Importamos componentes y estilos
+import "./SignupForm.css"
+import PlanCard from "../PlanCard/PlanCard";
+
+//Importamos imágenes
+import backgroundImage from "../../assets/login-wave.png"
+
+//Importamos los servicios
 import { signup } from "../../services/authService";
 import { createProject } from "../../services/projectService";
 
@@ -152,7 +155,7 @@ function SignupComponent() {
         setOpenSnackbar(false);
     };
 
-    //Creamos la instancia del navigate:
+
     const navigate = useNavigate()
 
     const handleCloseDialog = () => {
@@ -231,8 +234,18 @@ function SignupComponent() {
 
     return (
         <div className="signForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <Container className="form-container" maxWidth="sm" style={({ backgroundColor: "white", marginTop: '-50px' })} >
-                <Stepper activeStep={activeStep} alternativeLabel sx={{ marginTop: '10px' }}>
+            <Container
+                className="form-container"
+                maxWidth="sm"
+                style={({
+                    backgroundColor: "white",
+                    marginTop: '-50px'
+                })} >
+                <Stepper
+                    activeStep={activeStep}
+                    alternativeLabel
+                    sx={{ marginTop: '10px' }}
+                >
                     {steps.map((label) => (
                         <Step key={label}>
                             <StepLabel>{label}</StepLabel>
@@ -242,7 +255,13 @@ function SignupComponent() {
                 <form>
                     {activeStep === 0 && (
                         <>
-                            <Typography variant="h5" sx={{ marginTop: '10px' }}>User information:</Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{ marginTop: '10px' }}
+                            >
+                                User information:
+                            </Typography>
+
                             <TextField
                                 label="Name"
                                 name="first_name"
@@ -328,7 +347,13 @@ function SignupComponent() {
                     )}
                     {activeStep === 1 && (
                         <>
-                            <Typography variant="h5" sx={{ marginTop: '10px' }}>Project information:</Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{ marginTop: '10px' }}
+                            >
+                                Project information:
+                            </Typography>
+
                             <TextField
                                 label="Project name"
                                 name="project_name"
@@ -369,14 +394,20 @@ function SignupComponent() {
                     {activeStep === 2 && (
                         <>
                             <div>
-                                <Typography variant="h5" sx={{ marginTop: '10px' }}>Subscription plan information:</Typography>
+                                <Typography
+                                    variant="h5"
+                                    sx={{ marginTop: '10px' }}
+                                >
+                                    Subscription plan information:
+                                </Typography>
+
                                 <Box sx={{
                                     display: 'flex',
                                     justifyContent: 'center',
                                     flexDirection: 'row',
                                     flexWrap: 'wrap',
-                                    mx: 'auto', // Centra el Box de las tarjetas
-                                    maxWidth: 'lg', // Este es el ancho máximo para las tarjetas
+                                    mx: 'auto',
+                                    maxWidth: 'lg',
                                 }}>
                                     {plans.map((plan) => (
                                         <PlanCard
@@ -390,7 +421,12 @@ function SignupComponent() {
                             </div>
                         </>
                     )}
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            pt: 2
+                        }}>
                         <Button
                             color="inherit"
                             disabled={activeStep === 0}
@@ -401,14 +437,44 @@ function SignupComponent() {
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
                         {activeStep === steps.length - 1 ? (
-                            <Button variant="contained" color="primary" onClick={handleFinish}>Submit</Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleFinish}
+                                sx={{
+                                    borderRadius: '25px',
+                                    padding: '1px 20px'
+                                }}
+                            >
+                                Submit
+                            </Button>
                         ) : (
                             <>
                                 {activeStep === 0 && (
-                                    <Button variant="contained" color="primary" onClick={handleSubmitUser}>Sign up</Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleSubmitUser}
+                                        sx={{
+                                            borderRadius: '25px',
+                                            padding: '1px 20px'
+                                        }}
+                                    >
+                                        Sign up
+                                    </Button>
                                 )}
                                 {activeStep === 1 && (
-                                    <Button variant="contained" color="primary" onClick={handleSubmitProject}>Create project</Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleSubmitProject}
+                                        sx={{
+                                            borderRadius: '25px',
+                                            padding: '1px 20px'
+                                        }}
+                                    >
+                                        Create project
+                                    </Button>
                                 )}
                             </>
                         )}
@@ -419,9 +485,17 @@ function SignupComponent() {
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
             >
-                <MuiAlert onClose={handleCloseSnackbar} severity="error" elevation={6} variant="filled">
+                <MuiAlert
+                    onClose={handleCloseSnackbar}
+                    severity="error"
+                    elevation={6}
+                    variant="filled"
+                >
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
@@ -438,7 +512,11 @@ function SignupComponent() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseDialog} color="primary" autoFocus>
+                    <Button
+                        onClick={handleCloseDialog}
+                        color="primary"
+                        autoFocus
+                    >
                         OK
                     </Button>
                 </DialogActions>

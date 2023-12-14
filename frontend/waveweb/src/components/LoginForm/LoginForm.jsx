@@ -1,8 +1,6 @@
-import "./LoginForm.css"
-
+//Importaciones de librerías externas
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
 import {
   Card,
   CardHeader,
@@ -14,7 +12,12 @@ import {
   Typography
 } from "@mui/material"
 
+//Importamos estilos
+import "./LoginForm.css"
+
+//Importamos las imágenes
 import backgroundImage from "../../assets/login-wave.png"
+
 //Importamos los servicios:
 import { login } from "../../services/authService"
 
@@ -33,7 +36,7 @@ function LoginForm() {
       const result = await login(payload)
       if (result === 200 && localStorage.getItem("userRole") !== "admin") {
         navigate('/myProjects')
-      }else{
+      } else {
         navigate('/admin')
       }
     } catch (error) {
@@ -42,9 +45,18 @@ function LoginForm() {
   }
 
   return (
-    <div className="loginForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <Card sx={{ width: "50%", padding: "30px", margin: "auto" }}>
+    <div
+      className="loginForm-container"
+      style={{ backgroundImage: `url(${backgroundImage})` }}>
+
+      <Card
+        sx={{
+          width: "50%",
+          padding: "30px",
+          margin: "auto"
+        }}>
         <CardHeader title="Log in to your account" />
+
         <CardContent>
           <TextField
             onChange={(e) => setEmail(e.target.value)}
@@ -60,17 +72,37 @@ function LoginForm() {
             fullWidth={true}
           />
         </CardContent>
-        <CardActions sx={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}>
-          <Button variant="contained" onClick={handleClick} sx={{ marginRight: "10px" }}>
+
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginBottom: "30px"
+          }}>
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            sx={{
+              marginRight: "10px",
+              borderRadius: '25px',
+              padding: '1px 20px'
+            }}>
             Login
           </Button>
-          <Button variant="contained" href="/signup">
+          <Button
+            variant="contained"
+            href="/signup" sx={{
+              borderRadius: '25px',
+              padding: '1px 20px'
+            }}>
             Sign Up
           </Button>
         </CardActions>
         <Divider />
-
-        <Typography variant="h6" component="a" href="/">
+        <Typography
+          variant="h6"
+          component="a"
+          href="/">
           Forgot your password?
         </Typography>
       </Card>
