@@ -3,6 +3,9 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
+import { Divider, Typography } from '@mui/material';
+import VideocamIcon from '@mui/icons-material/Videocam';
+
 import { getProjectMessages, sendNewChatMessage } from '../../services/chatMessageService';
 
 import { useParams } from 'react-router-dom';
@@ -55,7 +58,7 @@ const ChatWeb = () => {
   const displayChatHistory = () => {
     return chatHistory.map((message, index) => (
       <ListItem
-        key={message.id || index} //Con esto resolvimos el "warning" que aparecía con la key única para cada child al renderizar el chatHistory ("message.id") estaba dando problemas. 
+        key={index} //Con esto resolvimos el "warning" que aparecía con la key única para cada child al renderizar el chatHistory. "message.id" estaba dando problemas. 
         sx={{
           margin: "2px",
           border: "1px solid",
@@ -73,10 +76,39 @@ const ChatWeb = () => {
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', borderTop: '1px solid #ccc', backgroundColor: '#fff' }}>
-      <List ref={chatListRef} sx={{ maxHeight: '25vh', overflowY: 'auto', display: "flex", flexDirection: "column" }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      borderLeft: '1px solid #ccc',
+      backgroundColor: '#fff',
+      padding: '16px',
+      boxSizing: 'border-box'
+    }}>
+
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+      }}>
+        <Typography fontWeight={"bold"}>Chat Messages</Typography>
+
+        <VideocamIcon fontSize='large' />
+      </div>
+
+      <Divider />
+
+      <List ref={chatListRef} sx={{
+        minHeight: '85vh',
+        overflowY: 'auto',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent:"flex-end"
+      }}>
         {displayChatHistory()}
       </List>
+
       <div style={{ display: 'flex', marginTop: '8px' }}>
         <TextField
           type="text"
@@ -85,9 +117,11 @@ const ChatWeb = () => {
           placeholder="Type your message..."
           sx={{ flex: 1, marginRight: '8px' }}
         />
+
         <Button variant="contained" onClick={handleMessageSend}>
           Send
         </Button>
+        
       </div>
     </div>
   );
