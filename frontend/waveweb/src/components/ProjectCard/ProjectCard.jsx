@@ -64,7 +64,6 @@ export default function ProjectCard({ data }) {
                         }}
                     />
 
-
                     <Stepper
                         activeStep={data.progress_status}
                         alternativeLabel

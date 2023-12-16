@@ -53,36 +53,53 @@ export default function ProjectInfo_UserCard({ data }) {
     }
 
     return (
-        <Box sx={{ minWidth: '60%', mt: 5, border: "1px solid black", padding: 2 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">
-                    {`${data.first_name} ${data.last_name}`}
-                </Typography>
+        <Box sx={{
+            minWidth: '60%',
+            mt: 5,
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            border: '1px solid #ddd',
+            backgroundColor: 'white',
+            padding: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'start',
+        }}>
+            <Avatar
+                alt={`${data.first_name} ${data.last_name}`}
+                src={userImage}
+                sx={{
+                    width: 150, 
+                    height: 150,
+                    border: '2px solid black',
+                    mr: 2
+                }}
+            />
+
+            <div style={{ flex: 1, position: 'relative' }}>
                 <Chip
                     label={data.role}
-                    style={{
+                    sx={{
                         border: "1px solid",
-                        backgroundColor: data.role === 'dev' ? 'black' : 'white',
-                        color: data.role === 'dev' ? 'white' : 'black'
+                        backgroundColor: 'black',
+                        color: 'white',
+                        position: 'absolute',
+                        top: -15, 
+                        right: 8
                     }}
                 />
-            </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', marginTop: 2 }}>
-                <Avatar
-                    alt={`${data.first_name} ${data.last_name}`}
-                    src={userImage}
-                    sx={{ width: 100, height: 100 }}
-                />
-                <div style={{ marginLeft: 2 }}>
-                    <Typography variant="body2" border={"1px solid red"}>
-                        {`${userDescription}`}
-                    </Typography>
-                    {data.role === 'dev' && (
-                        <Rating name="user-rating" value={4} readOnly />
-                        // Reemplaza el valor 4 por la puntuación real del usuario
-                    )}
-                </div>
+                <Typography variant="h6" sx={{ mb: 1, mt: 3 }}>
+                    {`${data.first_name} ${data.last_name}`}
+                </Typography>
+
+                <Typography variant="body1" sx={{ textAlign: 'left', mb: 2, fontStyle: 'italic' }}>
+                    {`"${userDescription}"`}
+                </Typography>
+
+                {data.role === 'dev' && (
+                    <Rating name="user-rating" value={4} readOnly sx={{ mb: 1 }} />
+                )}
             </div>
         </Box>
     );

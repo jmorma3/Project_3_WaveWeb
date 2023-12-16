@@ -1,7 +1,6 @@
 import "./ProjectInfo.css"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { Grid, Accordion, AccordionSummary, AccordionDetails, IconButton, Typography } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -46,33 +45,56 @@ const ProjectInfo = () => {
 
     return (
         <>
+          <div className="water-background" >
             <NavBarMyProjects />
 
-            <Grid container spacing={1} style={{ padding: '10px' }}>
-                {/* Columna de Información del Proyecto y Usuario */}
-                <Grid item xs={12} md={7} style={{ border: "1px solid red", display: 'flex', flexDirection: "column", alignItems: "flex-start" }}>
-                    {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
-                    <ProjectInfo_UserCard data={myDevOrClient} />
-                </Grid>
+            <Grid container spacing={2} style={{ padding: '30px' }}>
+                    {/* Columna de Información del Proyecto y Usuario */}
+                    <Grid item xs={12} md={7}>
+                        {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
+                        <ProjectInfo_UserCard data={myDevOrClient} />
+                    </Grid>
 
-                {/* Columna de Agenda para Escritorio */}
-                <Grid item xs={12} md={5} style={{ display: 'flex', flexDirection: "column", alignItems: "flex-start" }}>
-                    {localStorage.getItem("userRole") === "dev" && <Agenda_Dev data={userOneProject} />}
+                    {/* Columna de Agenda para Escritorio y Móvil */}
+                    <Grid item xs={12} md={5} sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center', // Centra en móviles
+                        justifyContent: 'flex-start', // Alineación superior en escritorio
+                    }}>
+                        {localStorage.getItem("userRole") === "dev" && <Agenda_Dev data={userOneProject} />}
+                    </Grid>
                 </Grid>
-            </Grid>
 
             {/* Accordion de Chat en la esquina inferior derecha */}
-            <Accordion style={{ position: 'fixed', bottom: 20, right: 20, width: '500px', zIndex: 1000 }} expanded={isChatVisible} onChange={handleChatIconClick}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon style={{ transform: isChatVisible ? 'rotate(180deg)' : 'rotate(180deg)' }} />} aria-controls="chat-content" id="chat-header">
-                    <IconButton color="primary">
-                        <ChatIcon />
-                    </IconButton>
-                    <Typography margin={"6px 6px"} alignContent={"center"}>Chat</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <ChatWeb />
-                </AccordionDetails>
-            </Accordion>
+            <Accordion 
+                    style={{ 
+                        position: 'fixed', 
+                        bottom: 20, 
+                        right: 20, 
+                        width: '500px', 
+                        zIndex: 1000,
+                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                        borderRadius: '10px'
+                    }} 
+                    expanded={isChatVisible} 
+                    onChange={handleChatIconClick}
+                >
+                    <AccordionSummary 
+                        expandIcon={<ExpandMoreIcon style={{ transform: isChatVisible ? 'rotate(180deg)' : 'rotate(180deg)' }} />} 
+                        aria-controls="chat-content" 
+                        id="chat-header"
+                    >
+                        <IconButton color="primary">
+                            <ChatIcon />
+                        </IconButton>
+                        <Typography margin={"6px 6px"} alignContent={"center"}>Chat</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <ChatWeb />
+                    </AccordionDetails>
+                </Accordion>
+            </div>
         </>
     );
 };

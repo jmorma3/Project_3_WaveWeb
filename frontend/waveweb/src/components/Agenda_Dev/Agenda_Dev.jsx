@@ -7,11 +7,9 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { TimeField } from '@mui/x-date-pickers/TimeField';
 
 import { createNewMeeting } from '../../services/agendaService';
-
 
 export default function Agenda_Dev({ data }) {
     const [dateValue, setDateValue] = useState(dayjs('2023-12-21'));
@@ -19,47 +17,58 @@ export default function Agenda_Dev({ data }) {
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const chosenDate = `${dateValue.$y}-${(dateValue.$M + 1).toString().length < 2 ? (`0${dateValue.$M + 1}`) : (`${dateValue.$M + 1}`)}-${dateValue.$D.toString().length < 2 ? (`0${dateValue.$D}`) : (`${dateValue.$D}`)}`;
-    const chosenTime = `${timeValue.$H}:${timeValue.$m}`
+    const chosenTime = `${timeValue.$H}:${timeValue.$m}`;
 
     const handleAddMeeting = () => {
         setPopupOpen(true);
     };
 
     const handleConfirmMeeting = async () => {
-        // Aquí se realiza la llamada a la API para enviar la información al backend
         try {
-            await createNewMeeting(data.id, data.clientId, chosenDate, chosenTime)
+            await createNewMeeting(data.id, data.clientId, chosenDate, chosenTime);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-        // Cerrar el popup después de confirmar
         setPopupOpen(false);
     };
 
     const handlePopupClose = () => {
-        // Cerrar el popup si se cancela
         setPopupOpen(false);
     };
 
-    const agendaStyle = {
-        border: '1px solid',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        margin: '15px 0px',
-        padding: '10px',
-        width: '100%', // Mantener el ancho al 100% del contenedor
-        maxWidth: '400px', // Establecer un ancho máximo para la agenda
-        alignSelf: 'center' 
-    };
-
     return (
-        <div style={agendaStyle}>
+        <div style={{
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            border: '1px solid #ddd',
+            backgroundColor: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: '2px',
+            width: '100%',
+            maxWidth: '400px',
+            alignSelf: 'center',
+            height: 'fit-content', // Ajuste para la altura
+        }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar value={dateValue} onChange={(newValue) => setDateValue(newValue)} />
             </LocalizationProvider>
 
-            <Button variant="contained" onClick={handleAddMeeting}>
+            <Button
+                variant="contained"
+                onClick={handleAddMeeting}
+                sx={{
+                    mt: '10px',
+                    mb: '5px',
+                    bgcolor: 'black',
+                    color: 'white',
+                    borderRadius: '20px', // Más redondeado
+                    width: 'fit-content',
+                    alignSelf:'center',
+                    padding: '6px 80px', // Más pequeño
+                    fontSize: '0.875rem' // Tamaño de fuente más pequeño
+                }}>
                 Add new Meeting
             </Button>
 
@@ -82,7 +91,7 @@ export default function Agenda_Dev({ data }) {
                     <Button onClick={handlePopupClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleConfirmMeeting} color="primary">
+                    <Button onClick={handleConfirmMeeting} color="primary" variant="contained" sx={{ bgcolor: 'black', color: 'white' }}>
                         Confirm
                     </Button>
                 </DialogActions>

@@ -27,7 +27,7 @@ const signUp = async (req, res) => {
         const user = await User.create(req.body);
 
         // Generar el token
-        const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
+        const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '10h' })
         const userId= user.dataValues.id
         const userRole =user.dataValues.role
         const userFirstName = user.dataValues.first_name
@@ -66,7 +66,7 @@ const logIn = async (req, res) => {
 
         if (comparePass) {
             const payload = { email: user.email, password: user.password }
-            const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
+            const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '10h' })
             const userId = user.id
             const userRole = user.role
             const userFirstName = user.first_name

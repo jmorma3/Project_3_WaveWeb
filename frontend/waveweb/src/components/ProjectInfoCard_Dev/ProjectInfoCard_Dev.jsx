@@ -1,17 +1,19 @@
 import "./ProjectInfoCard_Dev.css"
-
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 
+import { Chip, Box, Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import { updateOwnProject } from "../../services/projectService";
-
 const steps = ['Not Started', 'In Progress Step 1', 'In Progress Step 2', 'Completed'];
+
+//Importamos las imágenes de los proyectos:
+import project1 from "../../assets/project_gym.jpg"
+import project2 from "../../assets/project_starwars.jpeg"
+import project3 from "../../assets/project_barber.jpg"
+import project4 from "../../assets/project_wine.jpg"
+import project5 from "../../assets/project_apu.jpeg"
 
 const ProjectInfoCard_Dev = ({ data }) => {
   const [progressStatus, setProgressStatus] = useState(data.progress_status);
@@ -39,47 +41,99 @@ const ProjectInfoCard_Dev = ({ data }) => {
     handleUpdateProgress(prevStep);
   };
 
-  const cardStyle = {
-    height: "fit-content",
-    width: "100%", 
-    marginTop: 2,
-    border: '1px solid black',
-    padding: 2, 
-  };
+  let projectImage
+  let projectDescription
+  switch (data.id) {
+    case 1:
+      projectImage = project1
+      projectDescription = ""
+      break;
+    case 2:
+      projectImage = project2
+      projectDescription = ""
+      break;
+    case 3:
+      projectImage = project3
+      projectDescription = ""
+      break;
+    case 4:
+      projectImage = project4
+      projectDescription = ""
+      break;
+    case 5:
+      projectImage = project5
+      projectDescription = ""
+      break;
+
+  }
 
   return (
-    <Box sx={cardStyle}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        <Typography variant="h5" sx={{ mt: 2, ml: 2 }}>
-          {`Project "${data.project_name}"`}
-        </Typography>
-      </div>
+    <Card sx={{ width: "100%", maxWidth: 800, mb: 5 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={projectImage} // Cambia esto por la imagen del proyecto
+          alt={data.project_name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" fontWeight="bold" component="div" style={{ textTransform: 'uppercase' }}>
+            {`${data.project_name}`}
+          </Typography>
+          <Chip
+            label={data.project_type}
+            style={{
+              border: "1px solid",
+              backgroundColor: 'white'
+            }}
+          />
 
-      <Typography variant="subtitle2" sx={{ mt: 2, ml: 2 }}>
-        {`${data.project_type}`}
-      </Typography>
-
-      <Divider variant="middle" sx={{ mt: 2, mb: 3 }} />
-
-      <Box sx={{ mb: 2 }}>
-        <Stepper activeStep={progressStatus} alternativeLabel>
-          {steps.map((step) => (
-            <Step key={step}>
-              <StepLabel>{step}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box>
+          <Box sx={{ mb: 2 }}>
+            <Stepper
+              activeStep={progressStatus}
+              alternativeLabel
+              sx={{ margin: '15px 30px' }}>
+              {steps.map((step) => (
+                <Step key={step}>
+                  <StepLabel>{step}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </CardContent>
+      </CardActionArea>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', margin: '5px 16px' }}>
-        <Button variant="contained" onClick={handlePrev} disabled={progressStatus === 0}>
+        <Button
+          variant="contained"
+          onClick={handlePrev}
+          disabled={progressStatus === 0}
+          sx={{
+            borderRadius: '25px',
+            padding: '1px 20px',
+            margin: '10px'
+
+          }}
+        >
           Prev
         </Button>
-        <Button variant="contained" onClick={handleNext} disabled={progressStatus === steps.length - 1}>
+        <Button
+          variant="contained"
+          onClick={handleNext}
+          disabled={progressStatus === steps.length - 1}
+          sx={{
+            borderRadius: '25px',
+            padding: '1px 20px',
+            margin: '10px'
+
+          }}
+        >
           Next
         </Button>
       </div>
-    </Box>
+    </Card>
+
+
   );
 };
 
