@@ -26,9 +26,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import "./SignupForm.css"
 import PlanCard from "../PlanCard/PlanCard";
 
-//Importamos imágenes
-import backgroundImage from "../../assets/login-wave.png"
-
 //Importamos los servicios
 import { signup } from "../../services/authService";
 import { createProject } from "../../services/projectService";
@@ -231,9 +228,8 @@ function SignupComponent() {
 
     };
 
-
     return (
-        <div className="signForm-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="signForm-container">
             <Container
                 className="form-container"
                 maxWidth="sm"

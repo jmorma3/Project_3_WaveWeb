@@ -15,9 +15,6 @@ import {
 //Importamos estilos
 import "./LoginForm.css"
 
-//Importamos las imágenes
-import backgroundImage from "../../assets/login-wave.png"
-
 //Importamos los servicios:
 import { login } from "../../services/authService"
 
@@ -45,10 +42,7 @@ function LoginForm() {
   }
 
   return (
-    <div
-      className="loginForm-container"
-      style={{ backgroundImage: `url(${backgroundImage})` }}>
-
+    <div className="loginForm-container">
       <Card
         sx={{
           width: "50%",
