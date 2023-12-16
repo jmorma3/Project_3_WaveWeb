@@ -9,27 +9,37 @@ function PlanCard({ plan, selected, onSelect }) {
                 m: 1,
                 borderWidth: selected ? 2 : 1,
                 borderColor: selected ? 'primary.main' : 'grey.300',
-                boxShadow: selected ? 3 : 1,
+                backgroundColor: selected ? 'black' : 'white',
+                color: selected ? 'white' : 'black',
             }}
             onClick={() => onSelect(plan.title)}
         >
             <CardContent>
-                <Typography variant="h6" component="div" sx={{ fontSize: '0.995rem',mb:1 }}>
+                <Typography variant="h6" component="div" sx={{ fontSize: '0.995rem', mb: 1 }}>
                     {plan.title}
                 </Typography>
-                <Divider></Divider>
+                <Divider sx={{ borderColor: selected ? 'white' : '' }}></Divider>
 
-                <Typography color="text.secondary" sx={{ fontSize: '0.875rem', mb:1 }}>
+                <Typography color="text.secondary" sx={{ fontSize: '0.875rem', mb: 1, color: selected ? 'white' : 'default' }}>
                     {plan.subtitle}
                 </Typography>
                 {plan.features.map((feature, index) => (
-                    <Typography variant="body2" key={index} sx={{ display: 'flex', alignItems: 'center', margin: '-7px 0', mb:1, fontSize: '0.775rem' }}>
-                        <Checkbox checked={true} disabled />
+                    <Typography variant="body2" key={index} sx={{ display: 'flex', alignItems: 'center', margin: '-7px 0', mb: 1, fontSize: '0.775rem' }}>
+                        <Checkbox
+                            checked={true}
+                            disabled
+                            sx={{
+                                color: selected ? 'white' : 'default',
+                                '&.Mui-disabled': {
+                                    color: selected ? 'white' : 'default',
+                                },
+                            }}
+                        />
                         {feature}
                     </Typography>
                 ))}
-                <Divider></Divider>
-                <Typography variant="h6" color="primary"sx={{ fontSize: '0.975rem',mt:1, textAlign: 'center' }} >
+                <Divider sx={{ borderColor: selected ? 'white' : '' }}></Divider>
+                <Typography variant="h6" color="primary" sx={{ fontSize: '0.975rem', mt: 1, textAlign: 'center', color: selected ? 'white' : 'default' }} >
                     {plan.price}
                 </Typography>
             </CardContent>
