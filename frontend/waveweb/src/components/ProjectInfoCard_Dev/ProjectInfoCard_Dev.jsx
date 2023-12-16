@@ -68,7 +68,7 @@ const ProjectInfoCard_Dev = ({ data }) => {
   }
 
   return (
-    <Card sx={{ width: "100%", maxWidth: 800, mb: 5 }}>
+    <Card sx={{ width: "100%", maxWidth: 800, mb: 5, borderRadius: '10px' }}>
       <CardActionArea>
         <CardMedia
           component="img"

@@ -45,10 +45,10 @@ const ProjectInfo = () => {
 
     return (
         <>
-          <div className="water-background" >
-            <NavBarMyProjects />
+            <div className="water-background" >
+                <NavBarMyProjects />
 
-            <Grid container spacing={2} style={{ padding: '30px' }}>
+                <Grid container spacing={2} style={{ padding: '30px' }}>
                     {/* Columna de Información del Proyecto y Usuario */}
                     <Grid item xs={12} md={7}>
                         {localStorage.getItem("userRole") === "client" ? <ProjectInfoCard_Client data={userOneProject} /> : <ProjectInfoCard_Dev data={userOneProject} />}
@@ -66,23 +66,23 @@ const ProjectInfo = () => {
                     </Grid>
                 </Grid>
 
-            {/* Accordion de Chat en la esquina inferior derecha */}
-            <Accordion 
-                    style={{ 
-                        position: 'fixed', 
-                        bottom: 20, 
-                        right: 20, 
-                        width: '500px', 
+                {/* Accordion de Chat en la esquina inferior derecha */}
+                <Accordion
+                    style={{
+                        position: 'fixed',
+                        bottom: 20,
+                        right: 20,
+                        width: '500px',
                         zIndex: 1000,
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                         borderRadius: '10px'
-                    }} 
-                    expanded={isChatVisible} 
+                    }}
+                    expanded={isChatVisible}
                     onChange={handleChatIconClick}
                 >
-                    <AccordionSummary 
-                        expandIcon={<ExpandMoreIcon style={{ transform: isChatVisible ? 'rotate(180deg)' : 'rotate(180deg)' }} />} 
-                        aria-controls="chat-content" 
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon style={{ transform: isChatVisible ? 'rotate(180deg)' : 'rotate(180deg)' }} />}
+                        aria-controls="chat-content"
                         id="chat-header"
                     >
                         <IconButton color="primary">

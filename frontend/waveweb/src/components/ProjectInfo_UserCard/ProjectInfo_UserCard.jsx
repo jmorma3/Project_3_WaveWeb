@@ -8,6 +8,7 @@ import Rating from '@mui/material/Rating';
 import "./ProjectInfo_UserCard.css";
 
 //Importaciones de las imágenes de user:
+import user1 from "../../assets/user_admin.jpeg"
 import user2 from "../../assets/user_neo.jpg"
 import user3 from "../../assets/user_trinity.jpg"
 import user4 from "../../assets/user_tyler.jpg"
@@ -21,6 +22,10 @@ export default function ProjectInfo_UserCard({ data }) {
     let userImage
     let userDescription
     switch (data.id) {
+        case 1:
+            userImage = user1
+            userDescription = "I am not in danger, I am the danger."
+            break;
         case 2:
             userImage = user2
             userDescription = "I´m the chosen One!"
@@ -54,7 +59,8 @@ export default function ProjectInfo_UserCard({ data }) {
 
     return (
         <Box sx={{
-            minWidth: '60%',
+            width: "100%", 
+            maxWidth: 800,
             mt: 5,
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
             borderRadius: '10px',
