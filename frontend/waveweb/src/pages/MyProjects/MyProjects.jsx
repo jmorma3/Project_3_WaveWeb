@@ -57,13 +57,16 @@ const MyProjects = () => {
                 {localStorage.getItem("userRole") === "dev" && <ToggleNewProjects />}
             </div>
             
-            <Typography variant="h4" align="center" style={{ margin: '20px' }}>
-                {localStorage.getItem("userRole").toUpperCase() + " Dashboard"}
+            <Typography variant="h4" align="left" style={{ margin: '20px' }}>
+                {`Hi ${localStorage.getItem("userFirstName")} ${localStorage.getItem("userLastName")}!`}
+            </Typography>
+            <Typography variant="h4" align="left" style={{ margin: '20px' }}>
+                {`Welcome to your dashboard`}
             </Typography>
 
             <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
                 <div style={{ width: '45%', margin: '10px', overflowY: 'auto', maxHeight: '600px' }}>
-                    <Typography variant="h5" style={{ marginBottom: '10px' }}>My Projects:</Typography>
+                    {/* <Typography variant="h5" style={{ marginBottom: '10px' }}>My Projects:</Typography> */}
                     {userProjects.length > 0 ? displayUserProjects() : <Typography>You still don´t have any project</Typography>}
                 </div>
 

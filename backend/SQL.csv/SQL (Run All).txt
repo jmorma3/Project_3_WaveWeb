@@ -13,8 +13,8 @@ VALUES
 INSERT INTO projects (id, project_name, project_type, price, progress_status, devId, clientId, plus_prototype)
 VALUES 
   (1, 'Fight Club Gym Web', 'Basic Web', 2000, 2, 2, 4, true),
-  (2, 'Scissorhands Beauty Saloon Web', 'Dynamic Web', 4000, 0, 2, 5, false),
-  (3, 'Death Star Empire´s Web', 'Basic Web', 2000, 2, 2, 6, true),
+  (2, 'Death Star Empire´s Web', 'Basic Web', 4000, 0, 2, 5, false),
+  (3, 'Scissorhands Beauty Saloon Web', 'Dynamic Web', 2000, 2, 2, 6, true),
   (4, 'Tyrion´s Winestore Web', 'E-Commerce Web', 6000, 1, 2, 7, false);
    
 -- Inserción en la tabla "invoices"

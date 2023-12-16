@@ -30,12 +30,20 @@ const signUp = async (req, res) => {
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
         const userId= user.dataValues.id
         const userRole =user.dataValues.role
+        const userFirstName = user.dataValues.first_name
+        const userLastName = user.dataValues.last_name
+        const userEmail = user.dataValues.email
+        
 
         return res.status(200).json({
             message: 'User created',
             token: token,
             userId: userId,
-            userRole: userRole
+            userRole: userRole, 
+            userFirstName: userFirstName,
+            userLastName: userLastName,
+            userEmail: userEmail
+           
         });
 
     } catch (error) {
@@ -61,7 +69,11 @@ const logIn = async (req, res) => {
             const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
             const userId = user.id
             const userRole = user.role
-            return res.status(200).json({ token, userId, userRole })
+            const userFirstName = user.first_name
+            const userLastName = user.last_name
+            const userEmail = user.email
+            
+            return res.status(200).json({ token, userId, userRole, userFirstName, userLastName, userEmail })
         } else {
             return res.status(404).json('Error: Email or Password incorrect')
         }

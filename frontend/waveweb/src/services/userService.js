@@ -27,6 +27,19 @@ const getOneUser = async (userId) => {
     }
 }
 
+const getUserById = async (userId) => {
+    try {
+        const { data } = await api.get(`/user/${userId}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
 const updateOneUser = async (userId, body) => {
     try {
         const { data } = await api.put(`/user/${userId}`, body, {
@@ -56,6 +69,7 @@ const deleteOneUser = async (userId) => {
 export {
     getAllUsers,
     getOneUser,
+    getUserById,
     updateOneUser, 
     deleteOneUser
 }

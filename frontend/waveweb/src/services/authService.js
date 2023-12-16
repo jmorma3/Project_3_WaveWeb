@@ -5,9 +5,12 @@ const login = async (body) => {
     const { data } = await api.post("/auth/login", body)
     localStorage.setItem('token', data.token)
 
-    //Recogemos también el "userId" y "userRole" para usarlos en diferentes componentes...
+    //Recogemos también el resto de información del user para usarlos en diferentes componentes...
     localStorage.setItem("userId", data.userId)
     localStorage.setItem('userRole', data.userRole)
+    localStorage.setItem('userFirstName', data.userFirstName)
+    localStorage.setItem('userLastName', data.userLastName)
+    localStorage.setItem('userEmail', data.userEmail)
 
     return 200
   } catch (error) {
@@ -22,6 +25,10 @@ const signup = async (userData) => {
     localStorage.setItem('token', data.token)
     localStorage.setItem("userId", data.userId)
     localStorage.setItem('userRole', data.userRole)
+    localStorage.setItem('userFirstName', data.userFirstName)
+    localStorage.setItem('userLastName', data.userLastName)
+    localStorage.setItem('userEmail', data.userEmail)
+   
 
     return 200
 

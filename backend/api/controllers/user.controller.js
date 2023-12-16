@@ -41,6 +41,8 @@ const getOneUser = async (req, res) => {
     }
 }
 
+
+
 const getOwnProfile = async (req, res) => {
     try {
         const user = await User.findOne({
@@ -64,6 +66,7 @@ const getOwnProfile = async (req, res) => {
         return res.status(500).send(error.message)
     }
 }
+
 
 const createUser = async (req, res) => {
     try {

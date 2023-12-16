@@ -17,7 +17,7 @@ const {
 router
     .get("/profile", getOwnProfile)
     .get("/", checkAdmin, getAllUsers)
-    .get("/:userId", checkAdmin, getOneUser)
+    .get("/:userId", /*checkAdmin,*/getOneUser)
     .post("/", checkAdmin, createUser)
     .put("/profile", updateOwnProfile)
     .put("/profile/password", updateOwnPassword)

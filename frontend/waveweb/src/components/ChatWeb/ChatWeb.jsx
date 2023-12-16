@@ -60,7 +60,7 @@ const ChatWeb = () => {
       <ListItem
         key={index} //Con esto resolvimos el "warning" que aparecía con la key única para cada child al renderizar el chatHistory. "message.id" estaba dando problemas. 
         sx={{
-          margin: "2px",
+          margin: "5px",
           border: "1px solid",
           borderRadius: "15px",
           width: "fit-content",
@@ -79,32 +79,19 @@ const ChatWeb = () => {
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
-      borderLeft: '1px solid #ccc',
+      height: '50vh',
+      overflow: 'auto',
       backgroundColor: '#fff',
       padding: '16px',
       boxSizing: 'border-box'
     }}>
 
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-      }}>
-        <Typography fontWeight={"bold"}>Chat Messages</Typography>
-
-        <VideocamIcon fontSize='large' />
-      </div>
-
-      <Divider />
-
       <List ref={chatListRef} sx={{
-        minHeight: '85vh',
+        height: '100%',
         overflowY: 'auto',
         display: "flex",
         flexDirection: "column",
-        justifyContent:"flex-end"
+        justifyContent: "flex-end"
       }}>
         {displayChatHistory()}
       </List>
@@ -121,7 +108,7 @@ const ChatWeb = () => {
         <Button variant="contained" onClick={handleMessageSend}>
           Send
         </Button>
-        
+
       </div>
     </div>
   );
