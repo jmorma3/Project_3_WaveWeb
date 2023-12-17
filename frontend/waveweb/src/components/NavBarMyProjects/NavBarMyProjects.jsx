@@ -122,10 +122,9 @@ export default function NavBarMyProjects() {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <Box sx={{ flexGrow: 1, marginBottom: '64px' }}>
+            <AppBar position="fixed">
                 <Toolbar>
-
                     <WavesIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
                     <Typography

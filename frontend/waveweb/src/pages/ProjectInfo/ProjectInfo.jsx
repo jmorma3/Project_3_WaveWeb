@@ -93,22 +93,26 @@ const ProjectInfo = () => {
         <>
             <div className="water-background" >
                 <NavBarMyProjects />
-                <div>
-                    <Button
-                        variant="contained"
-                        href="/myProjects"
-                        sx={{
-                            borderRadius: '25px',
-                            padding: '1px 20px',
-                            width: 'fit-content',
-                            marginLeft: "30px",
-                            marginTop: "15px"
-                        }} >
-                        <Typography variant="button">
-                            Back to Dashboard
-                        </Typography>
-                    </Button>
-                </div>
+                {
+                    localStorage.getItem('userRole') === 'dev' && (
+                        <Button
+                            variant="contained"
+                            href="/myProjects"
+                            sx={{
+                                borderRadius: '25px',
+                                padding: '1px 20px',
+                                width: 'fit-content',
+                                marginLeft: "30px",
+                                marginTop: "15px"
+                            }}
+                        >
+                            <Typography variant="button">
+                                Back to Dashboard
+                            </Typography>
+                        </Button>
+                    )
+                }
+
                 <Grid container spacing={2} style={{ padding: '30px' }}>
                     {/* Columna de Información del Proyecto y Usuario */}
                     <Grid item xs={12} md={7}>

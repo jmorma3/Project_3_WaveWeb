@@ -40,6 +40,7 @@ const Admin_Project_Info = () => {
 
     return (
         <>
+           <div className="water-background" >
             <NavBarMyProjects />
             <Container component="main" maxWidth="sm">
                 <Paper style={{ padding: 20, marginTop: 20 }}>
@@ -119,15 +120,37 @@ const Admin_Project_Info = () => {
                             onChange={handleChange}
                         />
 
-                        <Button type="submit" variant="contained" color="primary">
-                            Save Changes
-                        </Button>
-                        <Button variant="contained" color="secondary" onClick={handleDelete}>
-                            Delete Project
-                        </Button>
+<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    borderRadius: '25px',
+                                    padding: '1px 20px',
+                                    width: '300px',
+                                    marginBottom: '10px'
+                                    
+
+                                }}>
+                                Save Changes
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={handleDelete}
+                                sx={{
+                                    borderRadius: '25px',
+                                    padding: '1px 20px',
+                                    width: '300px'
+                                }}>
+                                Delete Project
+                            </Button>
+                            </div>
                     </form>
                 </Paper>
             </Container>
+            </div>
         </>
     );
 };

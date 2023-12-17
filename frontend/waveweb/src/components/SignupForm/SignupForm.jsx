@@ -199,6 +199,7 @@ function SignupComponent() {
                 devId: 2,
                 clientId: parseInt(localStorage.getItem('userId')),
             };
+
             await createProject(projectData);
 
 
@@ -234,7 +235,7 @@ function SignupComponent() {
                 maxWidth="sm"
                 style={({
                     backgroundColor: "white",
-                    marginTop: '-50px'
+                    marginTop: '-30px'
                 })} >
                 <Stepper
                     activeStep={activeStep}

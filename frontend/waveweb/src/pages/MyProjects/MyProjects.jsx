@@ -81,14 +81,15 @@ const MyProjects = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     margin: '20px',
-                    padding: "5px"
+                    padding: "5px",
+                    paddingTop: '20px'
                 }}>
                     {/* Mensaje de bienvenida y toggle */}
                     <Typography
                         align="left"
                         sx={{
                             fontSize: '1.2rem', // Ajusta este valor según tus necesidades
-                            margin: '0px' // Ajustado para alinear con el toggle
+                            margin: '0px', // Ajustado para alinear con el toggle
                         }}
                     >
                         {`Hi ${localStorage.getItem("userFirstName")} ${localStorage.getItem("userLastName")}! Welcome to your dashboard`}

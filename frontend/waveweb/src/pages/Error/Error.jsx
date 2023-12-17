@@ -14,7 +14,7 @@ const Error = () => {
       <div className="water-background">
       <NavBarLogin />
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '40px 0px'}}>
-        <Card className="polaroid" >
+        <Card className="polaroid" sx={{marginTop: '80px'}} >
           <img
             src={errorImage}
             alt="Error"

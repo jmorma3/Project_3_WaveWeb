@@ -14,7 +14,7 @@ const pages = ['About Us', 'FAQ'];
 function NavBarLogin() {
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 

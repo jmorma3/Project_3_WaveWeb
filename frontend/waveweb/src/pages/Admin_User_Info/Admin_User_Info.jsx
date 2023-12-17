@@ -7,7 +7,7 @@ import { getOneUser, updateOneUser, deleteOneUser } from "../../services/userSer
 
 const Admin_User_Info = () => {
     const { userId } = useParams();
-    
+
     const [user, setUser] = useState({});
     const [editUser, setEditUser] = useState({});
 
@@ -43,62 +43,85 @@ const Admin_User_Info = () => {
 
     return (
         <>
-            <NavBarMyProjects />
-            <Container component="main" maxWidth="sm">
-                <Paper style={{ padding: 20, marginTop: 20 }}>
-                    <Typography variant="h6">Edit User Information</Typography>
-                    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                        <Typography variant="subtitle1">User ID: {user.id}</Typography>
-                        
-                        <Typography variant="subtitle1">Current First Name: {user.first_name}</Typography>
-                        <TextField
-                            label="New First Name"
-                            variant="outlined"
-                            name="first_name"
-                            placeholder="Enter new first name"
-                            value={editUser.first_name || ''}
-                            onChange={handleChange}
-                        />
+            <div className="water-background" >
+                <NavBarMyProjects />
+                <Container component="main" maxWidth="sm">
+                    <Paper style={{ padding: 20, marginTop: 20 }}>
+                        <Typography variant="h6">Edit User Information</Typography>
+                        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                            <Typography variant="subtitle1">User ID: {user.id}</Typography>
 
-                        <Typography variant="subtitle1">Current Last Name: {user.last_name}</Typography>
-                        <TextField
-                            label="New Last Name"
-                            variant="outlined"
-                            name="last_name"
-                            placeholder="Enter new last name"
-                            value={editUser.last_name || ''}
-                            onChange={handleChange}
-                        />
+                            <Typography variant="subtitle1">Current First Name: {user.first_name}</Typography>
+                            <TextField
+                                label="New First Name"
+                                variant="outlined"
+                                name="first_name"
+                                placeholder="Enter new first name"
+                                value={editUser.first_name || ''}
+                                onChange={handleChange}
+                            />
 
-                        <Typography variant="subtitle1">Current Email: {user.email}</Typography>
-                        <TextField
-                            label="New Email"
-                            variant="outlined"
-                            name="email"
-                            placeholder="Enter new email"
-                            value={editUser.email || ''}
-                            onChange={handleChange}
-                        />
+                            <Typography variant="subtitle1">Current Last Name: {user.last_name}</Typography>
+                            <TextField
+                                label="New Last Name"
+                                variant="outlined"
+                                name="last_name"
+                                placeholder="Enter new last name"
+                                value={editUser.last_name || ''}
+                                onChange={handleChange}
+                            />
 
-                        <Typography variant="subtitle1">Current Role: {user.role}</Typography>
-                        <TextField
-                            label="New Role"
-                            variant="outlined"
-                            name="role"
-                            placeholder="Enter new role"
-                            value={editUser.role || ''}
-                            onChange={handleChange}
-                        />
+                            <Typography variant="subtitle1">Current Email: {user.email}</Typography>
+                            <TextField
+                                label="New Email"
+                                variant="outlined"
+                                name="email"
+                                placeholder="Enter new email"
+                                value={editUser.email || ''}
+                                onChange={handleChange}
+                            />
 
-                        <Button type="submit" variant="contained" color="primary">
-                            Save Changes
-                        </Button>
-                        <Button variant="contained" color="secondary" onClick={handleDelete}>
-                            Delete User
-                        </Button>
-                    </form>
-                </Paper>
-            </Container>
+                            <Typography variant="subtitle1">Current Role: {user.role}</Typography>
+                            <TextField
+                                label="New Role"
+                                variant="outlined"
+                                name="role"
+                                placeholder="Enter new role"
+                                value={editUser.role || ''}
+                                onChange={handleChange}
+                            />
+
+                            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    borderRadius: '25px',
+                                    padding: '1px 20px',
+                                    width: '300px',
+                                    marginBottom: '10px'
+                                    
+
+                                }}>
+                                Save Changes
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={handleDelete}
+                                sx={{
+                                    borderRadius: '25px',
+                                    padding: '1px 20px',
+                                    width: '300px'
+                                }}>
+                                Delete User
+                            </Button>
+                            </div>
+                        </form>
+                    </Paper>
+                </Container>
+            </div>
         </>
     );
 };

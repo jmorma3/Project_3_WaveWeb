@@ -87,7 +87,8 @@ const Admin = () => {
                     align="left"
                     sx={{
                         fontSize: '1.2rem',
-                        margin: '20px'
+                        margin: '10px 20px',
+                        paddingTop: '10px'
                     }}>
                     ADMIN Control Panel
                 </Typography>
