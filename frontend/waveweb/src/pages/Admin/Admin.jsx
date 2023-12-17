@@ -1,5 +1,6 @@
 //Importaciones de librerías externas
 import React, { useState, useEffect } from 'react';
+import { Grid } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -89,12 +90,13 @@ const Admin = () => {
                     ADMIN Control Panel
                 </Typography>
 
+                <Grid container style={{ padding: '20px' }}>
 
-                    <div className='adminpage-container'>
-                    {/* Contenedor principal */}
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    {/* Contenedor de Acordiones */}
+                    <Grid item xs={12} md={6} sx={{ border: "1px solid red" }}>
+
                         {/* Contenedor izquierdo */}
-                        <div style={{ width: '45%', overflowY: 'auto', maxHeight: '80vh' }}>
+                        <div style={{ width: '100%', overflowY: 'auto', maxHeight: '80vh' }}>
                             {/* Accordion de Users */}
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -250,27 +252,49 @@ const Admin = () => {
                                 </AccordionDetails>
                             </Accordion>
                         </div>
+                    </Grid>
 
-                        
 
-                        <div style={{ width: '45%' }}>
-                           
+                    {/* Contenedor de Estadísticas y Resumen */}
+                    <Grid item xs={12} md={6} border={"1px solid red"} sx={{display: "flex", justifyContent: "center"}}>
+                        <div style={{
+                       width: "75%",
+                       overflowY: 'auto',
+                       height: 'fit-content',
+                       borderRadius: '10px', // Borde redondeado
+                      
+                   }}>
+                        <Paper style={{
+                            backgroundColor: 'black', 
+                            color: 'white',
+                            borderRadius: '10px',
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // Sombreado
+                        }}>
+                            <Typography variant="h6" marginLeft={"15px"}>Statistics...</Typography>
+                            <img src={statisticsImage} alt="Statistics" style={{ width: '100%', height: '350px',  borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} />
+                        </Paper>
 
-                            <Paper style={{ padding: '10px', borderRadius: '10px' }}>
-                                <Typography variant="h6">Statistics...</Typography>
-                                <img src={statisticsImage} alt="Statistics" style={{ width: 'auto', height: '300px', borderRadius: '10px' }} />
-                            </Paper>
+                        <Paper style={{ 
+                            marginTop: '15px', 
+                            padding: "15px", 
+                            borderRadius: '10px',
+                            borderRadius: '10px',
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)'
+                            }}>
+                            <Typography variant="h6" >Users</Typography>
+                            <Typography variant="body1">Total Clients: {clientCounter}</Typography>
+                            <Typography variant="body1">Total Devs: {devCounter}</Typography>
+                            <Typography variant="h6" >Projects:</Typography>
+                            <Typography variant="body1">Total Projects: {projects.length}</Typography>
+                        </Paper>
 
-                            <Paper style={{ marginTop: '15px', padding: '10px', borderRadius: '10px' }}>
-                                <Typography variant="h6">Users </Typography>
-                                <Typography variant="body1">Total Clients: {clientCounter}</Typography>
-                                <Typography variant="body1">Total Devs: {devCounter}</Typography>
-                                <Typography variant="h6">Projects:</Typography>
-                                <Typography variant="body1">Total Projects: {projects.length}</Typography>
-                            </Paper>
-                            </div>
-                    </div>
-                </div>
+                        </div>
+                    </Grid>
+                </Grid>
+
+
+
+
             </div>
         </>
     );
