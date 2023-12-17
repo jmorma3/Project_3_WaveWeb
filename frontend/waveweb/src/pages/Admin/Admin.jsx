@@ -1,6 +1,6 @@
 //Importaciones de librerías externas
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Divider } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -66,7 +66,8 @@ const Admin = () => {
     const accordionStyle = {
         marginBottom: '10px',
         borderRadius: '10px',
-        overflow: 'hidden', // Evita que los bordes redondeados muestren contenido sobresaliente
+        overflow: 'hidden',
+
     };
 
     return (
@@ -75,9 +76,9 @@ const Admin = () => {
                 <NavBarMyProjects />
 
                 <Modal open={openModal} onClose={handleCloseModal}>
-                    <div>
+                    <>
                         <HiAdminCard />
-                    </div>
+                    </>
                 </Modal>
 
                 <Typography
@@ -93,14 +94,14 @@ const Admin = () => {
                 <Grid container style={{ padding: '20px' }}>
 
                     {/* Contenedor de Acordiones */}
-                    <Grid item xs={12} md={6} sx={{ border: "1px solid red" }}>
+                    <Grid item xs={12} md={6} >
 
                         {/* Contenedor izquierdo */}
                         <div style={{ width: '100%', overflowY: 'auto', maxHeight: '80vh' }}>
                             {/* Accordion de Users */}
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Users
                                     </Typography>
                                 </AccordionSummary>
@@ -122,7 +123,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Projects
                                     </Typography>
                                 </AccordionSummary>
@@ -143,7 +144,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Meetings
                                     </Typography>
                                 </AccordionSummary>
@@ -165,7 +166,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Invoices
                                     </Typography>
                                 </AccordionSummary>
@@ -187,7 +188,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Agenda
                                     </Typography>
                                 </AccordionSummary>
@@ -209,7 +210,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Employees
                                     </Typography>
                                 </AccordionSummary>
@@ -231,7 +232,7 @@ const Admin = () => {
 
                             <Accordion style={accordionStyle}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>
+                                    <Typography sx={{ fontSize: "1.2rem" }}>
                                         Stuff
                                     </Typography>
                                 </AccordionSummary>
@@ -256,37 +257,56 @@ const Admin = () => {
 
 
                     {/* Contenedor de Estadísticas y Resumen */}
-                    <Grid item xs={12} md={6} border={"1px solid red"} sx={{display: "flex", justifyContent: "center"}}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
                         <div style={{
-                       width: "75%",
-                       overflowY: 'auto',
-                       height: 'fit-content',
-                       borderRadius: '10px', // Borde redondeado
-                      
-                   }}>
-                        <Paper style={{
-                            backgroundColor: 'black', 
-                            color: 'white',
-                            borderRadius: '10px',
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // Sombreado
-                        }}>
-                            <Typography variant="h6" marginLeft={"15px"}>Statistics...</Typography>
-                            <img src={statisticsImage} alt="Statistics" style={{ width: '100%', height: '350px',  borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} />
-                        </Paper>
+                            width: "75%",
+                            overflowY: 'auto',
+                            height: 'fit-content',
+                            borderRadius: '10px', // Borde redondeado
 
-                        <Paper style={{ 
-                            marginTop: '15px', 
-                            padding: "15px", 
-                            borderRadius: '10px',
-                            borderRadius: '10px',
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)'
+                        }}>
+                            <Paper style={{
+                                backgroundColor: 'black',
+                                color: 'white',
+                                borderRadius: '10px',
+                                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // Sombreado
                             }}>
-                            <Typography variant="h6" >Users</Typography>
-                            <Typography variant="body1">Total Clients: {clientCounter}</Typography>
-                            <Typography variant="body1">Total Devs: {devCounter}</Typography>
-                            <Typography variant="h6" >Projects:</Typography>
-                            <Typography variant="body1">Total Projects: {projects.length}</Typography>
-                        </Paper>
+                                <Typography variant="h6" marginLeft={"15px"}>Statistics...</Typography>
+                                <div style={{ width: '100%', height: '350px', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}>
+                                    <img src={statisticsImage} alt="Statistics" style={{ width: '100%', height: '350px', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }} />
+                                </div>
+                            </Paper>
+
+                            <Paper style={{
+                                marginTop: '15px',
+                                padding: '20px',
+                                borderRadius: '10px',
+                                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
+                                backgroundColor: '#f5f5f5', // Un fondo ligeramente gris para un contraste suave
+                            }}>
+                                <Typography variant="h6" style={{ marginBottom: '15px', color: '#333', fontWeight: 'bold' }}>
+                                    Users
+                                </Typography>
+
+                                <Typography variant="body1" style={{ marginBottom: '10px', color: '#555' }}>
+                                    Total Clients: {clientCounter}
+                                </Typography>
+
+                                <Typography variant="body1" style={{ marginBottom: '10px', color: '#555' }}>
+                                    Total Devs: {devCounter}
+                                </Typography>
+
+                                <Divider style={{ margin: '20px 0' }} />
+
+                                <Typography variant="h6" style={{ marginBottom: '15px', color: '#333', fontWeight: 'bold' }}>
+                                    Projects
+                                </Typography>
+
+                                <Typography variant="body1" style={{ color: '#555' }}>
+                                    Total Projects: {projects.length}
+                                </Typography>
+                            </Paper>
+
 
                         </div>
                     </Grid>
