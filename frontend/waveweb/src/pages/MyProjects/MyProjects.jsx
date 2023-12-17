@@ -1,6 +1,6 @@
 // Importaciones de librerías externas
 import React, { useState, useEffect } from "react";
-import { Typography, Divider, List, ListItem, ListItemText, ListItemAvatar, Avatar, Paper } from "@mui/material";
+import { Grid, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar } from "@mui/material";
 import GroupsIcon from '@mui/icons-material/Groups';
 
 // Importaciones de componentes y estilos
@@ -94,69 +94,77 @@ const MyProjects = () => {
                 </div>
 
 
-
                 {/* Contenido principal */}
-                <div className="dashboard-content" style={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    margin: '20px',
-                    maxHeight: '580px' // Altura máxima ajustada al viewport menos la altura del NavBar y margenes
-                }}>
-                    {/* Sección de proyectos */}
-                    <div className="projects-section" style={{
+                <Grid container>
+                    <Grid item xs={12} md={7} style={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-                        width: '60%',
-                        overflowY: 'auto',
-                        maxHeight: '100%', // Asegura que no se exceda del contenedor padre
-                        padding: '20px 0', // Espacio vertical para el centrado
-                    }}>
-                        {userProjects.length > 0 ? (
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center', // Centra los elementos horizontalmente
-                            }}>
-                                {displayUserProjects()}
-                            </div>
-                        ) : (
-                            <Typography style={{ textAlign: 'center' }}>You still don´t have any project</Typography>
-                        )}
-                    </div>
-
-                    
-
-                    {/* Sección de reuniones */}
-                    <div className="meetings-section" style={{
-                        width: '35%', // Más estrecho para reuniones
-                        margin: '10px',
-                        overflowY: 'auto',
-                        height: '500px',
-                        backgroundColor: 'white', // Fondo blanco
-                        borderRadius: '10px', // Borde redondeado
-                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // Sombreado
-                    }}>
-                        <div style={{
-                            // margin: "0px 10px",
-                            backgroundColor: 'black', // Fondo negro para el título
-                            color: 'white', // Texto blanco
-                            padding: '5px' // Espaciado interno
+                        <div className="dashboard-content" style={{
+                            padding: "10px",
+                            width: "100%",
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                            maxHeight: '580px' // Altura máxima ajustada al viewport menos la altura del NavBar y margenes
                         }}>
-                            <Typography
-                                variant="h6"
-                                marginLeft={"15px"}
-                            >
-                                Next meetings:
-                            </Typography>
+                            {/* Sección de proyectos */}
+                            <div className="projects-section" style={{
+                                width: '100%',
+                                overflowY: 'auto',
+                                maxHeight: '100%', // Asegura que no se exceda del contenedor padre
+                                padding: '10px 0', // Espacio vertical para el centrado
+                            }}>
+                                {userProjects.length > 0 ? (
+                                    <div style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center', // Centra los elementos horizontalmente
+                                    }}>
+                                        {displayUserProjects()}
+                                    </div>
+                                ) : (
+                                    <Typography style={{ textAlign: 'center' }}>You still don´t have any project</Typography>
+                                )}
+                            </div>
                         </div>
+                    </Grid>
 
-                        <Divider sx={{ bgcolor: 'black' }} /> {/* Divider con color negro */}
+                    <Grid item xs={12} md={5} style={{ overflowY: 'auto', maxHeight: '580px', display:"flex", justifyContent: "center" }}>
 
-                        <List sx={{ margin: '0px 0px' }}>
-                            {userMeetings.length > 0 ? displayUserAgenda() : <Typography padding={2} variant="h6">Sorry, you don´t have any meetings yet</Typography>}
-                        </List>
-                    </div>
+                        {/* Sección de reuniones */}
+                        <div className="meetings-section" style={{
+                           
+                            width: '85%', // Más estrecho para reuniones
+                            margin: '10px',
+                            overflowY: 'auto',
+                            height: '500px',
+                            backgroundColor: 'white', // Fondo blanco
+                            borderRadius: '10px', // Borde redondeado
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // Sombreado
+                        }}>
+                            <div style={{
+                                // margin: "0px 10px",
+                                backgroundColor: 'black', // Fondo negro para el título
+                                color: 'white', // Texto blanco
+                                padding: '5px' // Espaciado interno
+                            }}>
+                                <Typography
+                                    variant="h6"
+                                    marginLeft={"15px"}
+                                >
+                                    Next meetings:
+                                </Typography>
+                            </div>
 
-                </div>
+                            <List sx={{ margin: '0px 0px' }}>
+                                {userMeetings.length > 0 ? displayUserAgenda() : <Typography padding={2} variant="h6">Sorry, you don´t have any meetings yet</Typography>}
+                            </List>
+                        </div>
+                    </Grid>
+                </Grid>
+
+
+
+
+
             </div >
         </>
     );
