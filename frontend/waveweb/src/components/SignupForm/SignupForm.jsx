@@ -158,7 +158,7 @@ function SignupComponent() {
     const handleCloseDialog = () => {
         setOpenDialog(false);
         //Una vez se cree el proyecto y cliquemos en "OK", navegamos directamente al Dashboard del cliente para ver su proyecto. 
-        navigate("/myProjects")
+        navigate(`/myProjects/5`)
     };
 
     const handleSubmitUser = async () => {
@@ -199,7 +199,6 @@ function SignupComponent() {
                 devId: 2,
                 clientId: parseInt(localStorage.getItem('userId')),
             };
-
             await createProject(projectData);
 
 

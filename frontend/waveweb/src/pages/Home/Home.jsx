@@ -102,12 +102,12 @@ const Home = () => {
                     <Stepper
                         activeStep={activeStep}
                         alternativeLabel
-                        sx={{ marginTop: '15px', color: "white" }}
+                        sx={{ marginTop: '10px', color: "white" }}
                         className="stepper">
                         {sections.map((section, index) => (
                             <Step key={index} >
                                 <StepLabel>
-                                    <Typography sx={{ color: "white" }}>
+                                    <Typography sx={{ color: "white", fontSize: '0.875rem' }}>
                                         {section.title}
                                     </Typography>
                                 </StepLabel>
@@ -117,7 +117,7 @@ const Home = () => {
                     <Box
                         sx={{
                             textAlign: 'center',
-                            mt: 4
+                            mt: 3
                         }}
                     >
                         <Button
