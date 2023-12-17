@@ -40,7 +40,7 @@ const sections = [
     },
     {
         title: "Step 4. First Meeting and Match in 48 hours",
-        description: "You will have a first meeting with your dev and from there the adventure begins",
+        description: "You´ll have a first meeting with your dev and from there the adventure begins",
         imageUrl: sectionImage5,
     }
 
@@ -60,82 +60,89 @@ const Home = () => {
     return (
         <>
             <NavBar />
-            <div className="content-container">
-                <Box className="carousel-container">
+            <div className="water-background">
+                <div className="content-container">
+                    <Box className="carousel-container">
 
-                    <IconButton
-                        className="carousel-button"
-                        onClick={handleBack}
-                    >
-                        <ArrowBackIosNewIcon />
-                    </IconButton>
+                        <IconButton
+                            className="carousel-button"
+                            onClick={handleBack}
+                        >
+                            <ArrowBackIosNewIcon />
+                        </IconButton>
 
-                    <Card style={{ boxShadow: 'none', border: 'none' }} >
-                        <div className="polaroid">
-                            <img
-                                src={sections[activeStep].imageUrl}
-                                alt={sections[activeStep].title}
-                                className="card-image" />
+                        <Card className="polaroid">
+                            <div >
+                                <img
+                                    src={sections[activeStep].imageUrl}
+                                    alt={sections[activeStep].title}
+                                    className="card-image" />
 
-                            <div className="text-content">
-                                <Typography
-                                    variant="h5"
-                                    component="h2">
-                                    {sections[activeStep].title}
-                                </Typography>
-                                <Typography>
-                                    {sections[activeStep].description}
-                                </Typography>
+                                <div className="text-content">
+                                    <Typography
+                                        variant="h5"
+                                        component="h2">
+                                        {sections[activeStep].title}
+                                    </Typography>
+                                    <Typography>
+                                        {sections[activeStep].description}
+                                    </Typography>
+                                </div>
                             </div>
-                        </div>
-                    </Card>
+                        </Card>
 
-                    <IconButton
-                        className="carousel-button"
-                        onClick={handleNext}
-                    >
-                        <ArrowForwardIosIcon />
-                    </IconButton>
-                </Box>
+                        <IconButton
+                            className="carousel-button"
+                            onClick={handleNext}
+                        >
+                            <ArrowForwardIosIcon />
+                        </IconButton>
+                    </Box>
 
-                <Stepper
-                    activeStep={activeStep}
-                    alternativeLabel
-                    sx={{ marginTop: '15px' }}
-                    className="stepper">
-                    {sections.map((section, index) => (
-                        <Step key={index} >
-                            <StepLabel>{section.title}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
-                <Box
-                    sx={{
-                        textAlign: 'center',
-                        mt: 4
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        href="/signup"
+                    <Stepper
+                        activeStep={activeStep}
+                        alternativeLabel
+                        sx={{ marginTop: '15px', color: "white" }}
+                        className="stepper">
+                        {sections.map((section, index) => (
+                            <Step key={index} >
+                                <StepLabel>
+                                    <Typography sx={{ color: "white" }}>
+                                        {section.title}
+                                    </Typography>
+                                </StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    <Box
                         sx={{
-                            borderRadius: '25px',
-                            padding: '1px 20px'
+                            textAlign: 'center',
+                            mt: 4
                         }}
                     >
-                        Sign Up
-                    </Button>
-                    <Typography sx={{ mt: 1 }}>
-                        Already have an account?
-                        <a href="/login"
-                            style={{
-                                marginLeft: '5px',
-                                textDecoration: 'underline'
+                        <Button
+                            variant="contained"
+                            href="/signup"
+                            sx={{
+                                borderRadius: '25px',
+                                padding: '1px 20px'
                             }}
-                        >Log In
-                        </a>
-                    </Typography>
-                </Box>
+                        >
+                            Sign Up
+                        </Button>
+                        <Typography sx={{ mt: 1, color: "white" }}>
+                            Already have an account?
+                            <a href="/login"
+                                style={{
+                                    marginLeft: '5px',
+                                    textDecoration: 'underline',
+                                    color: "white"
+                                }}
+                            >Log In
+                            </a>
+                        </Typography>
+                    </Box>
+                </div>
             </div>
         </>
     );

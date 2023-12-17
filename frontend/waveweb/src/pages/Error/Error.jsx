@@ -11,8 +11,9 @@ import errorImage from '../../assets/not-found.jpg';
 const Error = () => {
   return (
     <>
+      <div className="water-background">
       <NavBarLogin />
-      <div className="error-container">
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '40px 0px'}}>
         <Card className="polaroid" >
           <img
             src={errorImage}
@@ -28,14 +29,16 @@ const Error = () => {
         <Button
           variant="contained"
           href="/"
-          sx={{
+                    sx={{
             borderRadius: '25px',
-            padding: '1px 20px'
+            padding: '1px 10px',
+            width: '150px',
           }} >
           <Typography variant="button">
             Go home
           </Typography>
         </Button>
+      </div>
       </div>
     </>
   )
