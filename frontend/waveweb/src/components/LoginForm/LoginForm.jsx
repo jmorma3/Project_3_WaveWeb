@@ -1,6 +1,12 @@
-//Importaciones de librerías externas
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+// Importaciones de librerías externas
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Importamos los servicios
+import { login } from "../../services/authService";
+import { getUserOneProject, getUserProjects } from "../../services/projectService";
+
+// Importaciones de componentes de Material UI
 import {
   Card,
   CardHeader,
@@ -10,36 +16,42 @@ import {
   Button,
   CardActions,
   Typography
-} from "@mui/material"
+} from "@mui/material";
 
-//Importamos estilos
-import "./LoginForm.css"
-
-//Importamos los servicios:
-import { login } from "../../services/authService"
+// Importamos estilos
+import "./LoginForm.css";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("")
-
-  const navigate = useNavigate()
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
       const payload = {
         email,
         password
-      }
-      const result = await login(payload)
-      if (result === 200 && localStorage.getItem("userRole") !== "admin") {
-        navigate('/myProjects')
-      } else {
-        navigate('/admin')
+      };
+      const result = await login(payload);
+
+      if (result === 200) {
+        const userRole = localStorage.getItem("userRole");
+        if (userRole === "dev") {
+          navigate('/myProjects');
+        } else if (userRole === "client") {
+          const projects = await getUserProjects();
+          if (projects && projects.length > 0) {
+            const project = await getUserOneProject(projects[0].id);
+            navigate(`/myProjects/${project.id}`);
+          }
+        } else if (userRole === "admin") {
+          navigate('/admin');
+        }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="loginForm-container">
@@ -100,7 +112,6 @@ function LoginForm() {
           Forgot your password?
         </Typography>
       </Card>
-
     </div>
   );
 }
