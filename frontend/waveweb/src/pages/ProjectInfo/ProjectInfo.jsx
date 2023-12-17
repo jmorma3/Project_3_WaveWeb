@@ -1,7 +1,7 @@
 import "./ProjectInfo.css"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Accordion, AccordionSummary, AccordionDetails, IconButton, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar } from "@mui/material";
+import { Button, Grid, Accordion, AccordionSummary, AccordionDetails, IconButton, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -68,6 +68,9 @@ const ProjectInfo = () => {
             case 4:
                 projectName = "Tyrion´s Winestore Web"
                 break;
+            case 5:
+                projectName = "Kwik-E-Mart"
+                break;
         }
 
         return (
@@ -90,7 +93,22 @@ const ProjectInfo = () => {
         <>
             <div className="water-background" >
                 <NavBarMyProjects />
-
+                <div>
+                    <Button
+                        variant="contained"
+                        href="/myProjects"
+                        sx={{
+                            borderRadius: '25px',
+                            padding: '1px 20px',
+                            width: 'fit-content',
+                            marginLeft: "30px",
+                            marginTop: "15px"
+                        }} >
+                        <Typography variant="button">
+                            Back to Dashboard
+                        </Typography>
+                    </Button>
+                </div>
                 <Grid container spacing={2} style={{ padding: '30px' }}>
                     {/* Columna de Información del Proyecto y Usuario */}
                     <Grid item xs={12} md={7}>

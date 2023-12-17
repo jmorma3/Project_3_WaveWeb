@@ -33,6 +33,7 @@ const Error = () => {
             borderRadius: '25px',
             padding: '1px 10px',
             width: '150px',
+            marginTop: "20px"
           }} >
           <Typography variant="button">
             Go home

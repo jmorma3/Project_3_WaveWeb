@@ -52,6 +52,9 @@ const MyProjects = () => {
             case 4:
                 projectName = "Tyrion´s Winestore Web"
                 break;
+            case 5:
+                projectName = "Kwik-E-Mart"
+                break;
         }
 
         return (

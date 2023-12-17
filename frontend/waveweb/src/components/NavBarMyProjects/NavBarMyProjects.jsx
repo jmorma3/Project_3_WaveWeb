@@ -126,7 +126,7 @@ export default function NavBarMyProjects() {
             <AppBar position="static">
                 <Toolbar>
 
-                    <WavesIcon sx={{ display: { xs: 'flex', md: 'flex' }, mr: 1 }} />
+                    <WavesIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
                     <Typography
                         variant="h6"
@@ -147,8 +147,29 @@ export default function NavBarMyProjects() {
                     </Typography>
 
 
+                    <WavesIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        Wave Web
+                    </Typography>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
+
 
                         <IconButton
                             size="large"

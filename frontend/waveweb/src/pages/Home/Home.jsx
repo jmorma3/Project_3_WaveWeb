@@ -58,7 +58,7 @@ const Home = () => {
     };
 
     return (
-        <>
+        <div style={{height: '100vh', overflow:'hidden'}}>
             <NavBar />
             <div className="water-background">
                 <div className="content-container">
@@ -144,7 +144,7 @@ const Home = () => {
                     </Box>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

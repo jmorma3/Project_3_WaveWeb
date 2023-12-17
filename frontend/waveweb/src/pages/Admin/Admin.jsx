@@ -25,6 +25,7 @@ import statisticsImage from "../../assets/Statitstics_Admin.jpeg"
 import { getAllUsers } from '../../services/userService';
 import { getAllProjects } from '../../services/projectService';
 import ProjectInfo_UserCard from '../../components/ProjectInfo_UserCard/ProjectInfo_UserCard';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
     const [users, setUsers] = useState([]);
@@ -60,7 +61,7 @@ const Admin = () => {
         fetchData();
     }, []);
 
-    const displayAllUsers = () => users.map(user => <ProjectInfo_UserCard key={user.id} data={user} />);
+    const displayAllUsers = () => users.map(user => <Link key={user.id} to={`/admin/user/${user.id}`} style={{ textDecoration: 'none', color: 'inherit' }} ><ProjectInfo_UserCard data={user} /></Link>);
     const displayAllProjects = () => projects.map(project => <ProjectCard key={project.id} data={project} />);
 
     const accordionStyle = {

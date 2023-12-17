@@ -50,6 +50,7 @@ export default function Agenda_Dev({ data }) {
             maxWidth: '400px',
             alignSelf: 'center',
             height: 'fit-content', // Ajuste para la altura
+            marginBottom:"80px"
         }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar value={dateValue} onChange={(newValue) => setDateValue(newValue)} />
