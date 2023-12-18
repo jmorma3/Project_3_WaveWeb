@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: "mysql://root:DCBd33CG4Hf1hdHH1AcEhFCD5ceF3dfF@monorail.proxy.rlwy.net:23694/railway"
+    baseURL: "http://project3waveweb-production.up.railway.app/api"
 })
 
 export default api
