@@ -1,4 +1,4 @@
 [build]
   base = "frontend/waveweb"
-  publish = "frontend/waveweb/dist"
+  publish = "dist"
   command = "npm run build"
