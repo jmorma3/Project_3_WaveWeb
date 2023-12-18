@@ -18,6 +18,11 @@ import {
   Typography
 } from "@mui/material";
 
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 // Importamos estilos
 import "./LoginForm.css";
 
@@ -25,6 +30,9 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  // Estado para controlar la visibilidad de la contraseña
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = async () => {
     try {
@@ -53,6 +61,11 @@ function LoginForm() {
     }
   };
 
+  // Función para cambiar la visibilidad de la contraseña
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="loginForm-container">
       <Card
@@ -75,7 +88,19 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             label="Password"
             variant="outlined"
+            type={showPassword ? 'text' : 'password'} 
             fullWidth={true}
+            InputProps={{ 
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </CardContent>
 

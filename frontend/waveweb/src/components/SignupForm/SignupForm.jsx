@@ -21,6 +21,9 @@ import {
 
 import MuiAlert from '@mui/material/Alert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 //Importamos componentes y estilos
 import "./SignupForm.css"
@@ -33,6 +36,11 @@ import { createProject } from "../../services/projectService";
 
 function SignupComponent() {
     const [activeStep, setActiveStep] = useState(0);
+
+    // Estados para controlar la visibilidad de las contraseñas
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const steps = ['User information', 'Project information', 'Subscription plan information'];
 
     const plans = [
@@ -228,6 +236,16 @@ function SignupComponent() {
 
     };
 
+    // Funciones para cambiar la visibilidad de las contraseñas
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
+
     return (
         <div className="signForm-container">
             <Container
@@ -235,7 +253,7 @@ function SignupComponent() {
                 maxWidth="sm"
                 style={({
                     backgroundColor: "white",
-                    marginTop: '-30px'
+                    marginTop: '-25px'
                 })} >
                 <Stepper
                     activeStep={activeStep}
@@ -300,7 +318,7 @@ function SignupComponent() {
                             <TextField
                                 label="Password"
                                 name="password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 value={formData.password}
                                 onChange={handleInputChange}
                                 required
@@ -312,6 +330,9 @@ function SignupComponent() {
                                             {formData.password && !errors.password ? (
                                                 <CheckCircleIcon style={{ color: 'green' }} />
                                             ) : null}
+                                            <IconButton onClick={togglePasswordVisibility}>
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -321,7 +342,7 @@ function SignupComponent() {
                             <TextField
                                 label="Confirm password"
                                 name="confirmPassword"
-                                type="password"
+                                type={showConfirmPassword ? 'text' : 'password'}
                                 value={formData.confirmPassword}
                                 onChange={handleInputChange}
                                 required
@@ -333,6 +354,9 @@ function SignupComponent() {
                                             {formData.confirmPassword && !errors.confirmPassword ? (
                                                 <CheckCircleIcon style={{ color: 'green' }} />
                                             ) : null}
+                                            <IconButton onClick={toggleConfirmPasswordVisibility}>
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
                                         </InputAdornment>
                                     ),
                                 }}
