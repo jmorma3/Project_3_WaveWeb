@@ -1,0 +1,1 @@
+[build]command = "npm run build"  # or "yarn build"publish = "dist"
