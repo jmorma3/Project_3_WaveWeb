@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 
 import WavesIcon from "@mui/icons-material/Waves";
 
-const pages = ['About Us', 'FAQ'];
 
 function NavBarLogin() {
 
@@ -59,18 +58,7 @@ function NavBarLogin() {
             Wave Web
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
+         
           
 
 

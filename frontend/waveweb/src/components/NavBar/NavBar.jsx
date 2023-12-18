@@ -16,62 +16,35 @@ function NavBar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
 
-          <WavesIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Wave Web
-          </Typography>
-
-          <WavesIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Wave Web
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          {/* Ícono y Título - Izquierda */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <WavesIcon sx={{ display: { xs: 'flex', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Wave Web
+            </Typography>
           </Box>
 
+          {/* Botones - Derecha */}
           <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Button variant="contained" href="/about">
+              About Us
+            </Button>
             <Button variant="contained" href="/login">
               Log In
             </Button>
@@ -79,7 +52,6 @@ function NavBar() {
               Sign Up
             </Button>
           </Stack>
-
 
         </Toolbar>
       </Container>
