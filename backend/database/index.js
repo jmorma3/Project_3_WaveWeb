@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize')
 require('dotenv').config()
 
 // console.log(process.env.MYSQLUSER, process.env.MYSQLPASSWORD, process.env.MYSQLHOST, process.env.MYSQLPORT, process.env.MYSQL_DATABASE)
-const connection = new Sequelize(`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`);
+const sequelize = new Sequelize(`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`);
 async function checkConnection() {
     try {
         await sequelize.authenticate()
