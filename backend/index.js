@@ -20,7 +20,7 @@ function initializeAndListenWithExpress() {
         .use(express.json())
         .use('/api', require('./api/routes/index'))
 
-        .listen(process.env.MYSQLPORT, () => {
+        .listen(process.env.PORT, () => {
             console.log(`> Listening on port: 3000`)
         })
 }
