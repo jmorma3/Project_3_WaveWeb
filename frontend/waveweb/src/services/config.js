@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://root:DCBd33CG4Hf1hdHH1AcEhFCD5ceF3dfF@monorail.proxy.rlwy.net:23694/railway/api"
-})
+    baseURL: "https://project3waveweb-production.up.railway.app/api"
+});
 
-export default api
+export default api;
